@@ -4,8 +4,8 @@
 * [Анастасия Самсонова]()
 
 # Сервисы для работы
-* [Miro]([https://miro.com/app/board/uXjVPk_a2SE=/](https://miro.com/app/board/uXjVMdmeG98=/))
-* [MeisterTask]([https://www.meistertask.com/app/project/OszZUyCg/tp](https://www.meistertask.com/app/project/ZxXL2qha/weather-statistics))
+* [Miro](https://miro.com/app/board/uXjVMdmeG98=/)
+* [MeisterTask]((https://www.meistertask.com/app/project/ZxXL2qha/weather-statistics)
 
 # Документация
 * [Курсовой проект]()
