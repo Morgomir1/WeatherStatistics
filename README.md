@@ -1,6 +1,6 @@
 # WeatherStatistics
 * [Тимошинов Егор](https://github.com/Morgomir1)
-* [Семён Долгих]()
+* [Семён Долгих](https://github.com/BlG-SEM)
 * [Анастасия Самсонова]()
 
 # Сервисы для работы
