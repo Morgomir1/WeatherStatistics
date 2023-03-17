@@ -1,7 +1,7 @@
 # WeatherStatistics
 * [Тимошинов Егор](https://github.com/Morgomir1)
 * [Семён Долгих](https://github.com/BlG-SEM)
-* [Анастасия Самсонова]()
+* [Анастасия Самсонова](https://github.com/Nastya-Samsonova)
 
 # Сервисы для работы
 * [Miro](https://miro.com/app/board/uXjVMdmeG98=/)
