@@ -9,3 +9,4 @@
 
 # Документация
 * [Курсовой проект]()
+* [Диаграммы](https://github.com/Morgomir1/WeatherStatistics/tree/main/diagramms)
