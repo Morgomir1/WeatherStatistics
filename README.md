@@ -6,7 +6,7 @@
 # Сервисы для работы
 * [Miro](https://miro.com/app/board/uXjVMdmeG98=/)
 * [GitHub Issues](https://github.com/Morgomir1/WeatherStatistics/issues)
-* [Figma] (https://www.figma.com/file/1puqRHwjSr7R51WveWESQW/Untitled?node-id=0%3A1&t=1qfSRSPv4mcw0xyQ-1)
+* [Figma](https://www.figma.com/file/1puqRHwjSr7R51WveWESQW/Untitled?node-id=0%3A1&t=1qfSRSPv4mcw0xyQ-1)
 
 # Документация
 * [Курсовой проект](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/Курсовой%20проект%20(4).pdf)
