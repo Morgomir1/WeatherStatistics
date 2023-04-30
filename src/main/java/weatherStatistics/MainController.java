@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import weatherStatistics.entity.WeatherStat;
 import weatherStatistics.repo.WeatherStatRepo;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -14,22 +17,78 @@ public class MainController {
   @Autowired
   private WeatherStatRepo weatherStatistics;
 
-  @GetMapping("/greeting")
-  public String greeting(
-          @RequestParam(name="name", required=false, defaultValue="World") String name,
-          Map<String, Object> model
-  ) {
-    model.put("name", name);
-    return "greeting";
+  @GetMapping("/admin")
+  public String admin() {
+    return "admin";
   }
+
+  @GetMapping("/planning")
+  public String planning() {
+    return "planning";
+  }
+
+  @GetMapping("/settings")
+  public String settings() {
+    return "settings";
+  }
+
+  @GetMapping("/information")
+  public String information() {
+    return "information";
+  }
+
+  @GetMapping("/dayFind")
+  public String dayFind() {
+    return "dayFind";
+  }
+
+  private Date currentDate = new Date();
 
   @GetMapping
   public String main(Map<String, Object> model) {
+
     Iterable<WeatherStat> weatherStats = weatherStatistics.findAll();
+    SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM");
+    String currentDate = formatForDateNow.format(this.currentDate);
+    System.out.println(formatForDateNow.format(this.currentDate));
+    ArrayList<WeatherStat> currentDayStats = new ArrayList<>();
     for (WeatherStat stat : weatherStats) {
-      System.out.println(stat.getTime());
+        if (stat.isDateEqualTo(currentDate)) {
+            currentDayStats.add(stat);
+        }
     }
-    model.put("weatherStats", weatherStats);
+    model.put("weatherStats", currentDayStats);
     return "main";
   }
+
+  @GetMapping(value = "/mainRedirect")
+  public String mainRedirect() {
+    return "redirect:/main";
+  }
+
+  @GetMapping(value = "/planningRedirect")
+  public String planningRedirect() {
+    return "redirect:/planning";
+  }
+
+  @GetMapping(value = "/settingsRedirect")
+  public String settingsRedirect() {
+    return "redirect:/settings";
+  }
+
+  @GetMapping(value = "/adminRedirect")
+  public String adminRedirect() {
+    return "redirect:/admin";
+  }
+
+  @GetMapping(value = "/informationRedirect")
+  public String informationRedirect() {
+    return "redirect:/information";
+  }
+
+  @GetMapping(value = "/dayFindRedirect")
+  public String dayFindRedirect() {
+    return "redirect:/dayFind";
+  }
+
 }

@@ -1,5 +1,6 @@
 package weatherStatistics.entity;
 
+import antlr.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -26,19 +27,25 @@ public class WeatherStat {
   public WeatherStat(String time, int t, double po, double p, double pa, int u, String DD, String WW,
                      String w1, String w2) {
     this.time = time;
-    T = t;
-    Po = po;
-    P = p;
-    Pa = pa;
-    U = u;
+    this.T = t / 10;
+    this.Po = po / 10;
+    this.P = p / 10;
+    this.Pa = pa / 10;
+    this.U = u;
     this.DD = DD;
     this.WW = WW;
-    W1 = w1;
-    W2 = w2;
+    this.W1 = w1;
+    this.W2 = w2;
   }
 
   public String getTime() {
     return time;
+  }
+
+  public boolean isDateEqualTo(String date) {
+    String thisDate = this.time.substring(0, 5);
+    thisDate = StringUtils.stripFront(thisDate, ".");
+    return thisDate.equals(date);
   }
 
   public int getT() {

@@ -1,12 +1,33 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
 
+<a type="button" href="/mainRedirect">Главная</a>
+<a type="button" href="/informationRedirect">Информация</a>
+<a type="button" href="/dayFindRedirect">Поиск дня</a>
+<a type="button" href="/planningRedirect">Планировка</a>
+<a type="button" href="/settingsRedirect">Настройки</a>
+<a type="button" href="/adminRedirect">Админ</a>
+</body>
 <body>
 {{#weatherStats}}
 <div>
-    <b>{{time}}</b>
+    <h2>{{time}}</h2>
     <span>{{T}}</span>
-    <i>{{DD}}</i>
+    <span>{{Po}}</span>
+    <span>{{P}}</span>
+    <span>{{Pa}}</span>
+    <span>{{U}}</span>
+    <span>{{DD}}</span>
+    <span>{{WW}}</span>
+    <span>{{W1}}</span>
+    <span>{{W2}}</span>
 </div>
+
 {{/weatherStats}}
 </body>
 </html>
