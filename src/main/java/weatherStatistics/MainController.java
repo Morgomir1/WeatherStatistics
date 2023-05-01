@@ -58,6 +58,9 @@ public class MainController {
         }
     }
     model.put("weatherStats", currentDayStats);
+    SimpleDateFormat formatForClient = new SimpleDateFormat("d LLLL");
+    currentDate = formatForClient.format(this.currentDate);
+    model.put("currentDate", currentDate);
     return "main";
   }
 

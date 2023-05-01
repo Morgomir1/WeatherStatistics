@@ -2,9 +2,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Главная</title>
-    <link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/css/style.css" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<!--body>
 
 <a type="button" href="/mainRedirect">Главная</a>
 <a type="button" href="/informationRedirect">Информация</a>
@@ -12,8 +13,86 @@
 <a type="button" href="/planningRedirect">Планировка</a>
 <a type="button" href="/settingsRedirect">Настройки</a>
 <a type="button" href="/adminRedirect">Админ</a>
-</body>
+</body-->
 <body>
+<div >
+    <div class="row">
+        <div class="buttonsBox col-xl">
+            <div class="row">
+                <a class="buttonBox col-md" onclick="/mainRedirect"><h2 class="buttonTitle">Главная</h2></a>
+                <a class="buttonBox col-md" onclick="/informationRedirect"><h2 class="buttonTitle">Информация</h2></a>
+                <a class="buttonBox col-md" onclick="/dayFindRedirect"><h2 class="buttonTitle">Поиск дня</h2></a>
+                <a class="buttonBox col-md" onclick="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
+                <a class="buttonBox col-md" onclick="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
+                <a class="buttonBox col-md" onclick="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box2">
+            <h2 class="buttonTitle" >{{currentDate}}</h2>
+        </div>
+    </div>
+    <div class="row weatherMainBox">
+            <div class="weatherBox col-md">
+                <img src="/assets/825a9bb02fee24708c05a4e2793615e8.png" alt="alt text" class="image" />
+                <px-grid x="83px 141fr 72fr" y="238px minmax(153px,153fr) 14fr" absolute="true">
+                    <h2 class="medium_title">
+                        0:00-6:00<br />
+                        Облачно<br />
+                        Дождь<br />
+                        +5
+                    </h2>
+                </px-grid>
+            </div>
+            <div class="weatherBox col-md">
+                <img src="/assets/825a9bb02fee24708c05a4e2793615e8.png" alt="alt text" class="image" />
+                <px-grid x="84px 138fr 74fr" y="238px minmax(153px,153fr) 14fr" absolute="true">
+                    <h2 class="medium_title">
+                        6:00-12:00<br />
+                        Облачно<br />
+                        Дождь<br />
+                        +5
+                    </h2>
+                </px-grid>
+            </div>
+            <div class="weatherBox col-md">
+                <img src="/assets/825a9bb02fee24708c05a4e2793615e8.png" alt="alt text" class="image" />
+                <px-grid x="84px 139fr 73fr" y="238px minmax(153px,153fr) 14fr" absolute="true">
+                    <h2 class="medium_title">
+                        12:00-18:00<br />
+                        Облачно<br />
+                        Дождь<br />
+                        +5
+                    </h2>
+                </px-grid>
+            </div>
+            <div class="weatherBox col-md">
+                <img src="/assets/825a9bb02fee24708c05a4e2793615e8.png" alt="alt text" class="image" />
+                <px-grid x="84px 138fr 74fr" y="238px minmax(153px,153fr) 14fr" absolute="true">
+                    <h2 class="medium_title">
+                        18:00-00:00<br />
+                        Облачно<br />
+                        Дождь<br />
+                        +5
+                    </h2>
+                </px-grid>
+            </div>
+    </div>
+    <div class="row">
+        <div class="buttonDaySwitchBox col-xl">
+            <div class="buttonDaySwitchBox2"><h2 class="buttonTitle">Следующий день</h2></div>
+        </div>
+        <div class="col-xl-5"></div>
+        <div class="buttonDaySwitchBox col-xl">
+            <div class="buttonDaySwitchBox2"><h2 class="buttonTitle">Предыдущий день</h2></div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<!--/body>
 {{#weatherStats}}
 <div>
     <h2>{{time}}</h2>
@@ -29,5 +108,5 @@
 </div>
 
 {{/weatherStats}}
-</body>
+</body-->
 </html>
