@@ -18,7 +18,7 @@ public class ResourceController {
     @GetMapping("/styles/css/{code}.css")
     @ResponseBody
     public ResponseEntity<String> styles(@PathVariable("code") String code) throws IOException {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("static/css/"+code+".css");
+        InputStream is = getClass().getClassLoader().getResourceAsStream("static/css/" + code + ".css");
         BufferedReader bf = new BufferedReader(new InputStreamReader(is));
         StringBuffer sb = new StringBuffer();
         String line = null;

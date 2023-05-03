@@ -2,13 +2,22 @@
 <html>
 <head>
     <title>Админ</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles/css/style.css" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<a type="button" href="/mainRedirect">Главная</a>
-<a type="button" href="/informationRedirect">Информация</a>
-<a type="button" href="/dayFindRedirect">Поиск дня</a>
-<a type="button" href="/planningRedirect">Планировка</a>
-<a type="button" href="/settingsRedirect">Настройки</a>
-<a type="button" href="/adminRedirect">Админ</a>
+<div class="row">
+    <div class="buttonsBox col-xl">
+        <div class="row">
+            <a class="buttonBox col-md" href="/mainRedirect"><h2 class="buttonTitle">Главная</h2></a>
+            <a class="buttonBox col-md" href="/informationRedirect"><h2 class="buttonTitle">Информация</h2></a>
+            <a class="buttonBox col-md" href="/dayFindRedirect"><h2 class="buttonTitle">Поиск дня</h2></a>
+            <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
+            <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
+            <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

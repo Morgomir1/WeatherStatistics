@@ -2,8 +2,11 @@ package weatherStatistics.entity;
 
 import antlr.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
+import weatherStatistics.util.DayTimeIntervals;
 
 import javax.persistence.*;
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 @Entity
 @Table(name = "stats")
@@ -13,12 +16,34 @@ public class WeatherStat {
   @GenericGenerator(name = "increment", strategy = "increment")
   @GeneratedValue(strategy=GenerationType.AUTO)
   private  String time;
-  private  int T;
+
+  private  double T;
   private  double Po;
   private  double P;
   private  double Pa;
   private  int U;
-  private  String DD, WW, W1, W2;
+  private  String DD;
+  private  String WW;
+  private  String W1;
+  private  String W2;
+
+  @Transient
+  private boolean positive;
+
+  @Transient
+  private int day;
+
+  @Transient
+  private int month;
+
+  @Transient
+  private int year;
+
+  @Transient
+  private int hour;
+
+  @Transient
+  private int nextHour;
 
   public WeatherStat() {
 
@@ -38,17 +63,33 @@ public class WeatherStat {
     this.W2 = w2;
   }
 
+  public int getDay() {
+      return Integer.parseInt(time.substring(0, 2));
+  }
+
+  public int getMonth() {
+      return Integer.parseInt(time.substring(3, 5));
+  }
+
+  public int getYear() {
+      return Integer.parseInt(time.substring(6, 10));
+  }
+
+  public int getHour() {
+      return Integer.parseInt(time.substring(11, 13));
+  }
+
   public String getTime() {
     return time;
   }
 
   public boolean isDateEqualTo(String date) {
-    String thisDate = this.time.substring(0, 5);
-    thisDate = StringUtils.stripFront(thisDate, ".");
-    return thisDate.equals(date);
+    int day = Integer.parseInt(date.substring(0, 2));
+    int month = Integer.parseInt(date.substring(2, 4));
+    return this.getDay() == day && this.getMonth() == month;
   }
 
-  public int getT() {
+  public double getT() {
     return T;
   }
 
@@ -89,8 +130,13 @@ public class WeatherStat {
     this.time = time;
   }
 
-  public void setT(int t) {
-    T = t;
+  public void setT(double t) {
+    if (t >= 0) {
+      positive = true;
+    } else {
+      positive = false;
+    }
+    this.T = t;
   }
 
   public void setPo(double po) {
@@ -125,4 +171,24 @@ public class WeatherStat {
     W2 = w2;
   }
 
+  public void setNextHour(int nextHour) {
+    this.nextHour = nextHour;
+  }
+
+  public static WeatherStat connectTwoStats(WeatherStat first, WeatherStat second) {
+
+    WeatherStat stat = new WeatherStat();
+    stat.hour = second.getHour();
+    stat.setTime(String.valueOf(second.getHour()));
+    stat.setT((first.getT() + second.getT()) / 2);
+    stat.setPo((first.getPo() + second.getPo()) / 2);
+    stat.setPa((first.getPa() + second.getPa()) / 2);
+    stat.setP((first.getP() + second.getP()) / 2);
+    stat.setU((first.getU() + second.getU()) / 2);
+    stat.setDD(first.getDD() + second.getDD());
+    stat.setWW(first.getWW() + second.getWW());
+    stat.setW1(first.getW1() + second.getW1());
+    stat.setW2(first.getW2() + second.getW2());
+    return stat;
+  }
 }
