@@ -14,59 +14,65 @@
 <a type="button" href="/settingsRedirect">Настройки</a>
 <a type="button" href="/adminRedirect">Админ</a>
 </body-->
-<body>
-<div >
-    <div class="row">
-        <div class="buttonsBox col-xl">
-            <div class="row">
-                <a class="buttonBox col-md" href="/mainRedirect"><h2 class="buttonTitle">Главная</h2></a>
-                <a class="buttonBox col-md" href="/informationRedirect"><h2 class="buttonTitle">Информация</h2></a>
-                <a class="buttonBox col-md" href="/dayFindRedirect"><h2 class="buttonTitle">Поиск дня</h2></a>
-                <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
-                <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
-                <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+<body class="root">
+<div>
+    <div class="buttonsBox col-xl">
+        <div class="row">
+            <a class="buttonBox col-md" href="/mainRedirect"><h2 class="buttonTitle">Главная</h2></a>
+            <a class="buttonBox col-md" href="/informationRedirect"><h2 class="buttonTitle">Информация</h2></a>
+            <a class="buttonBox col-md" href="/dayFindRedirect"><h2 class="buttonTitle">Поиск дня</h2></a>
+            <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
+            <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
+            <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+        </div>
+    </div>
+    <div class="mainBox">
+        <div class="row">
+            <div class="box2">
+                <h2 class="buttonTitle" >{{currentDate}}</h2>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="box2">
-            <h2 class="buttonTitle" >{{currentDate}}</h2>
-        </div>
-    </div>
-    <div class="row weatherMainBox">
+        <div class="row weatherMainBox">
             {{#weatherStats}}
-            <div class="weatherBox col-md">
-                <img src="/images/v8_11.png" class="image" />
-                <!--px-grid x="80px 140fr 70fr" y="238px minmax(153px,153fr) 14fr" absolute="true"-->
+                <div class="weatherBox col-md">
+                    <!--img src="/images/v8_11.png" class="image" /-->
+                    <!--px-grid x="80px 140fr 70fr" y="238px minmax(153px,153fr) 14fr" absolute="true"-->
                     <div class="medium_title">
-                        <h2>{{time}}:00 - {{nextHour}}:00</h2><br/>
+                        <h2>{{hour}}:00 - {{nextHour}}:00</h2><br/>
                         {{#positive}}
+                            Средняя температура:<br>
                             +{{T}}<br/>
                         {{/positive}}
                         {{^positive}}
                             {{T}}<br/>
                         {{/positive}}
-                        {{WW}}<br>
-                        {{DD}}
+                        Вероятность осадков:<br>
+                        {{#weatherTypes}}
+                            {{#entrySet}}
+                                {{key}} - {{value}}%<br>
+                            {{/entrySet}}
+                        {{/weatherTypes}}
 
                     </div>
-                <!--/px-grid-->
-            </div>
+                    <!--/px-grid-->
+                </div>
             {{/weatherStats}}
-    </div>
-    <div class="row">
-        <div class="buttonDaySwitchBox col-xl">
-            <a href="/prevDay" class="buttonDaySwitchBox2">
-                <h2 class="buttonTitle">Предыдущий день</h2>
-            </a>
         </div>
-        <div class="col-xl-7"></div>
-        <div class="buttonDaySwitchBox col-xl">
-            <a href="/nextDay" class="buttonDaySwitchBox2">
-                <h2 class="buttonTitle">Следующий день</h2>
-            </a>
+        <div class="row">
+            <div class="buttonDaySwitchBox col-xl">
+                <a href="/prevDay" class="buttonDaySwitchBox2">
+                    <h2 class="buttonTitle">Предыдущий день</h2>
+                </a>
+            </div>
+            <div class="col-xl-7"></div>
+            <div class="buttonDaySwitchBox col-xl">
+                <a href="/nextDay" class="buttonDaySwitchBox2">
+                    <h2 class="buttonTitle">Следующий день</h2>
+                </a>
+            </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>

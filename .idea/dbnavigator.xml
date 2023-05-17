@@ -36,19 +36,20 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" object-ref="schemas/weather/tables/stats" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weather.stats" active-filter-id="EMPTY_FILTER">
-      <filter id="e45fe9da-5f66-44b6-a207-7b2b7d75af44" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
-        <condition column="DD" operator="=" value="" active="true" />
+      <filter id="e45fe9da-5f66-44b6-a207-7b2b7d75af44" name="05.02" temporary="false" custom-name="false" type="basic" join-type="OR">
+        <condition column="time" operator="like" value="05.02" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weathers.stats" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weatherstats.statss" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weather.statsnew" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weatherstatistics.hibernate_sequence" active-filter-id="" />
     <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weatherstatistics.weather_stat" active-filter-id="EMPTY_FILTER" />
   </component>

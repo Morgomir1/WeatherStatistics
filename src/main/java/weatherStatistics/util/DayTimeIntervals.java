@@ -34,4 +34,9 @@ public enum DayTimeIntervals {
         NIGHT.next = MORNING;
         MORNING.next = DAY;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.time);
+    }
 }

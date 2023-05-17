@@ -1,11 +1,7 @@
 
 .root {
   background-color: rgb(212, 221, 221);
-  outline: 1px solid rgb(0, 0, 0);
-  outline-offset: -1px;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
+
 }
 .weatherMainBox {
   background-color: rgba(210, 248, 245, 0.498);
@@ -52,11 +48,11 @@
   background-color: rgba(58, 234, 223, 0.498);
   border-radius: 10px 10px 10px 10px;
   width: 296px;
-  height: 44px;
+  height: 60px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.247);
   position: absolute;
   overflow: hidden;
-  top: 98px;
+  top: 10px;
   left: 18px;
   min-width: 296px;
 }
@@ -92,7 +88,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.247);
   position: absolute;
   overflow: hidden;
-  top: 100px;
+  top: 85px;
   min-width: 60px;
 }
 .buttonDaySwitchBox2 {
@@ -105,7 +101,7 @@
   margin: 6px 35px 5px;
 }
 .buttonsBox {
-
+  width: 100%;
   background-color: rgba(58, 234, 223, 0.498);
   border-radius: 10px 10px 10px 10px;
   width: auto;
@@ -115,8 +111,18 @@
   overflow: hidden;
   top: 0px;
   left: 0px;
-  min-width:1280 px;
 
+
+}
+.mainBox {
+    width: 100%;
+    height: 720px;
+    background: rgba(212,221,221,1);
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
 }
 .buttonBox {
   background-color: rgb(255, 255, 255);
@@ -130,14 +136,11 @@
   min-width: 120px;
 }
 .buttonTitle {
-
   font: 19px "Ubuntu", Helvetica, Arial, serif;
   color: rgb(0, 0, 0);
   text-align: center;
   letter-spacing: 0px;
   width: 90px;
-
-
   min-width: 90px;
   margin: 11px auto;
 }
