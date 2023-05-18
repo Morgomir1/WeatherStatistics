@@ -1,4 +1,4 @@
-package weatherStatistics;
+package weatherStatistics.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +7,7 @@ import weatherStatistics.entity.WeatherStat;
 import weatherStatistics.repo.WeatherStatRepo;
 import weatherStatistics.util.CloudTypes;
 import weatherStatistics.util.DayTimeIntervals;
+import weatherStatistics.util.Plan;
 import weatherStatistics.util.WeatherTypes;
 
 import java.text.SimpleDateFormat;
@@ -26,11 +27,6 @@ public class MainController {
         return "admin";
     }
 
-    @GetMapping("/planning")
-    public String planning() {
-        return "planning";
-    }
-
     @GetMapping("/settings")
     public String settings() {
         return "settings";
@@ -40,8 +36,6 @@ public class MainController {
     public String information() {
         return "information";
     }
-
-
 
     private Date currentDate = new Date();
 
@@ -175,7 +169,7 @@ public class MainController {
 
     ArrayList<WeatherStat> foundedDays = new ArrayList<>();
 
-    @PostMapping
+    @PostMapping("/findDate")
     public String findDate(
             @RequestParam(name = "cloudiness", required = false) String cloudiness,
             @RequestParam(name = "precipitation", required = false) String precipitation,
@@ -292,5 +286,159 @@ public class MainController {
         long executionTime = System.currentTimeMillis() - time;
         System.out.println("Execution time: " + TimeUnit.MILLISECONDS.toSeconds(executionTime));
         return connectedStats;
+    }
+
+    private HashMap<String, ArrayList<Plan>> plans = new HashMap<>();
+    private HashMap<String, HashMap<Plan, WeatherStat>> plansResults = new HashMap<>();
+    private boolean creatingPlans = true;
+
+    @GetMapping("/planning")
+    public String planning(Map<String, Object> model) {
+        /*if (plans.size() == 0) {
+            SimpleDateFormat formatForClient = new SimpleDateFormat("d LLLL");
+            String currentDate = formatForClient.format(this.currentDate);
+            plans.put(currentDate, new ArrayList<>());
+        }*/
+        model.put("timeIntervals", DayTimeIntervals.values());
+        model.put("plans", plans);
+        model.put("creatingPlans", creatingPlans);
+        model.put("plansResults", plansResults);
+        return "planning";
+    }
+
+    @PostMapping("/addPlansForNextDay")
+    public String addPlansForNextDay(@RequestParam(name = "calendar") String calendar) {
+        if (!calendar.equals("")) {
+            plans.put(calendar, new ArrayList<>());
+        }
+        return "redirect:/planning";
+    }
+
+    @PostMapping("/removePlansForDay")
+    public String removePlansForDay(@RequestParam(name = "key") String key) {
+        plans.remove(key);
+        return "redirect:/planning";
+    }
+
+    @PostMapping("/addPlan")
+    public String addPlan(@RequestParam(name = "key", required = false) String key,
+                          @RequestParam(name = "time", required = false) Integer time,
+                          @RequestParam(name = "plan", required = false) String plan) {
+        if (key == null || time == null || plan == null) {
+            return "redirect:/planning";
+        }
+        System.out.println(key);
+        if (plans.get(key) != null) {
+            ArrayList<Plan> plansForThisDay = plans.get(key);
+            if (!this.alreadyHasPlan(plansForThisDay, plan, time)) {
+                plansForThisDay.add(new Plan(time, plan));
+                plans.put(key, plansForThisDay);
+            }
+        } else {
+            ArrayList<Plan> plansForThisDay = new ArrayList<>();
+            if (!this.alreadyHasPlan(plansForThisDay, plan, time)) {
+                plansForThisDay.add(new Plan(time, plan));
+                plans.put(key, plansForThisDay);
+            }
+        }
+        return "redirect:/planning";
+    }
+
+    private boolean alreadyHasPlan(ArrayList<Plan> list, String newPlan, int time) {
+        boolean has = false;
+        for (Plan plan : list) {
+            if (plan.getPlan().equals(newPlan) && plan.getInterval() == time) {
+                has = true;
+                break;
+            }
+        }
+        return has;
+    }
+
+    @PostMapping("/removePlan")
+    public String removePlan(@RequestParam(name = "plan") String plan, @RequestParam(name = "key") String key) {
+        ArrayList<Plan> plansForDay = plans.get(key);
+        plansForDay.removeIf(plan1 -> plan1.getPlan().equals(plan));
+        plans.put(key, plansForDay);
+        return "redirect:/planning";
+    }
+
+    @PostMapping("/showResults")
+    public String showResults() {
+        this.creatingPlans = !this.creatingPlans;
+        if (!this.creatingPlans) {
+            System.out.println(plans);
+            long time = System.currentTimeMillis();
+            HashMap<Integer, ArrayList<Integer>> monthsAndDaysInMonths = new HashMap<>();
+            for (Map.Entry<String, ArrayList<Plan>> entry : this.plans.entrySet()) {
+                int month = Integer.parseInt(entry.getKey().substring(5, 7));
+                int day = Integer.parseInt(entry.getKey().substring(8, 10));
+                if (monthsAndDaysInMonths.get(month) != null) {
+                    ArrayList<Integer> days = monthsAndDaysInMonths.get(month);
+                    days.add(day);
+                    monthsAndDaysInMonths.put(month, days);
+                } else {
+                    ArrayList<Integer> days = new ArrayList<>();
+                    days.add(day);
+                    monthsAndDaysInMonths.put(month, days);
+                }
+
+            }
+            Queue<WeatherStat> queue = new LinkedList<>(this.weatherStats);
+            Queue<WeatherStat> queueCopy = new LinkedList<>(queue);
+            while (!queueCopy.isEmpty()) {
+                WeatherStat stat = queueCopy.poll();
+                if (!monthsAndDaysInMonths.containsKey(stat.getMonth())) {
+                    queue.remove(stat);
+                }
+                boolean anyDaysContains = false;
+                for (Map.Entry<Integer, ArrayList<Integer>> entry : monthsAndDaysInMonths.entrySet()) {
+                    if (entry.getKey() == stat.getMonth() && entry.getValue().contains(stat.getDay())) {
+                        anyDaysContains = true;
+                        break;
+                    }
+                }
+                if (!anyDaysContains) {
+                    queue.remove(stat);
+                }
+
+            }
+            while (!queue.isEmpty()) {
+                WeatherStat stat = queue.poll();
+                for (Map.Entry<String, ArrayList<Plan>> entry : plans.entrySet()) {
+                    int month = Integer.parseInt(entry.getKey().substring(5, 7));
+                    int day = Integer.parseInt(entry.getKey().substring(8, 10));
+                    if (stat.getMonth() == month && stat.getDay() == day) {
+                        for (Plan plan : entry.getValue()) {
+                            if (plan.getInterval() == stat.getHour()) {
+                                HashMap<Plan, WeatherStat> dayPlans = plansResults.get(entry.getKey());
+                                if (dayPlans != null) {
+                                    if (dayPlans.get(plan) != null) {
+                                        dayPlans.put(plan, WeatherStat.connectTwoStats(dayPlans.get(plan), stat));
+                                    } else {
+                                        dayPlans.put(plan, stat);
+                                    }
+                                } else {
+                                    HashMap<Plan, WeatherStat> dayPlansNew = new HashMap<>();
+                                    dayPlansNew.put(plan, stat);
+                                    plansResults.put(entry.getKey(), dayPlansNew);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (HashMap<Plan, WeatherStat> map : plansResults.values()) {
+                for (WeatherStat stat : map.values()) {
+                    stat.calcWeatherChances();
+                }
+            }
+            long executionTime = System.currentTimeMillis() - time;
+            System.out.println("Execution time: " + TimeUnit.MILLISECONDS.toSeconds(executionTime));
+            System.out.println(queue);
+        } else {
+            this.plansResults.clear();
+        }
+        return "redirect:/planning";
     }
 }

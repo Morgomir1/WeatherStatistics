@@ -4,6 +4,7 @@
     <title>Планировка</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles/css/style.css" >
+    <link rel="stylesheet" type="text/css" href="styles/css/planningStyles.css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="root">
@@ -15,6 +16,87 @@
         <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
         <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
         <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+    </div>
+</div>
+<div class="component">
+    <div class="info-frame row">
+        {{#creatingPlans}}
+            {{#plans}}
+                {{#entrySet}}
+                    <div class="day-frame col">
+                        <form action="/removePlansForDay" method="post">
+                            <button type="submit" value="{{key}}" name="key" class="buttonDeleteDayPlans">x</button>
+                        </form>
+                        <p class="day-title row">{{key}}</p>
+                        {{#value}}
+                            <form action="/removePlan" method="post">
+                                <p><input value="{{plan}}" name="plan" readonly></p>
+                                <p>{{.}}</p>
+                                <button class="buttonDeleteDayPlans" value="{{key}}" name="key" type="submit">x</button>
+                            </form>
+                        {{/value}}
+                        <form action="/addPlan" method="post">
+                            <p><b>План:</b><br>
+                                <input name="plan" type="text" size="auto">
+                            </p>
+                            <p><b>Время:</b><br>
+                                <select name="time" size="3" multiple>
+                                    {{#timeIntervals}}
+                                        <option value={{time}}>{{time}}:00 - {{next}}:00</option>
+                                    {{/timeIntervals}}
+                                </select>
+                            </p>
+                            <button class="button" value="{{key}}" name="key" type="submit">+</button>
+                        </form>
+                    </div>
+                {{/entrySet}}
+                <div class="day-frame col">
+                    <form action="/addPlansForNextDay" method="post">
+                        <br>
+                        <p>Выберите дату: <input type="date" name="calendar"></p>
+                        <button class="button">+</button>
+                    </form>
+                </div>
+            {{/plans}}
+        {{/creatingPlans}}
+        {{^creatingPlans}}
+            {{#plansResults}}
+                {{#entrySet}}
+                    <div class="day-frame col">
+
+                        <p class="day-title row">{{key}}</p>
+                        {{#value}}
+                            {{#entrySet}}
+                                {{#key}}
+                                    <p><input value="{{plan}}" name="plan" readonly></p>
+                                {{/key}}
+                                {{#value}}
+                                    <h2>{{hour}}:00 - {{nextHour}}:00</h2><br/>
+                                    Средняя температура:<br>
+                                    {{#positive}}
+                                        +{{T}}<br/>
+                                    {{/positive}}
+                                    {{^positive}}
+                                        {{T}}<br/>
+                                    {{/positive}}
+                                    Вероятность осадков:<br>
+                                    {{#weatherTypes}}
+                                        {{#entrySet}}
+                                            {{key}} - {{value}}%<br>
+                                        {{/entrySet}}
+                                    {{/weatherTypes}}
+                                {{/value}}
+                            {{/entrySet}}
+                        {{/value}}
+                    </div>
+                {{/entrySet}}
+            {{/plansResults}}
+        {{/creatingPlans}}
+    </div>
+    <div class="main-button-four row">
+        <form action="/showResults" method="post">
+            <button type="submit" class="main-button-four glavnaja">{{#creatingPlans}}Показать результаты{{/creatingPlans}}{{^creatingPlans}}Вернуться{{/creatingPlans}}</button>
+        </form>
     </div>
 </div>
 </body>

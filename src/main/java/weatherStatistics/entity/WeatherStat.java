@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 @Entity
 @Table(name = "statsnew")
@@ -245,8 +247,29 @@ public class WeatherStat {
       stat.setU((first.getU() + second.getU()) / 2);
       stat.setDD(first.getDD() + second.getDD());
       stat.setWW(first.getWW() + ";" + second.getWW());
+
       stat.setW1(first.getW1() + ";" + second.getW1());
       stat.setW2(first.getW2() + ";" + second.getW2());
+      //stat.calcWeatherChances();
       return stat;
+  }
+
+  public void calcWeatherChances() {
+    this.getWeatherTypes().clear();
+    for (String weather : this.getW1().split(";")) {
+      for (WeatherTypes weather1 : WeatherTypes.values()) {
+        if (weather.toLowerCase(Locale.ROOT).contains(weather1.getWeatherName())) {
+          this.getWeatherTypes().merge(weather1, 1.0, Double::sum);
+        }
+      }
+    }
+    int sum = 0;
+    for (Map.Entry<WeatherTypes, Double> weather : this.getWeatherTypes().entrySet()) {
+      this.setW1(weather.getKey().getWeatherDisplayName());
+      sum += weather.getValue();
+    }
+    for (Map.Entry<WeatherTypes, Double> weather : this.getWeatherTypes().entrySet()) {
+      this.getWeatherTypes().put(weather.getKey(), (double) Math.round(weather.getValue() / sum * 100));
+    }
   }
 }
