@@ -5,6 +5,9 @@ import weatherStatistics.util.WeatherTypes;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -54,6 +57,11 @@ public class WeatherStat {
   @Transient
   private HashMap<WeatherTypes, Double> weatherTypes = new HashMap<>();
 
+  @Transient
+  private DayOfWeek dayOfWeek;
+
+  @Transient
+  private String dayOfWeekStr;
 
   public WeatherStat() {
 
@@ -109,19 +117,9 @@ public class WeatherStat {
       this.weatherTypes = weatherTypes;
   }
 
-  public boolean isDateEqualTo(String date) {
+  public boolean isDateEqualTo(LocalDate date) {
 
-    int day = Integer.parseInt(date.substring(0, 2));
-    int month = Integer.parseInt(date.substring(2, 4));
-    return this.getDay() == day && this.getMonth() == month;
-  }
-
-  public boolean isDateEqualTo(Date date) {
-      SimpleDateFormat formatForDateNow = new SimpleDateFormat("ddMM");
-      String currentDate = formatForDateNow.format(date);
-      int day = Integer.parseInt(currentDate.substring(0, 2));
-      int month = Integer.parseInt(currentDate.substring(2, 4));
-      return this.day == day && this.month == month;
+      return this.day == date.getDayOfMonth() && this.month == date.getMonthValue();
   }
 
   public boolean isDateEqualTo(WeatherStat stat) {
@@ -233,6 +231,17 @@ public class WeatherStat {
     this.id = id;
   }
 
+  public DayOfWeek getDayOfWeek() {
+    return dayOfWeek;
+  }
+
+  public void setDayOfWeek(DayOfWeek dayOfWeek) {
+    if (dayOfWeek != null) {
+      this.dayOfWeek = dayOfWeek;
+      this.dayOfWeekStr = dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault());
+    }
+  }
+
   public static WeatherStat connectTwoStats(WeatherStat first, WeatherStat second) {
       WeatherStat stat = new WeatherStat();
       stat.setDay(second.day);
@@ -240,6 +249,7 @@ public class WeatherStat {
       stat.setYear(second.year);
       stat.setHour(second.hour);
       stat.setNextHour(second.hour + 6 == 24 ? 0 : second.hour + 6);
+      stat.setDayOfWeek(second.getDayOfWeek());
       stat.setT(Math.round((first.getT() + second.getT()) / 2));
       stat.setPo((first.getPo() + second.getPo()) / 2);
       stat.setPa((first.getPa() + second.getPa()) / 2);

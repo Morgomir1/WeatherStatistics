@@ -24,53 +24,139 @@
             <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
             <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
             <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+
         </div>
     </div>
     <div class="mainBox">
         <div class="row">
-            <div class="box2">
+            <div class="box2 col-md-2">
                 <h2 class="buttonTitle" >{{currentDate}}</h2>
             </div>
+            <div class="col-xl"></div>
         </div>
         <div class="row weatherMainBox">
-            {{#weatherStats}}
-                <div class="weatherBox col-md">
-                    <!--img src="/images/v8_11.png" class="image" /-->
-                    <!--px-grid x="80px 140fr 70fr" y="238px minmax(153px,153fr) 14fr" absolute="true"-->
-                    <div class="medium_title">
-                        <h2>{{hour}}:00 - {{nextHour}}:00</h2><br/>
-                        Средняя температура:<br>
-                        {{#positive}}
-                            +{{T}}<br/>
-                        {{/positive}}
-                        {{^positive}}
-                            {{T}}<br/>
-                        {{/positive}}
-                        Вероятность осадков:<br>
-                        {{#weatherTypes}}
-                            {{#entrySet}}
-                                {{key}} - {{value}}%<br>
-                            {{/entrySet}}
-                        {{/weatherTypes}}
-
+            {{#isDay}}
+                {{#weatherStats}}
+                    <div class="weatherBox col-md">
+                        <div class="medium_title">
+                            <h2>{{hour}}:00 - {{nextHour}}:00</h2><br/>
+                            Средняя температура:<br>
+                            {{#positive}}
+                                +{{T}}<br/>
+                            {{/positive}}
+                            {{^positive}}
+                                {{T}}<br/>
+                            {{/positive}}
+                            Вероятность осадков:<br>
+                            {{#weatherTypes}}
+                                {{#entrySet}}
+                                    {{key}} - {{value}}%<br>
+                                {{/entrySet}}
+                            {{/weatherTypes}}
+                        </div>
                     </div>
-                    <!--/px-grid-->
+                {{/weatherStats}}
+            {{/isDay}}
+            {{#isMonth}}
+                <div class="row">
+                    {{#weatherStats1}}
+                        <div class="weatherBox col-md">
+                            {{day}} {{currentDate}}<br>
+                            {{#positive}}
+                                +{{T}}<br/>
+                            {{/positive}}
+                            {{^positive}}
+                                {{T}}<br/>
+                            {{/positive}}
+                        </div>
+                    {{/weatherStats1}}
                 </div>
-            {{/weatherStats}}
+                <div class="row">
+                    {{#weatherStats2}}
+                        <div class="weatherBox col-md">
+                            {{day}} {{currentDate}}<br>
+                            {{#positive}}
+                                +{{T}}<br/>
+                            {{/positive}}
+                            {{^positive}}
+                                {{T}}<br/>
+                            {{/positive}}
+                        </div>
+                    {{/weatherStats2}}
+                </div>
+                <div class="row">
+                    {{#weatherStats3}}
+                        <div class="weatherBox col-md">
+                            {{day}} {{currentDate}}<br>
+                            {{#positive}}
+                                +{{T}}<br/>
+                            {{/positive}}
+                            {{^positive}}
+                                {{T}}<br/>
+                            {{/positive}}
+                        </div>
+                    {{/weatherStats3}}
+                </div>
+                <div class="row">
+                    {{#weatherStats4}}
+                        <div class="weatherBox col-md">
+                            {{day}} {{currentDate}}<br>
+                            {{#positive}}
+                                +{{T}}<br/>
+                            {{/positive}}
+                            {{^positive}}
+                                {{T}}<br/>
+                            {{/positive}}
+                        </div>
+                    {{/weatherStats4}}
+                </div>
+            {{/isMonth}}
+            {{#isWeek}}
+                {{#weatherStats}}
+                    <div class="weatherBox col-md">
+                        <div class="medium_title">
+                            <p><div class="buttonTitle">{{day}} {{currentDate}}</div></p>
+                            <p><div class="buttonTitle">{{dayOfWeekStr}}</div></p>
+                            Средняя температура:<br>
+                            {{#positive}}
+                                +{{T}}<br/>
+                            {{/positive}}
+                            {{^positive}}
+                                {{T}}<br/>
+                            {{/positive}}
+                            Вероятность осадков:<br>
+                            {{#weatherTypes}}
+                                {{#entrySet}}
+                                    {{key}} - {{value}}%<br>
+                                {{/entrySet}}
+                            {{/weatherTypes}}
+                        </div>
+                    </div>
+                {{/weatherStats}}
+            {{/isWeek}}
         </div>
         <div class="row">
             <div class="buttonDaySwitchBox col-xl">
                 <a href="/prevDay" class="buttonDaySwitchBox2">
-                    <h2 class="buttonTitle">Предыдущий день</h2>
+                    <h2 class="buttonTitle">Предыдущ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
                 </a>
             </div>
-            <div class="col-xl-7"></div>
+            <div class="col-xl-1"></div>
+            <div class="col-md">
+                <form method="post" action="/downloadTable">
+                    <button class="buttonDownload" type="submit">Скачать таблицу</button>
+                </form>
+            </div>
+            <div class="col-xl-1"></div>
             <div class="buttonDaySwitchBox col-xl">
                 <a href="/nextDay" class="buttonDaySwitchBox2">
-                    <h2 class="buttonTitle">Следующий день</h2>
+                    <h2 class="buttonTitle">Следующ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
                 </a>
             </div>
         </div>
+
+
+
     </div>
 
 </div>

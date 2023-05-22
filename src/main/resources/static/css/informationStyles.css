@@ -106,13 +106,13 @@
   height: 576px;
 }
 .info-title {
-  height: 76px;
-  width: 621px;
-  color: var(--black);
-  display: flex;
-  align-items: center;
-  text-align: center;
-  font: 400 30px/1.16 "Ubuntu", Helvetica, Arial, serif;
+    /* height: 76px; */
+    /* width: 621px; */
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font: 400 30px/1.16 "Ubuntu", Helvetica, Arial, serif;
 }
 .info-text {
   height: 481px;

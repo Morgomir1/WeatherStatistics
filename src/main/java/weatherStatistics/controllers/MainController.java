@@ -10,9 +10,19 @@ import weatherStatistics.util.DayTimeIntervals;
 import weatherStatistics.util.Plan;
 import weatherStatistics.util.WeatherTypes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
 @Controller
 public class MainController {
@@ -27,23 +37,15 @@ public class MainController {
         return "admin";
     }
 
-    @GetMapping("/settings")
-    public String settings() {
-        return "settings";
-    }
-
     @GetMapping("/information")
     public String information() {
         return "information";
     }
 
-    private Date currentDate = new Date();
+    private LocalDate currentDate = LocalDate.now();
+    private List<WeatherStat> statsForDownLoad = new ArrayList<>();
 
-    @GetMapping
-    public String main(Map<String, Object> model) {
-        this.weatherStats = weatherStatistics.findAll();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("ddMM");
-        String currentDate = formatForDateNow.format(this.currentDate);
+    private void putDayInModel(Map<String, Object> model) {
         HashMap<Integer, WeatherStat> weatherStatHashMap = new HashMap<>();
         for (DayTimeIntervals interval : DayTimeIntervals.values()) {
             weatherStatHashMap.put(interval.getHour(), null);
@@ -64,12 +66,116 @@ public class MainController {
             }
         }
         ArrayList<WeatherStat> list = getListWithWeatherChances(weatherStatHashMap);
-        model.put("weatherStats", sortByHour(list));
+        list = sortByHour(list);
+        this.statsForDownLoad = list;
+        model.put("weatherStats", list);
+    }
 
-        SimpleDateFormat formatForClient = new SimpleDateFormat("d LLLL");
+    private void putMonthInModel(Map<String, Object> model) {
+        int month = this.currentDate.getMonthValue();
+        ArrayList<WeatherStat> weatherStatsCopy = new ArrayList<>(this.weatherStats);
+        for (WeatherStat stat : this.weatherStats) {
+            if (stat.month != month) {
+                weatherStatsCopy.remove(stat);
+            }
+        }
+        HashMap<String, WeatherStat> connectedStats = connectStats(weatherStatsCopy, null);
+        for (WeatherStat stat : connectedStats.values()) {
+            stat.calcWeatherChances();
+        }
+        ArrayList<WeatherStat> stats = new ArrayList<>(connectedStats.values());
+        stats = sortByMonth(stats);
+        this.statsForDownLoad = stats;
+        model.put("weatherStats1", stats.subList(0, 8));
+        model.put("weatherStats2", stats.subList(8, 16));
+        model.put("weatherStats3", stats.subList(16, 24));
+        model.put("weatherStats4", stats.subList(24, stats.size()));
+    }
+
+    private void putWeekInModel(Map<String, Object> model) {
+        ArrayList<LocalDate> week = new ArrayList<>();
+        week.add(this.currentDate);
+        while (week.size() != 7) {
+            week.add(week.get(week.size() - 1).plusDays(1));
+        }
+        List<WeatherStat> stats = new LinkedList<>(this.weatherStats);
+        Queue<WeatherStat> statsCopy = new LinkedList<>(this.weatherStats);
+        while (!statsCopy.isEmpty()) {
+            WeatherStat stat = statsCopy.poll();
+            boolean delete = true;
+            for (LocalDate date : week) {
+                if (stat.isDateEqualTo(date)) {
+                    stat.setDayOfWeek(date.getDayOfWeek());
+                    delete = false;
+                    break;
+                }
+            }
+            if (delete) {
+                stats.remove(stat);
+            }
+        }
+        HashMap<String, WeatherStat> connectedStats = connectStats(stats, null);
+        for (WeatherStat stat : connectedStats.values()) {
+            stat.calcWeatherChances();
+        }
+        stats = new ArrayList<>(connectedStats.values());
+        stats = sortByMonth(stats);
+        stats = sortByWeek(stats);
+        this.statsForDownLoad = stats;
+        model.put("weatherStats", stats);
+    }
+
+    @GetMapping
+    public String main(Map<String, Object> model) {
+        this.weatherStats = weatherStatistics.findAll();
+        String currentDate;
+        DateTimeFormatter formatForClient;
+        if (this.displayType == MainMenuDisplayTypes.DAYS) {
+            formatForClient = DateTimeFormatter.ofPattern("d LLLL");
+            putDayInModel(model);
+        } else if (this.displayType == MainMenuDisplayTypes.MONTH){
+            formatForClient = DateTimeFormatter.ofPattern("LLLL");
+            putMonthInModel(model);
+        } else {
+            formatForClient = DateTimeFormatter.ofPattern("LLLL");
+            putWeekInModel(model);
+        }
         currentDate = formatForClient.format(this.currentDate);
         model.put("currentDate", currentDate);
+        model.put("isDay", this.displayType == MainMenuDisplayTypes.DAYS);
+        model.put("isMonth", this.displayType == MainMenuDisplayTypes.MONTH);
+        model.put("isWeek", this.displayType == MainMenuDisplayTypes.WEEKS);
+        model.put("theme", this.theme);
         return "main";
+    }
+
+    @PostMapping("/downloadTable")
+    public void downloadTable(HttpServletResponse response) throws IOException {
+        String csvFileName = "results.csv";
+        response.setContentType("text/csv;charset=UTF-8");
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
+        response.setHeader(headerKey, headerValue);
+        List<WeatherStat> list = new ArrayList<>(this.statsForDownLoad);
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] header = { "id", "day", "month", "year", "hour", "T", "Po", "P", "Pa", "U", "DD", "WW", "W1", "W2"};
+        csvWriter.writeHeader(header);
+        for (WeatherStat stat : list) {
+            csvWriter.write(stat, header);
+        }
+        csvWriter.close();
+    }
+
+    public static ArrayList<WeatherStat> sortByWeek(List<WeatherStat> list) {
+        ArrayList<WeatherStat> newList = new ArrayList<>();
+        for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
+            for (WeatherStat stat : list) {
+                if (stat.getDayOfWeek() == dayOfWeek) {
+                    newList.add(stat);
+                }
+            }
+        }
+        return newList;
     }
 
 
@@ -96,11 +202,6 @@ public class MainController {
         return "redirect:/planning";
     }
 
-    @GetMapping(value = "/settingsRedirect")
-    public String settingsRedirect() {
-        return "redirect:/settings";
-    }
-
     @GetMapping(value = "/adminRedirect")
     public String adminRedirect() {
         return "redirect:/admin";
@@ -118,13 +219,28 @@ public class MainController {
 
     @GetMapping(value = "/nextDay")
     public String nextDay() {
-        this.currentDate = new Date(this.currentDate.getTime() + MILLIS_IN_A_DAY);
+        if (this.displayType == MainMenuDisplayTypes.MONTH) {
+            int month = this.currentDate.getMonthValue();
+            while (month == this.currentDate.getMonthValue()) {
+                this.currentDate = this.currentDate.plusDays(1);
+            }
+        } else {
+            this.currentDate = this.currentDate.plusDays(1);
+        }
         return "redirect:/main";
     }
 
     @GetMapping(value = "/prevDay")
     public String prevDay() {
-        this.currentDate = new Date(this.currentDate.getTime() - MILLIS_IN_A_DAY);
+        if (this.displayType == MainMenuDisplayTypes.MONTH) {
+            int month = this.currentDate.getMonthValue();
+            while (month == this.currentDate.getMonthValue()) {
+                this.currentDate = this.currentDate.minusDays(1);
+            }
+        } else {
+            this.currentDate = this.currentDate.minusDays(1);
+        }
+
         return "redirect:/main";
     }
 
@@ -241,34 +357,53 @@ public class MainController {
         return list;
     }
 
-    public static ArrayList<WeatherStat> sortByDay(List<WeatherStat> list, Date date) {
+    public static ArrayList<WeatherStat> sortByDay(List<WeatherStat> list, LocalDate date) {
         ArrayList<WeatherStat> sorted = new ArrayList<>();
-        Date currentDateCopy = date;
+        LocalDate currentDateCopy = date;
         while (sorted.size() < list.size()) {
             for (WeatherStat stat : list) {
                 if (stat.isDateEqualTo(currentDateCopy)) {
                     sorted.add(stat);
-                    currentDateCopy = new Date(currentDateCopy.getTime() + MILLIS_IN_A_DAY);
+                    currentDateCopy = currentDateCopy.plusDays(1);
                 }
             }
-            currentDateCopy = new Date(currentDateCopy.getTime() + MILLIS_IN_A_DAY);
+            currentDateCopy = currentDateCopy.plusDays(1);
         }
         return sorted;
     }
 
-    public static HashMap<String, WeatherStat> connectStats(List<WeatherStat> weatherStats, int hour) {
+    public static ArrayList<WeatherStat> sortByMonth(List<WeatherStat> list) {
+        ArrayList<WeatherStat> sorted = new ArrayList<>();
+        while (!list.isEmpty()) {
+            int minDay = Integer.MAX_VALUE;
+            WeatherStat statWithMinDay = null;
+            for (WeatherStat stat : list) {
+                if (minDay > stat.day) {
+                    minDay = stat.day;
+                    statWithMinDay = stat;
+                }
+            }
+            if (statWithMinDay != null) {
+                list.remove(statWithMinDay);
+                sorted.add(statWithMinDay);
+            }
+        }
+        return sorted;
+    }
+
+    public static HashMap<String, WeatherStat> connectStats(List<WeatherStat> weatherStats, Integer hour) {
         Queue<WeatherStat> statCopy = new LinkedList<>(weatherStats);
         HashMap<String, WeatherStat> connectedStats = new HashMap<>();
         long time = System.currentTimeMillis();
         while (!statCopy.isEmpty()) {
             WeatherStat stat = statCopy.poll();
             Queue<WeatherStat> statCopy2 = new LinkedList<>(statCopy);
-            if (stat.getHour() != hour) {
+            if (hour != null && stat.getHour() != hour) {
                 continue;
             }
             while (!statCopy2.isEmpty()) {
                 WeatherStat stat1 = statCopy2.poll();
-                if (stat1.getHour() != hour) {
+                if (hour != null && stat1.getHour() != hour) {
                     statCopy.remove(stat1);
                     continue;
                 }
@@ -294,11 +429,6 @@ public class MainController {
 
     @GetMapping("/planning")
     public String planning(Map<String, Object> model) {
-        /*if (plans.size() == 0) {
-            SimpleDateFormat formatForClient = new SimpleDateFormat("d LLLL");
-            String currentDate = formatForClient.format(this.currentDate);
-            plans.put(currentDate, new ArrayList<>());
-        }*/
         model.put("timeIntervals", DayTimeIntervals.values());
         model.put("plans", plans);
         model.put("creatingPlans", creatingPlans);
@@ -440,5 +570,75 @@ public class MainController {
             this.plansResults.clear();
         }
         return "redirect:/planning";
+    }
+
+    /*
+        Settings
+     */
+
+    private enum MainMenuDisplayTypes {
+        DAYS("Дни"),
+        WEEKS("Недели"),
+        MONTH("Месяцы");
+
+        private String name;
+
+        MainMenuDisplayTypes(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    private enum ThemeTypes {
+        BLUE("Синяя"),
+        BLACK("Тёмная");
+
+        private String name;
+
+        ThemeTypes(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    private MainMenuDisplayTypes displayType = MainMenuDisplayTypes.DAYS;
+    private ThemeTypes theme = ThemeTypes.BLUE;
+
+    @GetMapping(value = "/settingsRedirect")
+    public String settingsRedirect() {
+
+        return "redirect:/settings";
+    }
+
+    @PostMapping("/setupSettings")
+    public String setupSettings(@RequestParam(name = "displayType", required = false) String displayType,
+                                @RequestParam(name = "theme", required = false) String theme) {
+        if (displayType != null) {
+            this.displayType = MainMenuDisplayTypes.valueOf(displayType);
+            if (this.displayType == MainMenuDisplayTypes.WEEKS) {
+                LocalDate now = LocalDate.now();
+                while (now.getDayOfWeek() != DayOfWeek.MONDAY) {
+                    now = now.minusDays(1);
+                }
+                this.currentDate = now;
+            }
+        }
+        if (theme != null) {
+            this.theme = ThemeTypes.valueOf(theme);
+        }
+        return "redirect:/settings";
+    }
+
+    @GetMapping("/settings")
+    public String settings(HashMap<String, Object> model) {
+        model.put("displayTypes", MainMenuDisplayTypes.values());
+        model.put("themeTypes", ThemeTypes.values());
+        return "settings";
     }
 }

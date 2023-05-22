@@ -4,6 +4,7 @@
     <title>Настройки</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles/css/style.css" >
+    <link rel="stylesheet" type="text/css" href="styles/css/settingStyles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="root">
@@ -16,6 +17,27 @@
         <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
         <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
     </div>
+</div>
+<div class="mainBox">
+    <form action="/setupSettings" method="post">
+        <div class="row">
+            <div class="col-md text-frame">
+                <div class="settingsTitle">Вид отображения главной страницы</div>
+                {{#displayTypes}}
+                    <p><input name="displayType" type="radio" value={{.}}>{{name}}</p>
+                {{/displayTypes}}
+            </div>
+            <div class="col-md text-frame">
+                <div class="settingsTitle">Оформление сайта</div>
+                {{#themeTypes}}
+                    <p><input name="theme" type="radio" value={{.}}>{{name}}</p>
+                {{/themeTypes}}
+            </div>
+        </div>
+        <div class="row">
+            <button class="buttonSettings" type="submit">Применить изменения</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>
