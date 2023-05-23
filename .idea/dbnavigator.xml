@@ -47,6 +47,8 @@
         <condition column="time" operator="like" value="05.02" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weather.admin" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weather.role" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weathers.stats" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weatherstats.statss" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0a6f82f0-ada3-42e3-9214-134d4d9fbc90" dataset="weather.statsnew" active-filter-id="EMPTY_FILTER" />

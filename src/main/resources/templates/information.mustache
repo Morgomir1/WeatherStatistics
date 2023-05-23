@@ -1,10 +1,8 @@
-<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Информация</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="styles/css/style.css" >
-    <link rel="stylesheet" type="text/css" href="styles/css/informationStyles.css">
+    <link rel="stylesheet" type="text/css" href="styles/css/{{#theme}}{{name}}{{/theme}}.css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="root">
@@ -20,7 +18,7 @@
 </div>
 <div class="mainBox">
     <div class="row flex-wrapper-two">
-        <div class="info-frame">
+        <div class="info-frame2">
             <div class="text-frame">
                 <p class="info-title">Информация о сайте</p>
                 <p class="info-text">

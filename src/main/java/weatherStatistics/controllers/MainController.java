@@ -12,12 +12,9 @@ import weatherStatistics.util.WeatherTypes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.supercsv.io.CsvBeanWriter;
@@ -26,19 +23,15 @@ import org.supercsv.prefs.CsvPreference;
 
 @Controller
 public class MainController {
+
     List<WeatherStat> weatherStats = new ArrayList<>();
-    private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
 
     @Autowired
     private WeatherStatRepo weatherStatistics;
 
-    @GetMapping("/admin")
-    public String admin() {
-        return "admin";
-    }
-
     @GetMapping("/information")
-    public String information() {
+    public String information(HashMap<String, Object> model) {
+        model.put("theme", this.theme);
         return "information";
     }
 
@@ -202,11 +195,6 @@ public class MainController {
         return "redirect:/planning";
     }
 
-    @GetMapping(value = "/adminRedirect")
-    public String adminRedirect() {
-        return "redirect:/admin";
-    }
-
     @GetMapping(value = "/informationRedirect")
     public String informationRedirect() {
         return "redirect:/information";
@@ -262,6 +250,7 @@ public class MainController {
         model.put("weatherTypes", WeatherTypes.values());
         model.put("cloudTypes", CloudTypes.values());
         model.put("timeIntervals", DayTimeIntervals.values());
+        model.put("theme", this.theme);
         return "dayFind";
     }
 
@@ -331,6 +320,7 @@ public class MainController {
             System.out.println(sortedHashMap);
             System.out.println("Size after find:" + this.foundedDays.size());
         }
+
         return "redirect:/dayFind";
     }
 
@@ -433,6 +423,7 @@ public class MainController {
         model.put("plans", plans);
         model.put("creatingPlans", creatingPlans);
         model.put("plansResults", plansResults);
+        model.put("theme", this.theme);
         return "planning";
     }
 
@@ -593,13 +584,15 @@ public class MainController {
     }
 
     private enum ThemeTypes {
-        BLUE("Синяя"),
-        BLACK("Тёмная");
+        BLUE("style", "Бирюзовая"),
+        BLACK("black", "Тёмная");
 
         private String name;
+        private String displayName;
 
-        ThemeTypes(String name) {
+        ThemeTypes(String name, String displayName) {
             this.name = name;
+            this.displayName = displayName;
         }
 
         public String getName() {
@@ -639,6 +632,20 @@ public class MainController {
     public String settings(HashMap<String, Object> model) {
         model.put("displayTypes", MainMenuDisplayTypes.values());
         model.put("themeTypes", ThemeTypes.values());
+        model.put("theme", this.theme);
         return "settings";
+    }
+
+    @GetMapping("/admin")
+    public String admin(HashMap<String, Object> model) {
+        model.put("stats", this.weatherStats);
+        model.put("theme", this.theme);
+        return "admin";
+    }
+
+    @GetMapping("/login")
+    public String login(HashMap<String, Object> model) {
+        model.put("theme", this.theme);
+        return "login";
     }
 }

@@ -1,10 +1,8 @@
-<!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Поиск дня</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="styles/css/style.css" >
-    <link rel="stylesheet" type="text/css" href="styles/css/dayFindStyles.css" >
+    <link rel="stylesheet" type="text/css" href="styles/css/{{#theme}}{{name}}{{/theme}}.css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="root">
@@ -46,7 +44,7 @@
                         {{/timeIntervals}}
                     </select>
                     <br>
-                    <input type="number" name="temperature" placeholder="Температура">
+                    <input class="input-temp" type="number" name="temperature" placeholder="Температура">
                     <br>
                     <button type="submit" class="buttonDayFind">Поиск</button>
                     <!--button class="buttonDaySwitchBox2" type="submit">Добавить</button-->
