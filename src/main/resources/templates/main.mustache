@@ -5,15 +5,6 @@
     <link rel="stylesheet" type="text/css" href="styles/css/{{#theme}}{{name}}{{/theme}}.css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<!--body>
-
-<a type="button" href="/mainRedirect">Главная</a>
-<a type="button" href="/informationRedirect">Информация</a>
-<a type="button" href="/dayFindRedirect">Поиск дня</a>
-<a type="button" href="/planningRedirect">Планировка</a>
-<a type="button" href="/settingsRedirect">Настройки</a>
-<a type="button" href="/adminRedirect">Админ</a>
-</body-->
 <body class="root">
 <div>
     <div class="buttonsBox col-xl">
@@ -24,13 +15,12 @@
             <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
             <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
             <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
-
         </div>
     </div>
     <div class="mainBox">
         <div class="row">
             <div class="box2 col-md-2">
-                <h2 class="buttonTitle" >{{currentDate}}</h2>
+                <h2 class="buttonTitle" >{{day}} {{month}}</h2>
             </div>
             <div class="col-xl"></div>
         </div>
@@ -61,7 +51,7 @@
                 <div class="row">
                     {{#weatherStats1}}
                         <div class="weatherBox col-md">
-                            {{day}} {{currentDate}}<br>
+                            {{day}} {{month}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
                             {{/positive}}
@@ -74,7 +64,7 @@
                 <div class="row">
                     {{#weatherStats2}}
                         <div class="weatherBox col-md">
-                            {{day}} {{currentDate}}<br>
+                            {{day}} {{month}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
                             {{/positive}}
@@ -87,7 +77,7 @@
                 <div class="row">
                     {{#weatherStats3}}
                         <div class="weatherBox col-md">
-                            {{day}} {{currentDate}}<br>
+                            {{day}} {{month}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
                             {{/positive}}
@@ -100,7 +90,7 @@
                 <div class="row">
                     {{#weatherStats4}}
                         <div class="weatherBox col-md">
-                            {{day}} {{currentDate}}<br>
+                            {{day}} {{month}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
                             {{/positive}}
@@ -115,7 +105,7 @@
                 {{#weatherStats}}
                     <div class="weatherBox col-md">
                         <div class="medium_title">
-                            <p><div class="buttonTitle">{{day}} {{currentDate}}</div></p>
+                            <p><div class="buttonTitle">{{day}} {{month}}</div></p>
                             <p><div class="buttonTitle">{{dayOfWeekStr}}</div></p>
                             Средняя температура:<br>
                             {{#positive}}
@@ -137,28 +127,29 @@
         </div>
         <div class="row">
             <div class="buttonDaySwitchBox col-xl">
-                <a href="/prevDay" class="buttonDaySwitchBox2">
-                    <h2 class="buttonTitle">Предыдущ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
-                </a>
+                <form method="post" action="/prevDay">
+                    <button type="submit" name="day" value="{{day}} {{monthNumber}}" class="buttonDaySwitchBox2">
+                        <h2 class="buttonTitle">Предыдущ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
+                    </button>
+                </form>
+
             </div>
             <div class="col-xl-1"></div>
             <div class="col-md">
                 <form method="post" action="/downloadTable">
-                    <button class="buttonDownload" type="submit">Скачать таблицу</button>
+                    <button class="buttonDownload" name="statsForDownload" value="{{statsForDownload}}" type="submit">Скачать таблицу</button>
                 </form>
             </div>
             <div class="col-xl-1"></div>
             <div class="buttonDaySwitchBox col-xl">
-                <a href="/nextDay" class="buttonDaySwitchBox2">
-                    <h2 class="buttonTitle">Следующ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
-                </a>
+                <form method="post" action="/nextDay">
+                    <button type="submit" name="day"  value="{{day}} {{monthNumber}}" class="buttonDaySwitchBox2">
+                        <h2 class="buttonTitle">Следующ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
+                    </button>
+                </form>
             </div>
         </div>
-
-
-
     </div>
-
 </div>
 </body>
 </html>

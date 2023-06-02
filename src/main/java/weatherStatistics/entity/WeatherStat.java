@@ -3,7 +3,7 @@ package weatherStatistics.entity;
 import org.hibernate.annotations.GenericGenerator;
 import weatherStatistics.util.WeatherTypes;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -20,7 +20,7 @@ public class WeatherStat {
   @Id
   @GeneratedValue()
   @Column(name = "id")
-  private int id;
+  private Integer id;
   @Column(name = "day")
   public int day;
   @Column(name = "month")
@@ -244,6 +244,7 @@ public class WeatherStat {
 
   public static WeatherStat connectTwoStats(WeatherStat first, WeatherStat second) {
       WeatherStat stat = new WeatherStat();
+      stat.setId(second.id);
       stat.setDay(second.day);
       stat.setMonth(second.month);
       stat.setYear(second.year);

@@ -21,5 +21,64 @@
 <form action="/logOut" method="post">
     <button type="submit">Выйти из аккаунта</button>
 </form>
+<div class="tableContainer row">
+    <table>
+        <thead>
+        <tr>
+            <td>id</td>
+            <td>day</td>
+            <td>month</td>
+            <td>year</td>
+            <td>hour</td>
+            <td>T</td>
+            <td>Po</td>
+            <td>P</td>
+            <td>Pa</td>
+            <td>U</td>
+            <td>DD</td>
+            <td>WW</td>
+            <td>W1</td>
+            <td>W2</td>
+        </tr>
+        </thead>
+        <tbody>
+        {{#stats}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{day}}</td>
+                <td>{{month}}</td>
+                <td>{{year}}</td>
+                <td>{{hour}}</td>
+                <td>{{T}}</td>
+                <td>{{Po}}</td>
+                <td>{{P}}</td>
+                <td>{{Pa}}</td>
+                <td>{{U}}</td>
+                <td>{{DD}}</td>
+                <td>{{WW}}</td>
+                <td>{{W1}}</td>
+                <td>{{W2}}</td>
+            </tr>
+        {{/stats}}
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-sm"></div>
+    <!--form>
+        <button type="submit" name="prevFindDays" class="buttonDayFind col-sm"><h2 class="buttonTitleDayFind">Назад</h2></button>
+    </form-->
+    <form action="/adminTablePrev" class="buttonDaySwitchBox2 col-sm">
+        <button type="submit" class="buttonTitle">Назад</button>
+    </form>
+    <div class="col-md"></div>
+    <!--form>
+        <button type="submit" name="nextFindDays" class="buttonDayFind col-sm"><h2 class="buttonTitleDayFind">Далее</h2></button>
+    </form-->
+    <form action="/adminTableNext" class="buttonDaySwitchBox2 col-sm">
+        <button type="submit"  class="buttonTitle">Вперед</button>
+    </form>
+    <div class="col-sm"></div>
+</div>
 </body>
 </html>

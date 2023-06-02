@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import weatherStatistics.entity.Admin;
@@ -18,13 +19,8 @@ import java.util.Map;
 @Controller
 public class AdminLoginController {
 
-    @Autowired
-    private AdminRepo adminRepo;
-
     @GetMapping("/adminRedirect")
     public String registrationRedirect() {
-        List<Admin> list = adminRepo.findAll();
-        System.out.println(adminRepo.findAll());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             return "redirect:/admin";

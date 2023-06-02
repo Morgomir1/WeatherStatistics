@@ -1,8 +1,10 @@
 package weatherStatistics.controllers;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import weatherStatistics.entity.WeatherStat;
 import weatherStatistics.repo.WeatherStatRepo;
 import weatherStatistics.util.CloudTypes;
@@ -10,7 +12,7 @@ import weatherStatistics.util.DayTimeIntervals;
 import weatherStatistics.util.Plan;
 import weatherStatistics.util.WeatherTypes;
 
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -21,30 +23,37 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
-@Controller
+
+@RestController
+@RequestMapping
 public class MainController {
 
     List<WeatherStat> weatherStats = new ArrayList<>();
+
+    MainController(WeatherStatRepo repository) {
+        this.weatherStatistics = repository;
+    }
 
     @Autowired
     private WeatherStatRepo weatherStatistics;
 
     @GetMapping("/information")
-    public String information(HashMap<String, Object> model) {
+    public ModelAndView information() {
+        HashMap<String, Object> model = new HashMap<>();
         model.put("theme", this.theme);
-        return "information";
+        return new ModelAndView("information", model);
     }
 
     private LocalDate currentDate = LocalDate.now();
     private List<WeatherStat> statsForDownLoad = new ArrayList<>();
 
-    private void putDayInModel(Map<String, Object> model) {
+    private void putDayInModel(Map<String, Object> model, LocalDate currentDate) {
         HashMap<Integer, WeatherStat> weatherStatHashMap = new HashMap<>();
         for (DayTimeIntervals interval : DayTimeIntervals.values()) {
             weatherStatHashMap.put(interval.getHour(), null);
         }
         for (WeatherStat stat : weatherStats) {
-            if (stat.isDateEqualTo(this.currentDate)) {
+            if (stat.isDateEqualTo(currentDate)) {
                 for (DayTimeIntervals dayTimeIntervals : DayTimeIntervals.values()) {
                     if (dayTimeIntervals.getHour() == stat.getHour()) {
                         if (weatherStatHashMap.get(dayTimeIntervals.getHour()) != null) {
@@ -60,12 +69,12 @@ public class MainController {
         }
         ArrayList<WeatherStat> list = getListWithWeatherChances(weatherStatHashMap);
         list = sortByHour(list);
-        this.statsForDownLoad = list;
         model.put("weatherStats", list);
+        model.put("statsForDownLoad", list);
     }
 
-    private void putMonthInModel(Map<String, Object> model) {
-        int month = this.currentDate.getMonthValue();
+    private void putMonthInModel(Map<String, Object> model, LocalDate currentDate) {
+        int month = currentDate.getMonthValue();
         ArrayList<WeatherStat> weatherStatsCopy = new ArrayList<>(this.weatherStats);
         for (WeatherStat stat : this.weatherStats) {
             if (stat.month != month) {
@@ -78,16 +87,16 @@ public class MainController {
         }
         ArrayList<WeatherStat> stats = new ArrayList<>(connectedStats.values());
         stats = sortByMonth(stats);
-        this.statsForDownLoad = stats;
+        model.put("statsForDownLoad", stats);
         model.put("weatherStats1", stats.subList(0, 8));
         model.put("weatherStats2", stats.subList(8, 16));
         model.put("weatherStats3", stats.subList(16, 24));
         model.put("weatherStats4", stats.subList(24, stats.size()));
     }
 
-    private void putWeekInModel(Map<String, Object> model) {
+    private void putWeekInModel(Map<String, Object> model, LocalDate currentDate) {
         ArrayList<LocalDate> week = new ArrayList<>();
-        week.add(this.currentDate);
+        week.add(currentDate);
         while (week.size() != 7) {
             week.add(week.get(week.size() - 1).plusDays(1));
         }
@@ -114,42 +123,87 @@ public class MainController {
         stats = new ArrayList<>(connectedStats.values());
         stats = sortByMonth(stats);
         stats = sortByWeek(stats);
-        this.statsForDownLoad = stats;
         model.put("weatherStats", stats);
+        model.put("statsForDownLoad", stats);
     }
 
     @GetMapping
-    public String main(Map<String, Object> model) {
+    @ResponseBody
+    public ModelAndView main(@RequestParam(required = false) LocalDate date) {
+        Map<String, Object> model = new HashMap<>();
         this.weatherStats = weatherStatistics.findAll();
-        String currentDate;
         DateTimeFormatter formatForClient;
+        LocalDate currentDate;
+        if (date != null) {
+            currentDate = date;
+        } else {
+            currentDate = LocalDate.now();
+        }
         if (this.displayType == MainMenuDisplayTypes.DAYS) {
             formatForClient = DateTimeFormatter.ofPattern("d LLLL");
-            putDayInModel(model);
+            putDayInModel(model, currentDate);
         } else if (this.displayType == MainMenuDisplayTypes.MONTH){
             formatForClient = DateTimeFormatter.ofPattern("LLLL");
-            putMonthInModel(model);
+            putMonthInModel(model, currentDate);
         } else {
             formatForClient = DateTimeFormatter.ofPattern("LLLL");
-            putWeekInModel(model);
+            putWeekInModel(model, currentDate);
         }
-        currentDate = formatForClient.format(this.currentDate);
-        model.put("currentDate", currentDate);
+
+        model.put("day", currentDate.getDayOfMonth());
+        model.put("month", currentDate.getMonth());
+        model.put("monthNumber", currentDate.getMonthValue());
         model.put("isDay", this.displayType == MainMenuDisplayTypes.DAYS);
         model.put("isMonth", this.displayType == MainMenuDisplayTypes.MONTH);
         model.put("isWeek", this.displayType == MainMenuDisplayTypes.WEEKS);
         model.put("theme", this.theme);
-        return "main";
+        return new ModelAndView("main", model);
+    }
+
+    @PostMapping("/nextDay")
+    public ModelAndView nextDay(@RequestParam String day) {
+        int dayNumber = Integer.parseInt(day.split(" ")[0]);
+        int monthNumber = Integer.parseInt(day.split(" ")[1]);
+        LocalDate date = LocalDate.of(2020, monthNumber, dayNumber);
+        date = date.plusDays(1);
+        /*if (this.displayType == MainMenuDisplayTypes.MONTH) {
+            int month = date.getMonthValue();
+            while (month == this.currentDate.getMonthValue()) {
+                this.currentDate = this.currentDate.minusDays(1);
+            }
+        } else {
+            this.currentDate = this.currentDate.minusDays(1);
+        } */
+
+        return this.main(date);
+    }
+
+    @PostMapping("/prevDay")
+    public ModelAndView prevDay(@RequestParam String day) {
+        int dayNumber = Integer.parseInt(day.split(" ")[0]);
+        int monthNumber = Integer.parseInt(day.split(" ")[1]);
+        LocalDate date = LocalDate.of(2020, monthNumber, dayNumber);
+        date = date.minusDays(1);
+        /*if (this.displayType == MainMenuDisplayTypes.MONTH) {
+            int month = date.getMonthValue();
+            while (month == this.currentDate.getMonthValue()) {
+                this.currentDate = this.currentDate.minusDays(1);
+            }
+        } else {
+            this.currentDate = this.currentDate.minusDays(1);
+        } */
+
+        return this.main(date);
     }
 
     @PostMapping("/downloadTable")
-    public void downloadTable(HttpServletResponse response) throws IOException {
+    public void downloadTable(HttpServletResponse response, @RequestParam ArrayList<WeatherStat> statsForDownLoad) throws IOException {
         String csvFileName = "results.csv";
         response.setContentType("text/csv;charset=UTF-8");
         String headerKey = "Content-Disposition";
         String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
         response.setHeader(headerKey, headerValue);
-        List<WeatherStat> list = new ArrayList<>(this.statsForDownLoad);
+        List<WeatherStat> list = new ArrayList<>(statsForDownLoad);
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
         String[] header = { "id", "day", "month", "year", "hour", "T", "Po", "P", "Pa", "U", "DD", "WW", "W1", "W2"};
         csvWriter.writeHeader(header);
@@ -205,32 +259,9 @@ public class MainController {
         return "redirect:/dayFind";
     }
 
-    @GetMapping(value = "/nextDay")
-    public String nextDay() {
-        if (this.displayType == MainMenuDisplayTypes.MONTH) {
-            int month = this.currentDate.getMonthValue();
-            while (month == this.currentDate.getMonthValue()) {
-                this.currentDate = this.currentDate.plusDays(1);
-            }
-        } else {
-            this.currentDate = this.currentDate.plusDays(1);
-        }
-        return "redirect:/main";
-    }
 
-    @GetMapping(value = "/prevDay")
-    public String prevDay() {
-        if (this.displayType == MainMenuDisplayTypes.MONTH) {
-            int month = this.currentDate.getMonthValue();
-            while (month == this.currentDate.getMonthValue()) {
-                this.currentDate = this.currentDate.minusDays(1);
-            }
-        } else {
-            this.currentDate = this.currentDate.minusDays(1);
-        }
 
-        return "redirect:/main";
-    }
+
 
     String cloudiness = "";
     String precipitation = "";
@@ -636,9 +667,30 @@ public class MainController {
         return "settings";
     }
 
+    int startTableId = 0;
+    int endTableId = 6;
+
+    @PostMapping(value = "/adminTableNext")
+    public String adminTableNext() {
+        if (this.startTableId + 1 < this.weatherStats.size() - 6 && this.endTableId + 1 < this.weatherStats.size()) {
+            this.startTableId++;
+            this.endTableId++;
+        }
+        return "redirect:/admin";
+    }
+
+    @PostMapping(value = "/adminTablePrev")
+    public String adminTablePrev() {
+        if (this.endTableId - 1 >= 6 && this.startTableId - 1 >= 0) {
+            this.endTableId--;
+            this.startTableId--;
+        }
+        return "redirect:/admin";
+    }
+
     @GetMapping("/admin")
     public String admin(HashMap<String, Object> model) {
-        model.put("stats", this.weatherStats);
+        model.put("stats", this.weatherStats.subList(startTableId, endTableId));
         model.put("theme", this.theme);
         return "admin";
     }
