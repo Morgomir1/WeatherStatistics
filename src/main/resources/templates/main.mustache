@@ -2,25 +2,43 @@
 <head>
     <title>Главная</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="styles/css/{{#theme}}{{name}}{{/theme}}.css" >
+    <link rel="stylesheet" type="text/css" href="styles/css/{{theme}}.css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="root">
 <div>
     <div class="buttonsBox col-xl">
         <div class="row">
-            <a class="buttonBox col-md" href="/mainRedirect"><h2 class="buttonTitle">Главная</h2></a>
-            <a class="buttonBox col-md" href="/informationRedirect"><h2 class="buttonTitle">Информация</h2></a>
-            <a class="buttonBox col-md" href="/dayFindRedirect"><h2 class="buttonTitle">Поиск дня</h2></a>
-            <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
-            <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
-            <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+            <form class="col-md" action="/mainRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/informationRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/dayFindRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/planningRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планировка</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/settingsRedirect" method="get" >
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/adminRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
         </div>
     </div>
     <div class="mainBox">
         <div class="row">
             <div class="box2 col-md-2">
-                <h2 class="buttonTitle" >{{day}} {{month}}</h2>
+                <h2 class="buttonTitle" >{{dateDisplay}}</h2>
             </div>
             <div class="col-xl"></div>
         </div>
@@ -50,7 +68,7 @@
             {{#isMonth}}
                 <div class="row">
                     {{#weatherStats1}}
-                        <div class="weatherBox col-md">
+                        <div class="weatherBoxMonth col-md">
                             {{day}} {{month}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
@@ -63,7 +81,7 @@
                 </div>
                 <div class="row">
                     {{#weatherStats2}}
-                        <div class="weatherBox col-md">
+                        <div class="weatherBoxMonth col-md">
                             {{day}} {{month}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
@@ -76,7 +94,7 @@
                 </div>
                 <div class="row">
                     {{#weatherStats3}}
-                        <div class="weatherBox col-md">
+                        <div class="weatherBoxMonth col-md">
                             {{day}} {{month}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
@@ -89,7 +107,7 @@
                 </div>
                 <div class="row">
                     {{#weatherStats4}}
-                        <div class="weatherBox col-md">
+                        <div class="weatherBoxMonth col-md">
                             {{day}} {{month}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
@@ -103,7 +121,7 @@
             {{/isMonth}}
             {{#isWeek}}
                 {{#weatherStats}}
-                    <div class="weatherBox col-md">
+                    <div class="weatherBox col-sm">
                         <div class="medium_title">
                             <p><div class="buttonTitle">{{day}} {{month}}</div></p>
                             <p><div class="buttonTitle">{{dayOfWeekStr}}</div></p>
@@ -129,21 +147,24 @@
             <div class="buttonDaySwitchBox col-xl">
                 <form method="post" action="/prevDay">
                     <button type="submit" name="day" value="{{day}} {{monthNumber}}" class="buttonDaySwitchBox2">
+                        <input name="theme" value="{{theme}}" hidden>
+                        <input name="display" value="{{display}}" hidden>
                         <h2 class="buttonTitle">Предыдущ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
                     </button>
                 </form>
-
             </div>
             <div class="col-xl-1"></div>
             <div class="col-md">
                 <form method="post" action="/downloadTable">
-                    <button class="buttonDownload" name="statsForDownload" value="{{statsForDownload}}" type="submit">Скачать таблицу</button>
+                    <!--button class="buttonDownload" name="statsForDownload" value="" type="submit">Скачать таблицу</button-->
                 </form>
             </div>
             <div class="col-xl-1"></div>
             <div class="buttonDaySwitchBox col-xl">
                 <form method="post" action="/nextDay">
                     <button type="submit" name="day"  value="{{day}} {{monthNumber}}" class="buttonDaySwitchBox2">
+                        <input name="theme" value="{{theme}}" hidden>
+                        <input name="display" value="{{display}}" hidden>
                         <h2 class="buttonTitle">Следующ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
                     </button>
                 </form>

@@ -2,20 +2,37 @@
 <head>
     <title>Админ</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="styles/css/{{#theme}}{{name}}{{/theme}}.css" >
+    <link rel="stylesheet" type="text/css" href="styles/css/{{theme}}.css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="root">
     <div class="buttonsBox col-xl">
         <div class="row">
-            <a class="buttonBox col-md" href="/mainRedirect"><h2 class="buttonTitle">Главная</h2></a>
-            <a class="buttonBox col-md" href="/informationRedirect"><h2 class="buttonTitle">Информация</h2></a>
-            <a class="buttonBox col-md" href="/dayFindRedirect"><h2 class="buttonTitle">Поиск дня</h2></a>
-            <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
-            <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
-            <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+            <form class="col-md" action="/mainRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/informationRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/dayFindRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/planningRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планировка</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/settingsRedirect" method="get" >
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/adminRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
         </div>
-    </div>
 </body>
 <body>
 <form action="/logOut" method="post">

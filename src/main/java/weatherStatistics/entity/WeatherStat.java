@@ -8,10 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 @Table(name = "statsnew")
@@ -64,6 +61,35 @@ public class WeatherStat {
   private String dayOfWeekStr;
 
   public WeatherStat() {
+
+  }
+
+  public WeatherStat(String stat) {
+    String[] params = stat.split(";");
+    try {
+      this.id = Integer.valueOf(params[0]);
+      this.day = Integer.parseInt(params[1]);
+      this.month = Integer.parseInt(params[2]);
+      this.year = Integer.parseInt(params[3]);
+      this.hour = Integer.parseInt(params[4]);
+      this.T = Double.parseDouble(params[5]);
+      this.Po = Double.parseDouble(params[6]);
+      this.P = Double.parseDouble(params[7]);
+      this.Pa = Double.parseDouble(params[8]);
+      this.U = Integer.parseInt(params[9]);
+      this.DD = params[10];
+      this.WW = params[11];
+      this.W1 = params[12];
+      this.W2 = params[13];
+      String weatherTypes = params[14];
+      for (String weatherType : weatherTypes.split(", ")) {
+        String[] split = weatherType.split("=");
+        this.weatherTypes.put(WeatherTypes.getForDisplayName(split[0]), Double.valueOf(split[1].replaceAll("\\}", "")));
+      }
+    } catch (Exception e) {
+      System.out.println("EXEPTION!!!");
+      System.out.println(Arrays.toString(params));
+    }
 
   }
 
@@ -282,5 +308,11 @@ public class WeatherStat {
     for (Map.Entry<WeatherTypes, Double> weather : this.getWeatherTypes().entrySet()) {
       this.getWeatherTypes().put(weather.getKey(), (double) Math.round(weather.getValue() / sum * 100));
     }
+  }
+
+  @Override
+  public String toString() {
+    return this.id + ";" + this.day  + ";" + this.month + ";" + this.month + ";" + this.hour + ";" + T
+            + ";" + Po + ";" + P + ";" + Pa  + ";" + U + ";" + DD + ";" + WW + ";" + W1  + ";" + W2 + ";" + this.weatherTypes;
   }
 }

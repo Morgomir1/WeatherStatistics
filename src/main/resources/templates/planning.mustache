@@ -2,18 +2,36 @@
 <head>
     <title>Планировка</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="styles/css/{{#theme}}{{name}}{{/theme}}.css" >
+    <link rel="stylesheet" type="text/css" href="styles/css/{{theme}}.css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="root">
 <div class="buttonsBox col-xl">
     <div class="row">
-        <a class="buttonBox col-md" href="/mainRedirect"><h2 class="buttonTitle">Главная</h2></a>
-        <a class="buttonBox col-md" href="/informationRedirect"><h2 class="buttonTitle">Информация</h2></a>
-        <a class="buttonBox col-md" href="/dayFindRedirect"><h2 class="buttonTitle">Поиск дня</h2></a>
-        <a class="buttonBox col-md" href="/planningRedirect"><h2 class="buttonTitle">Планировка</h2></a>
-        <a class="buttonBox col-md" href="/settingsRedirect"><h2 class="buttonTitle">Настройки</h2></a>
-        <a class="buttonBox col-md" href="/adminRedirect"><h2 class="buttonTitle">Админ</h2></a>
+        <form class="col-md" action="/mainRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/informationRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/dayFindRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/planningRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планировка</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/settingsRedirect" method="get" >
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/adminRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
     </div>
 </div>
 <div class="component">
@@ -23,17 +41,27 @@
                 {{#entrySet}}
                     <div class="day-frame col">
                         <form action="/removePlansForDay" method="post">
+                            <input name="theme" value="{{theme}}" hidden>
+                            <input name="display" value="{{display}}" hidden>
+                            <input name="plans" value="{{plans}}" hidden>
                             <button type="submit" value="{{key}}" name="key" class="buttonDeleteDayPlans">x</button>
                         </form>
                         <p class="day-title row">{{key}}</p>
                         {{#value}}
                             <form action="/removePlan" method="post">
-                                <p><input value="{{plan}}" name="plan" readonly></p>
-                                <p>{{.}}</p>
+                                <input name="theme" value="{{theme}}" hidden>
+                                <input name="display" value="{{display}}" hidden>
+                                <input name="plans" value="{{plans}}" hidden>
+                                <input name="plan" value="{{plan}}" hidden>
+                                <p>{{plan}}</p>
+                                <p>{{interval}}:00 - {{nextInterval}}:00</p>
                                 <button class="buttonDeleteDayPlans" value="{{key}}" name="key" type="submit">x</button>
                             </form>
                         {{/value}}
                         <form action="/addPlan" method="post">
+                            <input name="theme" value="{{theme}}" hidden>
+                            <input name="display" value="{{display}}" hidden>
+                            <input name="plans" value="{{plans}}" hidden>
                             <p><b>План:</b><br>
                                 <input name="plan" type="text" size="auto">
                             </p>
@@ -51,6 +79,9 @@
                 <div class="day-frame col">
                     <form action="/addPlansForNextDay" method="post">
                         <br>
+                        <input name="theme" value="{{theme}}" hidden>
+                        <input name="display" value="{{display}}" hidden>
+                        <input name="plans" value="{{plans}}" hidden>
                         <p>Выберите дату: <input type="date" name="calendar"></p>
                         <button class="button">+</button>
                     </form>
@@ -61,7 +92,6 @@
             {{#plansResults}}
                 {{#entrySet}}
                     <div class="day-frame col">
-
                         <p class="day-title row">{{key}}</p>
                         {{#value}}
                             {{#entrySet}}
@@ -93,7 +123,10 @@
     </div>
     <div class="main-button-four row">
         <form action="/showResults" method="post">
-            <button type="submit" class="main-button-four glavnaja">{{#creatingPlans}}Показать результаты{{/creatingPlans}}{{^creatingPlans}}Вернуться{{/creatingPlans}}</button>
+            <input name="theme" value="{{theme}}" hidden>
+            <input name="display" value="{{display}}" hidden>
+            <input name="plans" value="{{plans}}" hidden>
+            <button name="creatingPlans" value="{{creatingPlans}}" type="submit" class="main-button-four glavnaja">{{#creatingPlans}}Показать результаты{{/creatingPlans}}{{^creatingPlans}}Вернуться{{/creatingPlans}}</button>
         </form>
     </div>
 </div>
