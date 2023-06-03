@@ -8,6 +8,6 @@ import weatherStatistics.entity.WeatherStat;
 import java.util.List;
 
 @Repository
-public interface WeatherStatRepo extends JpaRepository<WeatherStat, String> {
+public interface WeatherStatRepo extends JpaRepository<WeatherStat, Integer> {
 
 }

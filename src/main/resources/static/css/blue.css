@@ -17,11 +17,24 @@
     background-color: rgb(255, 255, 255);
     border-radius: 10px 10px 10px 10px;
     width: auto;
-    height: auto;
+    height: 300px;
     /* position: relative; */
     /* overflow: hidden; */
     top: 20px;
     left: 18px;
+    /* margin-left: 20px; */
+    margin: 10px;
+    /* margin-right: 20px; */
+    min-width: 125px;
+}
+
+.weatherBoxMonth {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 10px 10px 10px;
+    width: auto;
+    /* position: relative; */
+    /* overflow: hidden; */
+    left: 40px;
     /* margin-left: 20px; */
     margin: 10px;
     /* margin-right: 20px; */
@@ -89,7 +102,7 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.247);
     position: absolute;
     overflow: hidden;
-    /* top: 85px; */
+    width: 80%;
     margin: 20px;
     min-width: 60px;
 }
@@ -146,7 +159,7 @@
   position: absolute;
   overflow: hidden;
   top: 19px;
-  min-width: 120px;
+  min-width: 90%;
 }
 .buttonTitle {
   font: 19px "Ubuntu", Helvetica, Arial, serif;
@@ -647,7 +660,7 @@ select {
   top: -13px;
 }
 .main-button-four {
-    background-color: rgba(255, 255, 255, 1);
+    /* background-color: rgba(255, 255, 255, 1); */
     /* margin-left: 21px; */
     overflow: hidden;
     border-radius: 10px;
@@ -830,4 +843,33 @@ select {
   width: 90px;
   min-width: 90px;
   margin: 11px left;
+}
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid #dddddd;
+	border-collapse: collapse;
+}
+.table th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+}
+.tableContainer {
+  width: auto;
+  background: rgba(210,247,245,0.5);
+  margin: 20px;
+  opacity: 1;
+  left: 12px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 }

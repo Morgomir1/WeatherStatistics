@@ -1,13 +1,17 @@
 package weatherStatistics.util;
 
+
 public class Plan {
 
     int interval;
+    int nextInterval;
     private String plan;
 
     public Plan(int time, String plan) {
         this.interval = time;
+
         this.plan = plan;
+        this.nextInterval = (interval + 6 == 24 ? 0 : interval + 6);
     }
 
     public int getInterval() {
@@ -28,6 +32,7 @@ public class Plan {
 
     @Override
     public String toString() {
-        return this.getInterval() + ":00 - " + (interval + 6 == 24 ? 0 : interval + 6) + ":00";
+
+        return "(" + interval + ";" + plan + ")";
     }
 }
