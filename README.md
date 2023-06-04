@@ -22,3 +22,4 @@
 * [Код сервера](https://github.com/Morgomir1/WeatherStatistics/tree/develop/src/main/java/weatherStatistics)
 * [Код клиента](https://github.com/Morgomir1/WeatherStatistics/tree/develop/src/main/resources)
 * [Сайт](http://194.67.119.36:8090/)
+* [Swagger](http://194.67.119.36:8090/swagger-ui/index.html)
