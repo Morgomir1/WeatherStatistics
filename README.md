@@ -1,7 +1,12 @@
 # WeatherStatistics
+Сервис «Weather Statistics» предназначен для просмотра статистических данных об 
+актуальной погоде, а также о погоде прошлых лет.
+Целью данного проекта является разработка сайта учёта статистики погодных наблюдений.
+
+Разаработчиками являются:
 * [Тимошинов Егор](https://github.com/Morgomir1)
-* [Семён Долгих](https://github.com/BlG-SEM)
-* [Анастасия Самсонова](https://github.com/Nastya-Samsonova)
+* [Долгих Семен](https://github.com/BlG-SEM)
+* [Самсонова Анастасия](https://github.com/Nastya-Samsonova)
 
 # Сервисы для работы
 * [Miro](https://miro.com/app/board/uXjVMdmeG98=/)
