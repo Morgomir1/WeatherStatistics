@@ -1,5 +1,6 @@
 package weatherStatistics.controllers;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.supercsv.io.CsvBeanWriter;
@@ -30,9 +32,6 @@ public class MainController {
 
     @Autowired
     private WeatherStatRepo weatherStatistics;
-
-
-    private List<WeatherStat> statsForDownLoad = new ArrayList<>();
 
     private void putDayInModel(Map<String, Object> model, LocalDate currentDate) {
         HashMap<Integer, WeatherStat> weatherStatHashMap = new HashMap<>();
@@ -57,7 +56,7 @@ public class MainController {
         ArrayList<WeatherStat> list = Algoritms.getListWithWeatherChances(weatherStatHashMap);
         list = sortByHour(list);
         model.put("weatherStats", list);
-        model.put("statsForDownLoad", list);
+        model.put("statsForDownload", list);
     }
 
     private void putMonthInModel(Map<String, Object> model, LocalDate currentDate) {
@@ -74,11 +73,12 @@ public class MainController {
         }
         ArrayList<WeatherStat> stats = new ArrayList<>(connectedStats.values());
         stats = Algoritms.sortByMonth(stats);
-        model.put("statsForDownLoad", stats);
         model.put("weatherStats1", stats.subList(0, 8));
         model.put("weatherStats2", stats.subList(8, 16));
         model.put("weatherStats3", stats.subList(16, 24));
         model.put("weatherStats4", stats.subList(24, stats.size()));
+        ArrayList<WeatherStat> list = Algoritms.getListWithWeatherChances(connectedStats);
+        model.put("statsForDownload", list);
     }
 
     private void putWeekInModel(Map<String, Object> model, LocalDate currentDate) {
@@ -109,9 +109,9 @@ public class MainController {
         }
         stats = new ArrayList<>(connectedStats.values());
         stats = Algoritms.sortByMonth(stats);
-        stats = sortByWeek(stats);
+        //stats = sortByWeek(stats);
         model.put("weatherStats", stats);
-        model.put("statsForDownLoad", stats);
+        model.put("statsForDownload", stats);
     }
 
     @GetMapping
@@ -150,15 +150,14 @@ public class MainController {
             putWeekInModel(model, currentDate);
         }
         model.put("day", currentDate.getDayOfMonth());
-        model.put("month", currentDate.getMonth());
+        String month = currentDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ROOT);
+        model.put("month", month);
         model.put("monthNumber", currentDate.getMonthValue());
         model.put("dateDisplay", formatForClient.format(currentDate));
         model.put("isDay", display.equals(MainMenuDisplayTypes.DAYS.name()));
         model.put("isMonth", display.equals(MainMenuDisplayTypes.MONTH.name()));
         model.put("isWeek", display.equals(MainMenuDisplayTypes.WEEKS.name()));
-        System.out.println("Display type: " + display);
         model.put("display", display);
-        System.out.println("Theme type: " + theme);
         model.put("theme", theme == null ? ThemeTypes.BLUE.getThemeName() : theme);
         return new ModelAndView("main", model);
     }
@@ -169,12 +168,20 @@ public class MainController {
         int dayNumber = Integer.parseInt(day.split(" ")[0]);
         int monthNumber = Integer.parseInt(day.split(" ")[1]);
         LocalDate date = LocalDate.of(2020, monthNumber, dayNumber);
-        date = date.plusDays(1);
-
+        String displayType = request.getParameter("display");
+        MainMenuDisplayTypes type = MainMenuDisplayTypes.valueOf(displayType);
+        if (type == MainMenuDisplayTypes.MONTH) {
+            int month = date.getMonthValue();
+            while (date.getMonthValue() == month) {
+                date = date.plusDays(1);
+            }
+        } else if (type == MainMenuDisplayTypes.WEEKS) {
+            date = date.plusDays(7);
+        } else {
+            date = date.plusDays(1);
+        }
         return this.main(date, request);
     }
-
-
 
     @PostMapping("/prevDay")
     public ModelAndView prevDay(HttpServletRequest request) {
@@ -182,19 +189,41 @@ public class MainController {
         int dayNumber = Integer.parseInt(day.split(" ")[0]);
         int monthNumber = Integer.parseInt(day.split(" ")[1]);
         LocalDate date = LocalDate.of(2020, monthNumber, dayNumber);
+        String displayType = request.getParameter("display");
+        MainMenuDisplayTypes type = MainMenuDisplayTypes.valueOf(displayType);
+        if (type == MainMenuDisplayTypes.MONTH) {
+            int month = date.getMonthValue();
+            while (date.getMonthValue() == month) {
+                date = date.minusDays(1);
+            }
+        } else if (type == MainMenuDisplayTypes.WEEKS) {
+            date = date.minusDays(7);
+        } else {
+            date = date.minusDays(1);
+        }
         return this.main(date, request);
     }
 
     @PostMapping("/downloadTable")
-    public void downloadTable(HttpServletResponse response, @RequestParam ArrayList<WeatherStat> statsForDownLoad) throws IOException {
+    public void downloadTable(HttpServletResponse response, @RequestParam String statsForDownload) throws IOException {
+        String encodedWithISO88591 = statsForDownload;
+        statsForDownload = new String(encodedWithISO88591.getBytes("ISO-8859-1"), "UTF-8");
         String csvFileName = "results.csv";
         response.setContentType("text/csv;charset=UTF-8");
         String headerKey = "Content-Disposition";
         String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
         response.setHeader(headerKey, headerValue);
-        List<WeatherStat> list = new ArrayList<>(statsForDownLoad);
+        statsForDownload = statsForDownload.replaceAll("\\{", "");
+        statsForDownload = statsForDownload.replaceAll("\\[", "");
+        statsForDownload = statsForDownload.replaceAll("\\]", "");
+        String[] statsArray = statsForDownload.split("}, ");
+        List<WeatherStat> list = new ArrayList<WeatherStat>();
+        for (String str : statsArray) {
+            WeatherStat stat = new WeatherStat(str);
+            list.add(stat);
+        }
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] header = { "id", "day", "month", "year", "hour", "T", "Po", "P", "Pa", "U", "DD", "WW", "W1", "W2"};
+        String[] header = { "id", "day", "month", "year", "hour", "T", "Po", "P", "Pa", "U", "DD", "WW", "W1", "W2", "weatherTypes"};
         csvWriter.writeHeader(header);
         for (WeatherStat stat : list) {
             csvWriter.write(stat, header);
@@ -231,11 +260,4 @@ public class MainController {
     public ModelAndView mainRedirect(HttpServletRequest request) {
         return main(null, request);
     }
-
-    @GetMapping(value = "/logOut")
-    public ModelAndView logOut(HttpServletRequest request) {
-        return main(null, request);
-    }
-
-
 }

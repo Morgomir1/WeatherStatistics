@@ -82,8 +82,15 @@ public class Algoritms {
         ArrayList<WeatherStat> sorted = new ArrayList<>();
         while (!list.isEmpty()) {
             int minDay = Integer.MAX_VALUE;
+            int minMonth = Integer.MAX_VALUE;
             WeatherStat statWithMinDay = null;
             for (WeatherStat stat : list) {
+                if (minMonth > stat.month) {
+                    minMonth = stat.month;
+                    minDay = stat.day;
+                    statWithMinDay = stat;
+                    continue;
+                }
                 if (minDay > stat.day) {
                     minDay = stat.day;
                     statWithMinDay = stat;
