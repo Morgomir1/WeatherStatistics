@@ -1,5 +1,8 @@
 .root {
   background-color: rgb(212, 221, 221);
+  background-image: url("/images/root.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .weatherMainBox {
     background-color: rgb(48 50 50 / 50%);
@@ -21,7 +24,18 @@
     /* position: relative; */
     /* overflow: hidden; */
     top: 20px;
-    left: 18px;
+    /* margin-left: 20px; */
+    margin: 10px;
+    /* margin-right: 20px; */
+    min-width: 125px;
+}
+.weatherBoxWeek {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 10px 10px 10px;
+    width: auto;
+    height: auto;
+    /* position: relative; */
+    /* overflow: hidden; */
     /* margin-left: 20px; */
     margin: 10px;
     /* margin-right: 20px; */
@@ -119,13 +133,14 @@
     margin-top: 20px;
 }
 .buttonDaySwitchBox2 {
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px 10px 10px 10px;
-  position: relative;
-  overflow: hidden;
-  height: 80%;
-  flex-grow: 1;
-  margin: 6px 35px 5px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 10px 10px 10px;
+    /* position: relative; */
+    overflow: hidden;
+    height: 80%;
+    width: 100%;
+    flex-grow: 1;
+    margin: 5px;
 }
 .buttonsBox {
     width: 100%;
@@ -159,15 +174,6 @@
   overflow: hidden;
   top: 19px;
   min-width: 90%;
-}
-.buttonTitle {
-  font: 19px "Ubuntu", Helvetica, Arial, serif;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  letter-spacing: 0px;
-  width: 90px;
-  min-width: 90px;
-  margin: 11px auto;
 }
 * {
   box-sizing: border-box;
@@ -289,14 +295,6 @@ select {
   top: 129px;
   overflow: hidden;
 }
-.row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}
 .resultsBox {
     height: 52px;
     width: 100%;
@@ -331,14 +329,14 @@ select {
   padding: 12px 20px;
   margin: 8px 0;
 }
-.buttonTitleDayFind {
-  font: 19px "Ubuntu", Helvetica, Arial, serif;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  letter-spacing: 0px;
-  width: 90px;
-  min-width: 90px;
-  margin: 11px left;
+.buttonTitle {
+    font: 19px "Ubuntu", Helvetica, Arial, serif;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    letter-spacing: 0px;
+    width: 100%;
+    /* min-width: 90px; */
+    margin: 11px auto;
 }
 .component {
   display: flex;
@@ -833,7 +831,8 @@ select {
   font-size: 24px;
   opacity: 1;
   text-align: center;
-}uttonTitleDayFind {
+}
+.buttonTitleDayFind {
   font: 19px "Ubuntu", Helvetica, Arial, serif;
   color: rgb(0, 0, 0);
   text-align: center;
@@ -842,32 +841,110 @@ select {
   min-width: 90px;
   margin: 11px left;
 }
+.tableContainer {
+    width: 100%;
+    background: rgb(105 112 112 / 50%);
+    /* margin: 20px; */
+    opacity: 1;
+    /* left: 12px; */
+    border-radius: 100px;
+    /* border-top-right-radius: 10px; */
+    /* border-bottom-left-radius: 10px; */
+    /* border-bottom-right-radius: 10px; */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
 .table {
-	width: 100%;
+	width: 1000px;
 	margin-bottom: 20px;
-	border: 1px solid #dddddd;
+	border: 5px solid #fff;
+	border-top: 5px solid #fff;
+	border-bottom: 3px solid #fff;
 	border-collapse: collapse;
+	outline: 10px solid #17a2b8;
+	font-size: 15px;
+	background: #fff!important;
+	overflow-y:scroll;
+    height:400px;
+    display:block;
+}
+.tableAdd {
+	width: 1000px;
+	margin-bottom: 20px;
+	border: 5px solid #fff;
+	border-top: 5px solid #fff;
+	border-bottom: 3px solid #fff;
+	border-collapse: collapse;
+	outline: 10px solid #17a2b8;
+	font-size: 15px;
+	background: #fff!important;
+	overflow-y:scroll;
+    height:100px;
+    display:block;
 }
 .table th {
 	font-weight: bold;
-	padding: 5px;
-	background: #efefef;
-	border: 1px solid #dddddd;
+	padding: 7px;
+	background: #ffd300;
+	border: none;
+	text-align: left;
+	font-size: 15px;
+	border-top: 3px solid #fff;
+	border-bottom: 3px solid #ffd300;
 }
 .table td {
-	border: 1px solid #dddddd;
-	padding: 5px;
+	padding: 7px;
+	border: none;
+	border-top: 3px solid #fff;
+	border-bottom: 3px solid #fff;
+	font-size: 15px;
 }
-.tableContainer {
-  width: auto;
-  background: rgb(0 0 0 / 50%);
-  margin: 20px;
-  opacity: 1;
-  left: 12px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
+.table tbody tr:nth-child(even){
+	background: #f8f8f8!important;
+}
+
+.inputAdminTable {
+    width: 100%;
+}
+
+/* Bordered form */
+formLogin {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+inputLogin[type=text], inputLogin[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+buttonLogin {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Add a hover effect for buttons */
+buttonLogin:hover {
+    opacity: 0.8;
+}
+
+/* Add padding to containers */
+.containerLogin {
+    padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
 }

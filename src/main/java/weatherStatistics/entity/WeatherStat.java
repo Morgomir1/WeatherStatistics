@@ -64,27 +64,90 @@ public class WeatherStat {
 
   }
 
-  public WeatherStat(String stat) {
-    String[] params = stat.split(";");
+  public WeatherStat(String s) {
+    this(s.split(";"));
+  }
+
+  public WeatherStat(String[] params) {
     try {
-      this.id = Integer.valueOf(params[0]);
-      this.day = Integer.parseInt(params[1]);
-      this.month = Integer.parseInt(params[2]);
-      this.year = Integer.parseInt(params[3]);
-      this.hour = Integer.parseInt(params[4]);
-      this.T = Double.parseDouble(params[5]);
-      this.Po = Double.parseDouble(params[6]);
-      this.P = Double.parseDouble(params[7]);
-      this.Pa = Double.parseDouble(params[8]);
-      this.U = Integer.parseInt(params[9]);
-      this.DD = params[10];
-      this.WW = params[11];
-      this.W1 = params[12];
-      this.W2 = params[13];
-      String weatherTypes = params[14];
-      for (String weatherType : weatherTypes.split(", ")) {
-        String[] split = weatherType.split("=");
-        this.weatherTypes.put(WeatherTypes.getForDisplayName(split[0]), Double.valueOf(split[1].replaceAll("\\}", "")));
+      if (params.length > 0) {
+        this.id = Integer.valueOf(params[0]);
+      } else {
+        this.id = 0;
+      }
+      if (params.length > 1) {
+        this.day = Integer.parseInt(params[1]);
+      } else {
+        this.day = 0;
+      }
+      if (params.length > 2) {
+        this.month = Integer.parseInt(params[2]);
+      } else {
+        this.month = 0;
+      }
+      if (params.length > 3) {
+        this.year = Integer.parseInt(params[3]);
+      } else {
+        this.year = 0;
+      }
+      if (params.length > 4) {
+        this.hour = Integer.parseInt(params[4]);
+      } else {
+        this.hour = 0;
+      }
+      if (params.length > 5) {
+        this.T = Double.parseDouble(params[5]);
+      } else {
+        this.T = 0;
+      }
+      if (params.length > 6) {
+        this.Po = Double.parseDouble(params[6]);
+      } else {
+        this.Po = 0;
+      }
+      if (params.length > 7) {
+        this.P = Double.parseDouble(params[7]);
+      } else {
+        this.P = 0;
+      }
+      if (params.length > 8) {
+        this.Pa = Double.parseDouble(params[8]);
+      } else {
+        this.Pa = 0;
+      }
+      if (params.length > 9) {
+        this.U = Integer.parseInt(params[9]);
+      } else {
+        this.U = 0;
+      }
+      if (params.length > 10) {
+        this.DD = params[10];
+      } else {
+        this.DD = "null";
+      }
+      if (params.length > 11) {
+        this.WW = params[11];
+      } else {
+        this.WW = "null";
+      }
+      if (params.length > 12) {
+        this.W1 = params[12];
+      } else {
+        this.W1 = "null";
+      }
+      if (params.length > 13) {
+        this.W2 = params[13];
+      } else {
+        this.W2 = "null";
+      }
+      if (params.length > 14) {
+        String weatherTypes = params[14];
+        for (String weatherType : weatherTypes.split(", ")) {
+          String[] split = weatherType.split("=");
+          this.weatherTypes.put(WeatherTypes.getForDisplayName(split[0]), Double.valueOf(split[1].replaceAll("\\}", "")));
+        }
+      } else {
+        this.weatherTypes = new HashMap<>();
       }
     } catch (Exception e) {
       System.out.println("EXEPTION!!!");
