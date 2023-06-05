@@ -57,7 +57,6 @@ public class DayFindController {
         model.put("startFindId", startFindId);
         model.put("endFindID", endFindID);
         model.put("weatherTypes", WeatherTypes.values());
-        model.put("cloudTypes", CloudTypes.values());
         model.put("timeIntervals", DayTimeIntervals.values());
         System.out.println("Theme type: " + theme);
         model.put("theme", theme == null ? ThemeTypes.BLUE.getThemeName() : theme);
@@ -88,10 +87,6 @@ public class DayFindController {
             startFindId++;
             endFindID++;
         }
-        System.out.println("--------------");
-        System.out.println(startFindId);
-        System.out.println(endFindID);
-        System.out.println("--------------");
         HashMap<String, Object> model = new HashMap<>();
         model.put("foundedDays", stats);
         return dayFind(request, startFindId, endFindID, model);

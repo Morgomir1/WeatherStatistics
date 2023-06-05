@@ -149,8 +149,9 @@ public class MainController {
             formatForClient = DateTimeFormatter.ofPattern("LLLL");
             putWeekInModel(model, currentDate);
         }
+        System.out.println(model.get("statsForDownload"));
         model.put("day", currentDate.getDayOfMonth());
-        String month = currentDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ROOT);
+        String month = currentDate.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
         model.put("month", month);
         model.put("monthNumber", currentDate.getMonthValue());
         model.put("dateDisplay", formatForClient.format(currentDate));

@@ -56,7 +56,5 @@ public class WebSecurityConfig  {
                     .permitAll()
                 .and()
                     .build();
-
-
     }
 }

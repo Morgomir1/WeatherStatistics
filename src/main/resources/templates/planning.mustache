@@ -1,6 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <title>Планировка</title>
+    <title>Планирование дня</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles/css/{{theme}}.css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -20,13 +20,7 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/93829072" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRVS3H7JZC%22%3E"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GRVS3H7JZC');
-    </script>
+
 </head>
 <body class="root">
 <div class="buttonsBox col-xl">
@@ -44,7 +38,7 @@
             <input name="display" value="{{display}}" hidden>
         </form>
         <form class="col-md" action="/planningRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планировка</h2></button>
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
             <input name="display" value="{{display}}" hidden>
         </form>
         <form class="col-md" action="/settingsRedirect" method="get" >
@@ -77,7 +71,7 @@
                                 <input name="plans" value="{{plans}}" hidden>
                                 <input name="plan" value="{{plan}}" hidden>
                                 <p>{{plan}}</p>
-                                <p>{{interval}}:00 - {{nextInterval}}:00</p>
+                                <p>{{interval}}:00-{{nextInterval}}:00</p>
                                 <button class="buttonDeleteDayPlans" value="{{key}}" name="key" type="submit">x</button>
                             </form>
                         {{/value}}
@@ -91,7 +85,7 @@
                             <p><b>Время:</b><br>
                                 <select name="time" size="3" multiple>
                                     {{#timeIntervals}}
-                                        <option value={{time}}>{{time}}:00 - {{next}}:00</option>
+                                        <option value={{time}}>{{time}}:00-{{next}}:00</option>
                                     {{/timeIntervals}}
                                 </select>
                             </p>
@@ -122,7 +116,7 @@
                                     <p><input value="{{plan}}" name="plan" readonly></p>
                                 {{/key}}
                                 {{#value}}
-                                    <h2>{{hour}}:00 - {{nextHour}}:00</h2><br/>
+                                    <h2>{{hour}}:00-{{nextHour}}:00</h2><br/>
                                     Средняя температура:<br>
                                     {{#positive}}
                                         +{{T}}<br/>

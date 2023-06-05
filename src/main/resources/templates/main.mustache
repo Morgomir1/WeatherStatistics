@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <title>Главная</title>
     <meta charset="UTF-8">
@@ -20,13 +20,7 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/93829072" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRVS3H7JZC%22%3E"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GRVS3H7JZC');
-    </script>
+
 </head>
 <body class="root">
 <div>
@@ -45,7 +39,7 @@
                 <input name="display" value="{{display}}" hidden>
             </form>
             <form class="col-md" action="/planningRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планировка</h2></button>
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
             <form class="col-md" action="/settingsRedirect" method="get" >
@@ -92,7 +86,7 @@
                 <div class="row">
                     {{#weatherStats1}}
                         <div class="weatherBoxMonth col-md">
-                            {{day}} {{month}}<br>
+                            {{day}} {{monthStr}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
                             {{/positive}}
@@ -105,7 +99,7 @@
                 <div class="row">
                     {{#weatherStats2}}
                         <div class="weatherBoxMonth col-md">
-                            {{day}} {{month}}<br>
+                            {{day}} {{monthStr}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
                             {{/positive}}
@@ -118,7 +112,7 @@
                 <div class="row">
                     {{#weatherStats3}}
                         <div class="weatherBoxMonth col-md">
-                            {{day}} {{month}}<br>
+                            {{day}} {{monthStr}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
                             {{/positive}}
@@ -131,7 +125,7 @@
                 <div class="row">
                     {{#weatherStats4}}
                         <div class="weatherBoxMonth col-md">
-                            {{day}} {{month}}<br>
+                            {{day}} {{monthStr}}<br>
                             {{#positive}}
                                 +{{T}}<br/>
                             {{/positive}}
@@ -146,7 +140,7 @@
                 {{#weatherStats}}
                     <div class="weatherBoxWeek col-sm">
                         <div class="medium_title">
-                            <p><div class="buttonTitle">{{day}} {{month}}</div></p>
+                            <p><div class="buttonTitle">{{day}} {{monthStr}}</div></p>
                             Средняя температура:<br>
                             {{#positive}}
                                 +{{T}}<br/>
@@ -178,7 +172,7 @@
             <div class="col-xl-1"></div>
             <div class="col-md">
                 <form method="post" action="/downloadTable">
-                    <button class="buttonDownload" name="statsForDownload" value="{{statsForDownload}}" type="submit">Скачать таблицу</button>
+                    {{^isMonth}}<button class="buttonDownload" name="statsForDownload" value="{{statsForDownload}}" type="submit">Скачать таблицу</button>{{/isMonth}}
                 </form>
             </div>
             <div class="col-xl-1"></div>

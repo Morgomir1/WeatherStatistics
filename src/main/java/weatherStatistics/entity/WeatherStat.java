@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.*;
 
@@ -58,6 +59,9 @@ public class WeatherStat {
   private DayOfWeek dayOfWeek;
 
   @Transient
+  private String monthStr;
+
+  @Transient
   private String dayOfWeekStr;
 
   public WeatherStat() {
@@ -82,6 +86,7 @@ public class WeatherStat {
       }
       if (params.length > 2) {
         this.month = Integer.parseInt(params[2]);
+        this.setMonthStr(this.month);
       } else {
         this.month = 0;
       }
@@ -324,6 +329,8 @@ public class WeatherStat {
     return dayOfWeek;
   }
 
+
+
   public void setDayOfWeek(DayOfWeek dayOfWeek) {
     if (dayOfWeek != null) {
       this.dayOfWeek = dayOfWeek;
@@ -331,11 +338,16 @@ public class WeatherStat {
     }
   }
 
+  public void setMonthStr(int month) {
+    this.monthStr = Month.of(month).getDisplayName(TextStyle.FULL, Locale.getDefault());
+  }
+
   public static WeatherStat connectTwoStats(WeatherStat first, WeatherStat second) {
       WeatherStat stat = new WeatherStat();
       stat.setId(second.id);
       stat.setDay(second.day);
       stat.setMonth(second.month);
+      stat.setMonthStr(second.month);
       stat.setYear(second.year);
       stat.setHour(second.hour);
       stat.setNextHour(second.hour + 6 == 24 ? 0 : second.hour + 6);
