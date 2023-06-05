@@ -4,9 +4,9 @@
 Целью данного проекта является разработка сайта учёта статистики погодных наблюдений.
 
 Разаработчиками являются:
-* [Тимошинов Егор](https://github.com/Morgomir1)
-* [Долгих Семен](https://github.com/BlG-SEM)
-* [Самсонова Анастасия](https://github.com/Nastya-Samsonova)
+* [Тимошинов Егор](https://github.com/Morgomir1) (Backend, Frontend)
+* [Долгих Семен](https://github.com/BlG-SEM) (Диаграммы, Miro, Figma, Метрики, Swagger)
+* [Самсонова Анастасия](https://github.com/Nastya-Samsonova) (Курсовая работа, Презентация)
 
 # Сервисы для работы
 * [Miro](https://miro.com/app/board/uXjVMdmeG98=/)
