@@ -15,6 +15,7 @@
 * [Метрики](https://metrika.yandex.ru/dashboard?id=93829072)
 
 # Документация
+* [Сопроводительное письмо](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/%D0%A1%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5%20%D0%BF%D0%B8%D1%81%D1%8C%D0%BC%D0%BE.pdf)
 * [Курсовой проект](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/Курсовая.pdf)
 * [Презентация](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/Погодная%20статистика.pdf)
 * [Диаграммы](https://github.com/Morgomir1/WeatherStatistics/tree/main/Diagrams)
