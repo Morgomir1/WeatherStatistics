@@ -77,7 +77,8 @@ public class MainController {
         model.put("weatherStats2", stats.subList(8, 16));
         model.put("weatherStats3", stats.subList(16, 24));
         model.put("weatherStats4", stats.subList(24, stats.size()));
-        ArrayList<WeatherStat> list = Algoritms.getListWithWeatherChances(connectedStats);
+        List<WeatherStat> list = Algoritms.getListWithWeatherChances(connectedStats);
+
         model.put("statsForDownload", list);
     }
 
@@ -107,7 +108,8 @@ public class MainController {
         for (WeatherStat stat : connectedStats.values()) {
             stat.calcWeatherChances();
         }
-        stats = new ArrayList<>(connectedStats.values());
+        stats = Algoritms.getListWithWeatherChances(connectedStats);
+        //stats = new ArrayList<>(connectedStats.values());
         stats = Algoritms.sortByMonth(stats);
         //stats = sortByWeek(stats);
         model.put("weatherStats", stats);
@@ -149,7 +151,6 @@ public class MainController {
             formatForClient = DateTimeFormatter.ofPattern("LLLL");
             putWeekInModel(model, currentDate);
         }
-        System.out.println(model.get("statsForDownload"));
         model.put("day", currentDate.getDayOfMonth());
         String month = currentDate.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
         model.put("month", month);
@@ -206,7 +207,7 @@ public class MainController {
     }
 
     @PostMapping("/downloadTable")
-    public void downloadTable(HttpServletResponse response, @RequestParam String statsForDownload) throws IOException {
+    public void downloadTable(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = true) String statsForDownload) throws IOException {
         String encodedWithISO88591 = statsForDownload;
         statsForDownload = new String(encodedWithISO88591.getBytes("ISO-8859-1"), "UTF-8");
         String csvFileName = "results.csv";
