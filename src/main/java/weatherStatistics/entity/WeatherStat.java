@@ -388,6 +388,6 @@ public class WeatherStat {
   @Override
   public String toString() {
     return this.id + ";" + this.day  + ";" + this.month + ";" + this.month + ";" + this.hour + ";" + T
-            + ";" + Po + ";" + P + ";" + Pa  + ";" + U + ";" + DD + ";" + WW + ";" + W1  + ";" + W2 + ";" + this.weatherTypes;
+            + ";" + Po + ";" + P + ";" + Pa  + ";" + U + ";" + DD + ";" + WW + ";" + W1  + ";" + W2 + ";" + this.weatherTypes.toString();
   }
 }

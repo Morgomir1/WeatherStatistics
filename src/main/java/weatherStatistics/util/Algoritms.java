@@ -26,6 +26,10 @@ public class Algoritms {
             for (Map.Entry<WeatherTypes, Double> weather : stat.getWeatherTypes().entrySet()) {
                 stat.getWeatherTypes().put(weather.getKey(), (double) Math.round(weather.getValue() / sum * 100));
             }
+            stat.setDD("");
+            stat.setWW("");
+            stat.setW1("");
+            stat.setW2("");
             list.add(stat);
         }
         return list;
