@@ -1,6 +1,6 @@
 .root {
   background-color: rgb(212, 221, 221);
-  background-image: url("/images/root.png");
+  background-image: url("/images/root_black.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -855,13 +855,11 @@ select {
 
 }
 .table {
-	width: 1000px;
 	margin-bottom: 20px;
 	border: 5px solid #fff;
 	border-top: 5px solid #fff;
 	border-bottom: 3px solid #fff;
 	border-collapse: collapse;
-	outline: 10px solid #17a2b8;
 	font-size: 15px;
 	background: #fff!important;
 	overflow-y:scroll;
@@ -869,28 +867,21 @@ select {
     display:block;
 }
 .tableAdd {
-	width: 1000px;
+	width: 100%;
 	margin-bottom: 20px;
 	border: 5px solid #fff;
 	border-top: 5px solid #fff;
 	border-bottom: 3px solid #fff;
 	border-collapse: collapse;
-	outline: 10px solid #17a2b8;
 	font-size: 15px;
 	background: #fff!important;
-	overflow-y:scroll;
     height:100px;
     display:block;
 }
-.table th {
-	font-weight: bold;
-	padding: 7px;
-	background: #ffd300;
-	border: none;
-	text-align: left;
-	font-size: 15px;
-	border-top: 3px solid #fff;
-	border-bottom: 3px solid #ffd300;
+.tableHead {
+	position: sticky;
+    top: 0;
+    background: white;
 }
 .table td {
 	padding: 7px;
@@ -902,11 +893,9 @@ select {
 .table tbody tr:nth-child(even){
 	background: #f8f8f8!important;
 }
-
 .inputAdminTable {
-    width: 100%;
+    width: 50px;
 }
-
 /* Bordered form */
 formLogin {
     border: 3px solid #f1f1f1;
