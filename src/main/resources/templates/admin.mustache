@@ -42,27 +42,47 @@
                 <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
-            <form class="col-md" action="/adminRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+            <form class="col-md" action="/logOut" method="post">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти из аккаунта</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
         </div>
     </div>
 </body>
 <body>
-<form action="/logOut" method="post">
-    <input name="display" value="{{display}}" hidden>
-    <input name="theme" value="{{theme}}" hidden>
-    <button class="buttonDownload" type="submit">Выйти из аккаунта</button>
-</form>
+<div class="row">
+    <div class="col-md">
+    </div>
+    <div class="col-xl">
+    </div>
+    <div class="col-md">
+        <form method="post" style="background-color: white" action="/setStep">
+            <input value="{{startTableId}}" name="startTableId" hidden>
+            <input value="{{endTableId}}" name="endTableId" hidden>
+            <input value="{{display}}" name="display" hidden>
+            <input value="{{theme}}" name="theme" hidden>
+            <p2>Количество записей на странице:</p2><br>
+            <select name="tableStep">
+                {{#tableSteps}}
+                    <option {{#selected}}selected{{/selected}} value="{{value}}">{{value}}</option>
+                {{/tableSteps}}
+            </select>
+            <button type="submit">Применить</button>
+        </form>
+    </div>
+</div>
 <div class=" row" style="
     margin-left: 0px;
     margin-right: 0px;
 ">
-    <div class="col-xl">
+    <div class="col-xl" style="background-color: white">
         <form method="post" action="/onButtonClick">
+            <input value="{{display}}" name="display" hidden>
+            <input value="{{theme}}" name="theme" hidden>
+            <input value="{{startTableId}}" name="startTableId" hidden>
+            <input value="{{endTableId}}" name="endTableId" hidden>
             <table class="table">
-                <thead>
+                <thead class="tableHead">
                 <tr>
                     <td> </td>
                     <td>id</td>
@@ -85,35 +105,76 @@
                 {{#stats}}
                     <tr>
                         <td><input type="checkbox" value="{{id}}" name="statsId"></td>
-                        <td contenteditable>{{id}}</td>
-                        <td contenteditable>{{day}}</td>
-                        <td contenteditable>{{month}}</td>
-                        <td contenteditable>{{year}}</td>
-                        <td contenteditable>{{hour}}</td>
-                        <td contenteditable>{{T}}</td>
-                        <td contenteditable>{{Po}}</td>
-                        <td contenteditable>{{P}}</td>
-                        <td contenteditable>{{Pa}}</td>
-                        <td contenteditable>{{U}}</td>
-                        <td contenteditable>{{DD}}</td>
-                        <td contenteditable>{{WW}}</td>
-                        <td contenteditable>{{W1}}</td>
-                        <td contenteditable>{{W2}}</td>
+                        <td><input class="inputAdminTable" readonly type="number" value="{{id}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{day}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{month}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{year}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{hour}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{T}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{Po}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{P}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{Pa}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="number" value="{{U}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="text" value="{{DD}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="text" value="{{WW}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="text" value="{{W1}}" name="stats"></td>
+                        <td><input class="inputAdminTable" type="text" value="{{W2}}" name="stats"></td>
                     </tr>
                 {{/stats}}
                 </tbody>
             </table>
             <div class="row">
-
+                <input name="tableStep" value="{{tableStep}}" hidden>
+                <div class="col-xl"></div>
+                <div class="col-xl"></div>
                 <div class="col-md">
-                    <button class="buttonTitle" type="submit">Удалить выбранное</button>
+                    <select name="action">
+                            <option value="Применить изменения">Применить изменения</option>
+                            <option value="Удалить выбранное">Удалить выбранное</option>
+                    </select>
+                </div>
+                <div class="col-md">
+                    <button class="buttonTitle" type="submit">Выполнить</button>
                 </div>
             </div>
-            <input value="{{display}}" name="display" hidden>
-            <input value="{{theme}}" name="theme" hidden>
-            <input value="{{startTableId}}" name="startTableId" hidden>
-            <input value="{{endTableId}}" name="endTableId" hidden>
+
+
         </form>
+        <div class="row rowAdminTableSteps">
+            <form method="post" action="/adminTablePrev" class=" col-sm">
+                <input name="display" value="{{display}}" hidden>
+                <input name="theme" value="{{theme}}" hidden>
+                <input name="endTableId" value="{{endTableId}}" hidden>
+                <input name="startTableId" value="{{startTableId}}" hidden>
+                <input name="size" value="{{size}}" hidden>
+                <input name="tableStep" value="{{tableStep}}" hidden>
+                <button type="submit" class="buttonTitle">Назад</button>
+            </form>
+            <form action="/goToPage" method="post">
+                <p2>
+                    <input name="display" value="{{display}}" hidden>
+                    <input name="theme" value="{{theme}}" hidden>
+                    <input name="endTableId" value="{{endTableId}}" hidden>
+                    <input name="startTableId" value="{{startTableId}}" hidden>
+                    <input name="size" value="{{size}}" hidden>
+                    <input name="tableStep" value="{{tableStep}}" hidden>
+                    <input name="pagesSize" value="{{pagesSize}}" hidden>
+                    <input name="currentPage" value="{{currentPage}}" hidden>
+                    Номер страницы:<input class="inputAdminTable" name="page" type="number" value="{{currentPage}}">/{{pagesSize}}
+                    <button type="submit">Перейти</button>
+                </p2>
+            </form>
+            <form method="post" action="/adminTableNext" class=" col-sm">
+                <input name="display" value="{{display}}" hidden>
+                <input name="theme" value="{{theme}}" hidden>
+                <input name="endTableId" value="{{endTableId}}" hidden>
+                <input name="startTableId" value="{{startTableId}}" hidden>
+                <input name="size" value="{{size}}" hidden>
+                <input name="tableStep" value="{{tableStep}}" hidden>
+                <button type="submit"  class="buttonTitle">Вперед</button>
+            </form>
+            <div class="col-md"></div>
+        </div>
         <form method="post" action="/change">
             <table class="tableAdd">
                 <thead>
@@ -150,34 +211,17 @@
                     <td><input class="inputAdminTable" name="stats"></td>
                     <td><input class="inputAdminTable" name="stats"></td>
                     <td><input class="inputAdminTable" name="stats"></td>
-                    <td><button class="buttonTitle" type="submit">Изменить запись</button></td>
+                    <td><button class="buttonTitle" type="submit">Добавить запись</button></td>
                 </tr>
             </table>
             <input value="{{display}}" name="display" hidden>
             <input value="{{theme}}" name="theme" hidden>
             <input value="{{startTableId}}" name="startTableId" hidden>
+            <input name="tableStep" value="{{tableStep}}" hidden>
             <input value="{{endTableId}}" name="endTableId" hidden>
         </form>
     </div>
 </div>
-<div class="row">
-    <form method="post" action="/adminTablePrev" class="buttonDaySwitchBox2 col-sm">
-        <input name="display" value="{{display}}" hidden>
-        <input name="theme" value="{{theme}}" hidden>
-        <input name="endTableId" value="{{endTableId}}" hidden>
-        <input name="startTableId" value="{{startTableId}}" hidden>
-        <input name="size" value="{{size}}" hidden>
-        <button type="submit" class="buttonTitle">Назад</button>
-    </form>
-    <div class="col-md"></div>
-    <form method="post" action="/adminTableNext" class="buttonDaySwitchBox2 col-sm">
-        <input name="display" value="{{display}}" hidden>
-        <input name="theme" value="{{theme}}" hidden>
-        <input name="endTableId" value="{{endTableId}}" hidden>
-        <input name="startTableId" value="{{startTableId}}" hidden>
-        <input name="size" value="{{size}}" hidden>
-        <button type="submit"  class="buttonTitle">Вперед</button>
-    </form>
-</div>
+
 </body>
 </html>

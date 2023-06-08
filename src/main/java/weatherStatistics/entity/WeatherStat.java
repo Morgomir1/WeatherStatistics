@@ -16,7 +16,7 @@ import java.util.*;
 public class WeatherStat {
 
   @Id
-  @GeneratedValue()
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Integer id;
   @Column(name = "day")
@@ -128,22 +128,22 @@ public class WeatherStat {
       if (params.length > 10) {
         this.DD = params[10];
       } else {
-        this.DD = "null";
+        this.DD = " ";
       }
       if (params.length > 11) {
         this.WW = params[11];
       } else {
-        this.WW = "null";
+        this.WW = " ";
       }
       if (params.length > 12) {
         this.W1 = params[12];
       } else {
-        this.W1 = "null";
+        this.W1 = " ";
       }
       if (params.length > 13) {
         this.W2 = params[13];
       } else {
-        this.W2 = "null";
+        this.W2 = " ";
       }
       if (params.length > 14) {
         String weatherTypes = params[14];
