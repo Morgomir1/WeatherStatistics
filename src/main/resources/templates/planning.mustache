@@ -71,7 +71,7 @@
                                 <input name="plans" value="{{plans}}" hidden>
                                 <input name="plan" value="{{plan}}" hidden>
                                 <p>{{plan}}</p>
-                                <p>{{interval}}:00-{{nextInterval}}:00</p>
+                                <p>{{startTime}}:00-{{endTime}}:00</p>
                                 <button class="buttonDeleteDayPlans" value="{{key}}" name="key" type="submit">x</button>
                             </form>
                         {{/value}}
@@ -83,11 +83,13 @@
                                 <input name="plan" type="text" size="auto">
                             </p>
                             <p><b>Время:</b><br>
-                                <select name="time" size="3" multiple>
+                                <input type="number" placeholder="Начало" name="timeStart">
+                                <input type="number" placeholder="Конец" name="timeEnd">
+                                <!--select name="time" size="3" multiple>
                                     {{#timeIntervals}}
                                         <option value={{time}}>{{time}}:00-{{next}}:00</option>
                                     {{/timeIntervals}}
-                                </select>
+                                </select-->
                             </p>
                             <button class="button" value="{{key}}" name="key" type="submit">+</button>
                         </form>
@@ -114,9 +116,9 @@
                             {{#entrySet}}
                                 {{#key}}
                                     <p><input value="{{plan}}" name="plan" readonly></p>
+                                    <h2>{{startTime}}:00-{{endTime}}:00</h2><br/>
                                 {{/key}}
                                 {{#value}}
-                                    <h2>{{hour}}:00-{{nextHour}}:00</h2><br/>
                                     Средняя температура:<br>
                                     {{#positive}}
                                         +{{T}}<br/>
@@ -138,6 +140,7 @@
             {{/plansResults}}
         {{/creatingPlans}}
     </div>
+
     <div class="main-button-four row">
         <form action="/showResults" method="post">
             <input name="theme" value="{{theme}}" hidden>
@@ -146,6 +149,14 @@
             <button name="creatingPlans" value="{{creatingPlans}}" type="submit" class="main-button-four glavnaja">{{#creatingPlans}}Показать результаты{{/creatingPlans}}{{^creatingPlans}}Вернуться{{/creatingPlans}}</button>
         </form>
     </div>
+    {{^creatingPlans}}
+        <div class="row">
+            <form action="downloadPlans" method="post">
+                <button type="submit">Скачать</button>
+            </form>
+        </div>
+    {{/creatingPlans}}
+
 </div>
 </body>
 </html>
