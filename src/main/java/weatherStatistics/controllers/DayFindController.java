@@ -23,13 +23,15 @@ public class DayFindController {
 
     @GetMapping(value = "/dayFindRedirect")
     public ModelAndView dayFindRedirect(HttpServletRequest request) {
-        return dayFind(request, null, null, null);
+        return dayFind(request, null, null, 0, 0, null);
     }
 
     @GetMapping("/dayFind")
     public ModelAndView dayFind(HttpServletRequest request,
                                 @RequestParam(required = false) Integer startFindId,
                                 @RequestParam(required = false) Integer endFindID,
+                                @RequestParam(required = false) Integer startTime,
+                                @RequestParam(required = false) Integer endTime,
                                 @RequestParam(required = false) HashMap<String, Object> model) {
         if (model == null) {
             model = new HashMap<>();
@@ -50,6 +52,10 @@ public class DayFindController {
             model.put("results", finalStats);
         }
         model.put("allResults", foundedDays);
+
+
+        model.put("timeStart", startTime);
+        model.put("timeEnd", endTime);
 
         String theme = request.getParameter("theme");
         String display = request.getParameter("display");
@@ -89,7 +95,10 @@ public class DayFindController {
         }
         HashMap<String, Object> model = new HashMap<>();
         model.put("foundedDays", stats);
-        return dayFind(request, startFindId, endFindID, model);
+
+        Integer timeStart = Integer.valueOf(request.getParameter("timeStart"));
+        Integer timeEnd = Integer.valueOf(request.getParameter("timeEnd"));
+        return dayFind(request, startFindId, endFindID, timeStart, timeEnd, model);
     }
 
     @PostMapping("/prevFindDays")
@@ -103,7 +112,9 @@ public class DayFindController {
         }
         HashMap<String, Object> model = new HashMap<>();
         model.put("foundedDays", stats);
-        return dayFind(request, startFindId, endFindID, model);
+        Integer timeStart = Integer.valueOf(request.getParameter("timeStart"));
+        Integer timeEnd = Integer.valueOf(request.getParameter("timeEnd"));
+        return dayFind(request, startFindId, endFindID, timeStart, timeEnd, model);
     }
 
     @PostMapping("/findDate")
@@ -112,7 +123,8 @@ public class DayFindController {
         precipitation = new String(encodedWithISO88591.getBytes("ISO-8859-1"), "UTF-8");
         HashMap<String, Object> model = new HashMap<>();
         //String precipitation = WeatherTypes.valueOf(precipitationName).getName();
-        Integer timeInterval = Integer.valueOf(request.getParameter("timeInterval"));
+        Integer timeStart = Integer.valueOf(request.getParameter("timeStart"));
+        Integer timeEnd = Integer.valueOf(request.getParameter("timeEnd"));
         Integer temperature = Integer.valueOf(request.getParameter("temperature"));
         String day = request.getParameter("calendar");
         int dayNumber = Integer.parseInt(day.split("-")[2]);
@@ -122,8 +134,11 @@ public class DayFindController {
             this.weatherStats = weatherStatistics.findAll();
         }
         ArrayList<WeatherStat> foundedDays = new ArrayList<>();
-        if (temperature != null && precipitation != null && timeInterval != null) {
-            HashMap<String, WeatherStat> connectedStats = Algoritms.connectStats(this.weatherStats, timeInterval);
+        if (timeEnd < 0 || timeEnd > 24 || timeStart < 0 || timeStart.equals(timeEnd) || timeEnd < timeStart) {
+            return dayFind(request, 0, 3, 0, 0, model);
+        }
+        if (temperature != null && precipitation != null && timeStart != null && timeEnd != null) {
+            HashMap<String, WeatherStat> connectedStats = Algoritms.connectStats(this.weatherStats, timeStart, timeEnd);
             ArrayList<WeatherStat> sortedStatsWithWeather = Algoritms.getListWithWeatherChances(connectedStats);
             foundedDays = Algoritms.sortByDay(sortedStatsWithWeather, date);
             Queue<WeatherStat> queue = new LinkedList<>(foundedDays);
@@ -163,7 +178,8 @@ public class DayFindController {
             stat.setW1("null");
             stat.setW2("null");
         }
+        foundedDays = Algoritms.sortByDay(foundedDays, date);
         model.put("foundedDays", foundedDays);
-        return dayFind(request, 0, 3, model);
+        return dayFind(request, 0, 3,  timeStart, timeEnd, model);
     }
 }

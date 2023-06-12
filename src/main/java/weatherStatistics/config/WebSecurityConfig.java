@@ -41,7 +41,10 @@ public class WebSecurityConfig  {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
+        return http/*.requiresChannel(channel ->
+                channel.anyRequest().requiresSecure())
+
+                */
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers(new AntPathRequestMatcher("/admin")).hasRole("ADMIN")

@@ -207,14 +207,15 @@ body {
     /* overflow: hidden; */
 }
 .day {
+    margin: 10px;
     /* width: 100%; */
-    height: 295px;
+    /* height: 295px; */
     /* max-height: 400px; */
     background: rgba(255,255,255,1);
-    padding: 5px 10px;
+    /* padding: 5px 10px; */
     opacity: 1;
     /* top: 28px; */
-    position: absolute;
+    /* position: absolute; */
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -330,7 +331,7 @@ select {
   margin: 8px 0;
 }
 .buttonTitle {
-    font: 19px "Ubuntu", Helvetica, Arial, serif;
+    font: 17px "Ubuntu", Helvetica, Arial, serif;
     color: rgb(0, 0, 0);
     text-align: center;
     letter-spacing: 0px;
@@ -833,7 +834,7 @@ select {
   text-align: center;
 }
 .buttonTitleDayFind {
-  font: 19px "Ubuntu", Helvetica, Arial, serif;
+  font: 17px "Ubuntu", Helvetica, Arial, serif;
   color: rgb(0, 0, 0);
   text-align: center;
   letter-spacing: 0px;
@@ -936,4 +937,18 @@ buttonLogin:hover {
 span.psw {
     float: right;
     padding-top: 16px;
+}
+.siteIconContainer {
+    align-items: center;
+}
+
+.siteIconStyle {
+    /* width: 70; */
+    /* margin: 20; */
+    /* height: auto; */
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    margin-top: 10px;
+    margin-left: 10px;
 }

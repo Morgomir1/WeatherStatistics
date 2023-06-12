@@ -66,6 +66,41 @@ public class Algoritms {
         System.out.println("Execution time: " + TimeUnit.MILLISECONDS.toSeconds(executionTime));
         return connectedStats;
     }
+    public static HashMap<String, WeatherStat> connectStats(List<WeatherStat> weatherStats, Integer start, Integer end) {
+        Queue<WeatherStat> statCopy = new LinkedList<>(weatherStats);
+        HashMap<String, WeatherStat> connectedStats = new HashMap<>();
+        long time = System.currentTimeMillis();
+        while (!statCopy.isEmpty()) {
+            WeatherStat stat = statCopy.poll();
+            Queue<WeatherStat> statCopy2 = new LinkedList<>(statCopy);
+            if (!(start <= stat.getHour() && end >= stat.getHour()
+                    || ((start - stat.getHour()) * (stat.getHour() + 3 - start) >= 0)
+                    || ((end - stat.getHour()) * (stat.getHour() + 3 - end) >= 0))) {
+                continue;
+            }
+            while (!statCopy2.isEmpty()) {
+                WeatherStat stat1 = statCopy2.poll();
+                if (!(start <= stat1.getHour() && end >= stat1.getHour()
+                        || ((start - stat1.getHour()) * (stat1.getHour() + 3 - start) >= 0)
+                        || ((end - stat1.getHour()) * (stat1.getHour() + 3 - end) >= 0))) {
+                    statCopy.remove(stat1);
+                    continue;
+                }
+                if (stat.isDateEqualTo(stat1)) {
+                    if (connectedStats.get(stat.getDate()) != null) {
+                        connectedStats.put(stat.getDate(), WeatherStat.connectTwoStats(connectedStats.get(stat.getDate()), WeatherStat.connectTwoStats(stat, stat1)));
+                    } else {
+                        connectedStats.put(stat.getDate(), WeatherStat.connectTwoStats(stat, stat1));
+                    }
+                    statCopy.remove(stat1);
+                }
+            }
+
+        }
+        long executionTime = System.currentTimeMillis() - time;
+        System.out.println("Execution time: " + TimeUnit.MILLISECONDS.toSeconds(executionTime));
+        return connectedStats;
+    }
 
     public static ArrayList<WeatherStat> sortByDay(List<WeatherStat> list, LocalDate date) {
         ArrayList<WeatherStat> sorted = new ArrayList<>();
