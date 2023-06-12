@@ -22,8 +22,8 @@
 * [Техническое задание](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/%D0%A2%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%202-2.pdf)
 * [Код сервера](https://github.com/Morgomir1/WeatherStatistics/tree/develop/src/main/java/weatherStatistics)
 * [Код клиента](https://github.com/Morgomir1/WeatherStatistics/tree/develop/src/main/resources)
-* [Сайт](http://194.67.119.36:8090/)
-* [Swagger](http://194.67.119.36:8090/swagger-ui/index.html)
+* [Сайт](http://194.67.119.36:8443/)
+* [Swagger](http://194.67.119.36:8443/swagger-ui/index.html)
 * [Видео-обзор](https://drive.google.com/drive/folders/103oacY7_KdSL9nYpxMCCLh8C_k2mZpLQ)
 # Данные для входа в аккаунт администратора
 * логин: admin
