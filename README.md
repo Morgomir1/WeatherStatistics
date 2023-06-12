@@ -25,6 +25,7 @@
 * [Сайт](http://194.67.119.36:8443/)
 * [Swagger](http://194.67.119.36:8443/swagger-ui/index.html)
 * [Видео-обзор](https://drive.google.com/drive/folders/103oacY7_KdSL9nYpxMCCLh8C_k2mZpLQ)
+* [Инструкция установки](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/instruction.txt)
 # Данные для входа в аккаунт администратора
 * логин: admin
 * пароль: admin
