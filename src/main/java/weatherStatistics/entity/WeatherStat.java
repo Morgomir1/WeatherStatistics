@@ -12,7 +12,7 @@ import java.time.format.TextStyle;
 import java.util.*;
 
 @Entity
-@Table(name = "statsnew")
+@Table(name = "stats")
 public class WeatherStat {
 
   @Id
@@ -33,8 +33,6 @@ public class WeatherStat {
   private double Po;
   @Column(name = "P")
   private double P;
-  @Column(name = "Pa")
-  private double Pa;
   @Column(name = "U")
   private int U;
   @Column(name = "DD")
@@ -115,11 +113,6 @@ public class WeatherStat {
       } else {
         this.P = 0;
       }
-      if (params.length > 8) {
-        this.Pa = Double.parseDouble(params[8]);
-      } else {
-        this.Pa = 0;
-      }
       if (params.length > 9) {
         this.U = Integer.parseInt(params[9]);
       } else {
@@ -161,17 +154,16 @@ public class WeatherStat {
 
   }
 
-  public WeatherStat(int id, int day, int month, int year, int hour, int t, double po, double p, double pa, int u, String DD, String WW,
+  public WeatherStat(int id, int day, int month, int year, int hour, int t, double po, double p, int u, String DD, String WW,
                      String w1, String w2) {
     this.id = id;
     this.day = day;
     this.month = month;
     this.year = year;
     this.hour = hour;
-    this.T = t / 10;
-    this.Po = po / 10;
-    this.P = p / 10;
-    this.Pa = pa / 10;
+    this.T = t;
+    this.Po = po;
+    this.P = p;
     this.U = u;
     this.DD = DD;
     this.WW = WW;
@@ -235,10 +227,6 @@ public class WeatherStat {
     return P;
   }
 
-  public double getPa() {
-    return Pa;
-  }
-
   public int getU() {
     return U;
   }
@@ -275,10 +263,6 @@ public class WeatherStat {
 
   public void setP(double p) {
     P = p;
-  }
-
-  public void setPa(double pa) {
-    Pa = pa;
   }
 
   public void setU(int u) {
@@ -354,7 +338,6 @@ public class WeatherStat {
       stat.setDayOfWeek(second.getDayOfWeek());
       stat.setT(Math.round((first.getT() + second.getT()) / 2));
       stat.setPo((first.getPo() + second.getPo()) / 2);
-      stat.setPa((first.getPa() + second.getPa()) / 2);
       stat.setP((first.getP() + second.getP()) / 2);
       stat.setU((first.getU() + second.getU()) / 2);
       stat.setDD(first.getDD() + second.getDD());
@@ -388,6 +371,6 @@ public class WeatherStat {
   @Override
   public String toString() {
     return this.id + ";" + this.day  + ";" + this.month + ";" + this.month + ";" + this.hour + ";" + T
-            + ";" + Po + ";" + P + ";" + Pa  + ";" + U + ";" + DD + ";" + WW + ";" + W1  + ";" + W2 + ";" + this.weatherTypes.toString();
+            + ";" + Po + ";" + P + ";" + U + ";" + DD + ";" + WW + ";" + W1  + ";" + W2 + ";" + this.weatherTypes.toString();
   }
 }

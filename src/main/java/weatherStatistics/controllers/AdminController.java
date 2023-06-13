@@ -189,9 +189,9 @@ public class AdminController {
         int index = 0;
         for (int i = 0; i < statsArray.length; i++) {
             statList.add(statsArray[i]);
-            if (index == 13) {
+            if (index == 12) {
                 index = 0;
-                String[] statArr = new String[13];
+                String[] statArr = new String[12];
                 for (int j = 0; j < statArr.length; j++) {
                     statArr[j] = statList.get(j);
                 }

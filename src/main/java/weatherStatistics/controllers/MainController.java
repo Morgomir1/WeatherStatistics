@@ -225,7 +225,7 @@ public class MainController {
             list.add(stat);
         }
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] header = { "id", "day", "month", "year", "hour", "T", "Po", "P", "Pa", "U", "DD", "WW", "W1", "W2", "weatherTypes"};
+        String[] header = { "id", "day", "month", "year", "hour", "T", "Po", "P", "U", "DD", "WW", "W1", "W2", "weatherTypes"};
         csvWriter.writeHeader(header);
         for (WeatherStat stat : list) {
             csvWriter.write(stat, header);
