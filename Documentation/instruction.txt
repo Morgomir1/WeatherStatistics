@@ -18,7 +18,7 @@ mvn install
 #Если все сделано правильно - в папке target появится jar-файл проекта
 
 #НАСТРОЙКА БД
-#Теперь, необходимо скопировать три файла таблиц: role.csv, admin.csv и statsnew.csv из папки resources проекта, и поместить их в папку /var/lib/mysql-files/
+#Теперь, необходимо скопировать три файла таблиц: role.csv, admin.csv и stats.csv из папки resources проекта, и поместить их в папку /var/lib/mysql-files/
 #Переходим в меню mysql.
 mysql
 #Создаем базу данных, где weatherstatistics - название базы данных.
@@ -72,7 +72,7 @@ LOAD DATA INFILE '/var/lib/mysql-files/role.csv' INTO TABLE weatherstatistics.ro
 #Загружаем данные в таблицу администраторов
 LOAD DATA INFILE '/var/lib/mysql-files/admin.csv' INTO TABLE weatherstatistics.admin FIELDS TERMINATED BY ',' ENCLOSED BY '"'IGNORE 1 ROWS;
 #Загружаем данные в таблицу статистики погоды
-LOAD DATA INFILE '/var/lib/mysql-files/statsnew.csv' INTO TABLE weatherstatistics.stats FIELDS TERMINATED BY ',' ENCLOSED BY '"'IGNORE 1 ROWS;
+LOAD DATA INFILE '/var/lib/mysql-files/stats.csv' INTO TABLE weatherstatistics.stats FIELDS TERMINATED BY ',' ENCLOSED BY '"'IGNORE 1 ROWS;
 #Выходим из mysql
 
 #ЗАПУСК ПРОЕКТА
