@@ -10,7 +10,7 @@
 
 # Сервисы для работы
 * [Miro](https://miro.com/app/board/uXjVMdmeG98=/)
-* [GitHub Issues](https://github.com/Morgomir1/WeatherStatistics/issues)
+* [GitHub Issues](https://github.com/Morgomir1/WeatherStatistics/issues) (Таск-менеджер)
 * [Figma](https://www.figma.com/file/1puqRHwjSr7R51WveWESQW/Untitled?node-id=0%3A1&t=1qfSRSPv4mcw0xyQ-1)
 * [Метрики](https://metrika.yandex.ru/dashboard?id=93829072)
 
