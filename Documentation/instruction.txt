@@ -55,7 +55,6 @@ CREATE TABLE `statsnew` (
   `T` int NOT NULL,
   `Po` int NOT NULL,
   `P` int NOT NULL,
-  `Pa` text NOT NULL,
   `U` int NOT NULL,
   `DD` text NOT NULL,
   `WW` text NOT NULL,
