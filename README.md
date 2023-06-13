@@ -6,7 +6,7 @@
 Разаработчиками являются:
 * [Тимошинов Егор](https://github.com/Morgomir1) (Backend, Frontend)
 * [Долгих Семен](https://github.com/BlG-SEM) (Диаграммы, Miro, Figma, Метрики, Swagger)
-* [Самсонова Анастасия](https://github.com/Nastya-Samsonova) (Курсовая работа, Презентация)
+* [Самсонова Анастасия](https://github.com/Nastya-Samsonova) (Курсовая работа, Презентация, Тестирование)
 
 # Сервисы для работы
 * [Miro](https://miro.com/app/board/uXjVMdmeG98=/)
