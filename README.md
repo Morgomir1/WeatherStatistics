@@ -23,10 +23,10 @@
 * [Код сервера](https://github.com/Morgomir1/WeatherStatistics/tree/develop/src/main/java/weatherStatistics)
 * [Код клиента](https://github.com/Morgomir1/WeatherStatistics/tree/develop/src/main/resources)
 * [Видео-обзор](https://drive.google.com/drive/folders/103oacY7_KdSL9nYpxMCCLh8C_k2mZpLQ)
-* [Инструкция установки](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/instruction.txt)
 # Веб-приложение
 * [Сайт](http://194.67.119.36:8090/)
 * [Swagger](http://194.67.119.36:8090/swagger-ui/index.html)
+* [Инструкция установки](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/instruction.txt)
 # Видео
 * [Видео-функционал приложения](https://drive.google.com/file/d/1_ft3wSR23noIQIXNHdpj0RuFvvzpDKbc/view?usp=drive_link)
 # Данные для входа в аккаунт администратора
