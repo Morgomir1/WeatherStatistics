@@ -46,7 +46,7 @@ CREATE TABLE `role` (
   `role` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #Создаем таблицу статистики погоды
-CREATE TABLE `statsnew` (
+CREATE TABLE `stats` (
   `id` int NOT NULL AUTO_INCREMENT,
   `day` int NOT NULL,
   `month` int NOT NULL,
