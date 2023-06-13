@@ -27,6 +27,8 @@
 # Веб-приложение
 * [Сайт](http://194.67.119.36:8090/)
 * [Swagger](http://194.67.119.36:8090/swagger-ui/index.html)
+# Видео
+* [Видео-функционал приложения](https://drive.google.com/file/d/1_ft3wSR23noIQIXNHdpj0RuFvvzpDKbc/view?usp=drive_link)
 # Данные для входа в аккаунт администратора
 * логин: admin
 * пароль: admin
