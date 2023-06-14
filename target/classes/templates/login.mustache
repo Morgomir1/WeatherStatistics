@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Админ</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles/css/{{theme}}.css" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(93829072, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/93829072" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+</head>
+<body class="root">
+<div class="buttonsBox col-xl">
+    <div class="row">
+        <div class="siteIconContainer">
+            <img class="siteIconStyle" src="/images/rain.png">
+        </div>
+        <form class="col-md" action="/mainRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/informationRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/dayFindRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/planningRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/settingsRedirect" method="get" >
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        {{#admin}}
+            <form class="col-md" action="/adminRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/logOut" method="post">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+        {{/admin}}
+    </div>
+</div>
+</body>
+<body>
+<div class="form">
+    <form class="formLogin" action="/login" method="post">
+
+        <div class="containerLogin">
+            <label for="uname"><b>Логин</b></label>
+            <input  class="inputLogin" name="username" type="text" placeholder="Username" autofocus="true"/>
+
+            <label for="psw"><b>Пароль</b></label>
+            <input class="inputLogin" name="password" type="password" placeholder="Password"/>
+            <input name="theme" value="{{theme}}" hidden>
+            <input name="display" value="{{display}}" hidden>
+            <button class="buttonLogin" type="submit">Войти</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

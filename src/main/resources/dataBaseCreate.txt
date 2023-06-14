@@ -1,0 +1,88 @@
+#СБОРКА ПРИЛОЖЕНИЯ
+#Скачиваем java 17-й версии
+sudo apt update
+sudo apt install openjdk-17-jdk
+sudo apt install openjdk-17-jre
+#Теперь необходимо установить переменную JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+#И добавить её к переменной PATH
+export PATH=$PATH:$JAVA_HOME/bin
+
+#Далее необходимо установить Maven версии 3.9.2, скачав его с сайта Maven https://maven.apache.org/download.cgi 
+#Теперь необходимо добавить к переменной PATH путь к папке bin распакованного архива Maven.
+export PATH=$PATH:/opt/apache-maven-3.9.2/bin:
+#Скачиваем исходный код с гитхаба проекта
+wget https://github.com/Morgomir1/Weatherstatistics/archive/develop.tar.gz
+#Распаковываем в архив, и переходим в полученную папку. Выполняем команду:
+mvn install
+#Если все сделано правильно - в папке target появится jar-файл проекта
+
+#НАСТРОЙКА БД
+#Теперь, необходимо скопировать три файла таблиц: role.csv, admin.csv и stats.csv из папки resources проекта, и поместить их в папку /var/lib/mysql-files/
+#Переходим в меню mysql.
+mysql
+#Создаем базу данных, где weatherstatistics - название базы данных.
+CREATE DATABASE weatherstatistics;
+#Создаем пользователя для базы данных, где settra - имя пользователя, а dainrybila1. - его пароль.
+CREATE USER 'settra'@'localhost' IDENTIFIED BY 'dainrybila1.';
+#Выдаем пользователю все права на базу данных, где settra - имя пользователя, а weatherstatistics - название базы данных для которой мы выдаем привилегии.
+GRANT ALL PRIVILEGES ON settra . * TO 'weatherstatistics'@'localhost';
+#Выходим из меню mysql
+exit
+#Авторизриуемся в mysql под аккаунтом созданного пользователя -u settra и выбираем базу данных -p weatherstatistics
+mysql -u settra -p weatherstatistics
+#Вводим пароль
+dainrybila1.
+#Создаем таблицу администраторов
+CREATE TABLE `admin` (
+  `id` int DEFAULT NULL,
+  `username` text,
+  `password` text,
+  `active` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#Создаем таблицу ролей
+CREATE TABLE `role` (
+  `id` int DEFAULT NULL,
+  `role` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#Создаем таблицу статистики погоды
+CREATE TABLE `stats` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `day` int NOT NULL,
+  `month` int NOT NULL,
+  `year` int NOT NULL,
+  `hour` int NOT NULL,
+  `T` int NOT NULL,
+  `Po` int NOT NULL,
+  `P` int NOT NULL,
+  `Pa` text NOT NULL,
+  `U` int NOT NULL,
+  `DD` text NOT NULL,
+  `WW` text NOT NULL,
+  `W1` text NOT NULL,
+  `W2` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=52644 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#Выходим из аккаунта пользователя
+exit
+#Входим в меню mysql
+mysql
+#Загружаем данные в таблицу ролей
+LOAD DATA INFILE '/var/lib/mysql-files/role.csv' INTO TABLE weatherstatistics.role FIELDS TERMINATED BY ',' ENCLOSED BY '"'IGNORE 1 ROWS;
+#Загружаем данные в таблицу администраторов
+LOAD DATA INFILE '/var/lib/mysql-files/admin.csv' INTO TABLE weatherstatistics.admin FIELDS TERMINATED BY ',' ENCLOSED BY '"'IGNORE 1 ROWS;
+#Загружаем данные в таблицу статистики погоды
+LOAD DATA INFILE '/var/lib/mysql-files/stats.csv' INTO TABLE weatherstatistics.stats FIELDS TERMINATED BY ',' ENCLOSED BY '"'IGNORE 1 ROWS;
+#Выходим из mysql
+
+#ЗАПУСК ПРОЕКТА
+#Теперь необходимо установить утилиту screen, для запуска приложения в фоновом режиме.
+sudo apt install screen
+#Создаем новый screen командой
+screen
+#Нажимаем enter и оказываемся в новом скрине.
+#Переходим в директирию в которой собран jar-файл приложения, и запускаем его командой
+java -jar WeatherStatistics-1.0-SNAPSHOT.jar
+#Приложение запущено, можем выходить из скрина.
+#Переходим в браузер, вводим ip-адрес хостинга, добавляя к нему порт 8443.
