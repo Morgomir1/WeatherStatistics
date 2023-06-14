@@ -21,7 +21,6 @@
 * [Презентация](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/Погодная%20статистика.pdf)
 * [Код сервера](https://github.com/Morgomir1/WeatherStatistics/tree/develop/src/main/java/weatherStatistics)
 * [Код клиента](https://github.com/Morgomir1/WeatherStatistics/tree/develop/src/main/resources)
-* [Видео-обзор](https://drive.google.com/drive/folders/103oacY7_KdSL9nYpxMCCLh8C_k2mZpLQ)
 * [Сопроводительное письмо](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/%D0%A1%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5%20%D0%BF%D0%B8%D1%81%D1%8C%D0%BC%D0%BE.pdf)
 # Веб-приложение
 * [Сайт](http://194.67.119.36:8090/)
