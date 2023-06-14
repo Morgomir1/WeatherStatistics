@@ -1,0 +1,132 @@
+<html>
+<head>
+    <title>Поиск дня</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles/css/{{theme}}.css" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(93829072, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/93829072" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body class="root">
+    <div class="buttonsBox col-xl">
+        <div class="row">
+            <form class="col-md" action="/mainRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/informationRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/dayFindRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/planningRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/settingsRedirect" method="get" >
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/adminRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+        </div>
+    </div>
+<div>
+    <div class="row">
+        <div class="findOptionsContainer col-3">
+            <div class="findOptionsContainer2 col">
+                <div class="row">
+                    <span class="parametersText">Введите интересующие вас параметры:</span>
+                </div>
+                <br>
+                <form action="/findDate" method="post">
+                    <br>
+                    <p>Выберите дату: <input type="date" name="calendar"></p>
+                    <select name="precipitation" size="3" multiple>
+                        {{#weatherTypes}}
+                            <option value="{{.}}">{{weatherDisplayName}}</option>
+                        {{/weatherTypes}}
+                    </select>
+                    <select name="timeInterval" size="3" multiple>
+                        {{#timeIntervals}}
+                            <option value={{time}}>{{time}}:00 - {{next}}:00</option>
+                        {{/timeIntervals}}
+                    </select>
+                    <br>
+                    <input class="input-temp" type="number" name="temperature" placeholder="Температура">
+                    <br>
+                    <input name="display" value="{{display}}" hidden>
+                    <input name="theme" value="{{theme}}" hidden>
+                    <button type="submit" class="buttonDayFind">Поиск</button>
+                </form>
+            </div>
+        </div>
+        <div class="container col">
+            <div class="resultsBox row">
+                <span class="resultsText">Ближайшие дни с подходящей погодой:</span>
+            </div>
+
+            <div class="daysBox row">
+                {{#results}}
+                <div class="col">
+                    <div class="day">
+                        {{day}} {{monthStr}}<br>
+                        {{hour}}:00 - {{nextHour}}:00<br/>
+                        Средняя температура в течении дня: <br>
+                        {{#positive}}
+                            +{{T}}<br/>
+                        {{/positive}}
+                        {{^positive}}
+                            {{T}}<br/>
+                        {{/positive}}
+                        Вероятность осадков:<br>
+                        {{#weatherTypes}}
+                            {{#entrySet}}
+                                {{key}} - {{value}}%<br>
+                            {{/entrySet}}
+                        {{/weatherTypes}}
+                    </div>
+                </div>
+                {{/results}}
+            </div>
+            <div class="row">
+                <form method="post" action="/prevFindDays" class="col-sm">
+                    <input name="startFindId" value="{{startFindId}}" hidden>
+                    <input name="endFindID" value="{{endFindID}}" hidden>
+                    <input name="display" value="{{display}}" hidden>
+                    <input name="theme" value="{{theme}}" hidden>
+                    <button value="{{allResults}}" name="allResultsPrev" class="buttonDaySwitchBox2"><h2 class="buttonTitle">Назад</h2></button>
+                </form>
+                <div class="col-md"></div>
+                <form method="post" action="/nextFindDays" class="col-sm">
+                    <input name="startFindId" value="{{startFindId}}" hidden>
+                    <input name="endFindID" value="{{endFindID}}" hidden>
+                    <input name="display" value="{{display}}" hidden>
+                    <input name="theme" value="{{theme}}" hidden>
+                    <button value="{{allResults}}" name="allResultsNext" class="buttonDaySwitchBox2"><h2 class="buttonTitle">Вперед</h2></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
