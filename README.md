@@ -31,4 +31,4 @@
 * [Swagger](http://194.67.119.36:8090/swagger-ui/index.html)
 * [Инструкция установки](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/instruction.txt)
 # Видео
-* [Видео-функционал приложения](https://drive.google.com/file/d/1_ft3wSR23noIQIXNHdpj0RuFvvzpDKbc/view?usp=drive_link)
+* [Видео-функционал приложения]([https://drive.google.com/file/d/1_ft3wSR23noIQIXNHdpj0RuFvvzpDKbc/view?usp=drive_link](https://drive.google.com/file/d/1NaVlO1e490X_--mVdr9WaJsyYjq_wuJQ/view?usp=drive_link))
