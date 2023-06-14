@@ -32,3 +32,4 @@
 * [Инструкция установки](https://github.com/Morgomir1/WeatherStatistics/blob/main/Documentation/instruction.txt)
 # Видео
 * [Видео-функционал приложения](https://drive.google.com/file/d/1NaVlO1e490X_--mVdr9WaJsyYjq_wuJQ/view?usp=drive_link)
+* [Видео-презентация](https://drive.google.com/file/d/146CO5wfCWvvWNDkX02BWbrO6VPdMNtJ3/view?usp=drive_link)
