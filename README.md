@@ -34,3 +34,4 @@
 * [Видео-функционал приложения](https://drive.google.com/file/d/1NaVlO1e490X_--mVdr9WaJsyYjq_wuJQ/view?usp=drive_link)
 * [Видео-презентация](https://drive.google.com/file/d/146CO5wfCWvvWNDkX02BWbrO6VPdMNtJ3/view?usp=drive_link)
 * [Видео с развертыванием приложения](https://drive.google.com/file/d/1EAa0d4i9GXspWxixKFEgQWS_eKGM2hHO/view?usp=drive_link)
+* [Видео-обзор серверной части приложения](https://drive.google.com/file/d/1zXaMjREG8Zr0dJqCIHmAAi3rJT7Z1_Is/view?usp=drive_link)
