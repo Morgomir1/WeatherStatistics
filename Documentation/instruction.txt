@@ -25,8 +25,8 @@ mysql
 CREATE DATABASE weatherstatistics;
 #Создаем пользователя для базы данных, где settra - имя пользователя, а dainrybila1. - его пароль.
 CREATE USER 'settra'@'localhost' IDENTIFIED BY 'dainrybila1.';
-#Выдаем пользователю все права на базу данных, где settra - имя пользователя, а weatherstatistics - название базы данных для которой мы выдаем привилегии.
-GRANT ALL PRIVILEGES ON settra . * TO 'weatherstatistics'@'localhost';
+#Выдаем пользователю все права на базу данных, где settra - имя пользователя.
+GRANT ALL ON *.* TO 'settra'@'localhost';
 #Выходим из меню mysql
 exit
 #Авторизриуемся в mysql под аккаунтом созданного пользователя -u settra и выбираем базу данных -p weatherstatistics
