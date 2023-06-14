@@ -48,10 +48,16 @@
             <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
             <input name="display" value="{{display}}" hidden>
         </form>
-        <form class="col-md" action="/adminRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
+        {{#admin}}
+            <form class="col-md" action="/adminRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/logOut" method="post">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+        {{/admin}}
     </div>
 </div>
 <div>

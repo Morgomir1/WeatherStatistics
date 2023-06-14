@@ -2,6 +2,9 @@ package weatherStatistics.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import weatherStatistics.entity.WeatherStat;
@@ -66,6 +69,9 @@ public class DayFindController {
         model.put("timeIntervals", DayTimeIntervals.values());
         System.out.println("Theme type: " + theme);
         model.put("theme", theme == null ? ThemeTypes.BLUE.getThemeName() : theme);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.put("admin", !(authentication instanceof AnonymousAuthenticationToken));
         return new ModelAndView("dayFind", model);
     }
 
@@ -123,10 +129,16 @@ public class DayFindController {
         precipitation = new String(encodedWithISO88591.getBytes("ISO-8859-1"), "UTF-8");
         HashMap<String, Object> model = new HashMap<>();
         //String precipitation = WeatherTypes.valueOf(precipitationName).getName();
+        String timeStartString = request.getParameter("timeStart");
+        String timeEndString = request.getParameter("timeEnd");
+        String temperatureString = request.getParameter("temperature");
+        String day = request.getParameter("calendar");
+        if (day.equals("") || temperatureString.equals("") || timeEndString.equals("") || timeStartString.equals("")) {
+            return dayFind(request, 0, 3, 0, 0, model);
+        }
         Integer timeStart = Integer.valueOf(request.getParameter("timeStart"));
         Integer timeEnd = Integer.valueOf(request.getParameter("timeEnd"));
         Integer temperature = Integer.valueOf(request.getParameter("temperature"));
-        String day = request.getParameter("calendar");
         int dayNumber = Integer.parseInt(day.split("-")[2]);
         int monthNumber = Integer.parseInt(day.split("-")[1]);
         LocalDate date = LocalDate.of(2020, monthNumber, dayNumber);

@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Главная</title>
     <meta charset="UTF-8">
@@ -49,18 +50,40 @@
                 <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
-            <form class="col-md" action="/adminRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
+            {{#admin}}
+                <form class="col-md" action="/adminRedirect" method="get">
+                    <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+                    <input name="display" value="{{display}}" hidden>
+                </form>
+                <form class="col-md" action="/logOut" method="post">
+                    <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
+                    <input name="display" value="{{display}}" hidden>
+                </form>
+            {{/admin}}
+            </div>
         </div>
     </div>
     <div>
         <div class="row">
             <div class="box2 col-md-2">
-                <h2 class="buttonTitle" >{{dateDisplay}}</h2>
+                <h2 class="buttonTitle" >{{dateDisplay}}
+                    <form method="post" action="/setCurrentDate">
+                        <input name="display" value="{{display}}" hidden>
+                        <input name="theme" value="{{theme}}" hidden>
+                        <p><input type="date" name="calendar"></p>
+                        <button type="submit">Выбрать день</button>
+                    </form>
+                </h2>
             </div>
             <div class="col-xl"></div>
+            {{^admin}}
+                <div class="buttonDaySwitchBox col-xl">
+                    <form class="col-md" action="/adminRedirect" method="get">
+                        <button name="theme" value="{{theme}}" class="buttonDaySwitchBox2" ><h2 class="buttonTitle">Войти в аккаунт</h2></button>
+                        <input name="display" value="{{display}}" hidden>
+                    </form>
+                </div>
+            {{/admin}}
         </div>
         <div class="row weatherMainBox" style=" margin-right: 0px;margin-left: 0px;">
             {{#isDay}}

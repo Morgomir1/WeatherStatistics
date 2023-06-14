@@ -24,37 +24,43 @@
 
 </head>
 <body class="root">
-    <div class="buttonsBox col-xl">
-        <div class="row">
-            <div class="siteIconContainer">
-                <img class="siteIconStyle" src="/images/rain.png">
-            </div>
-            <form class="col-md" action="/mainRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-            <form class="col-md" action="/informationRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-            <form class="col-md" action="/dayFindRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-            <form class="col-md" action="/planningRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-            <form class="col-md" action="/settingsRedirect" method="get" >
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
+<div class="buttonsBox col-xl">
+    <div class="row">
+        <div class="siteIconContainer">
+            <img class="siteIconStyle" src="/images/rain.png">
+        </div>
+        <form class="col-md" action="/mainRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/informationRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/dayFindRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/planningRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        <form class="col-md" action="/settingsRedirect" method="get" >
+            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
+            <input name="display" value="{{display}}" hidden>
+        </form>
+        {{#admin}}
             <form class="col-md" action="/adminRedirect" method="get">
                 <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
-        </div>
+            <form class="col-md" action="/logOut" method="post">
+                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+        {{/admin}}
     </div>
+</div>
 </body>
 <body>
 <div class="form">

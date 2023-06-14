@@ -2,6 +2,9 @@ package weatherStatistics.controllers;
 
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import weatherStatistics.util.MainMenuDisplayTypes;
@@ -65,6 +68,9 @@ public class SettingsController {
         model.put("theme", theme == null ? ThemeTypes.BLUE.getThemeName() : theme);
         model.put("displayTypes", MainMenuDisplayTypes.values());
         model.put("themeTypes", ThemeTypes.values());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.put("admin", !(authentication instanceof AnonymousAuthenticationToken));
         return new ModelAndView("settings", model);
     }
 }

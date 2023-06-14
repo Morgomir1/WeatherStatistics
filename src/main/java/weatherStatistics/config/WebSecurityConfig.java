@@ -1,5 +1,6 @@
 package weatherStatistics.config;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -16,6 +18,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.sql.DataSource;
@@ -55,7 +58,7 @@ public class WebSecurityConfig  {
                     .loginPage("/login")
                     .permitAll()
                 .and()
-                    .logout()
+                    .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logOut")).logoutSuccessUrl("/login")
                     .permitAll()
                 .and()
                     .build();

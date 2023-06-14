@@ -4,6 +4,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -161,7 +164,21 @@ public class MainController {
         model.put("isWeek", display.equals(MainMenuDisplayTypes.WEEKS.name()));
         model.put("display", display);
         model.put("theme", theme == null ? ThemeTypes.BLUE.getThemeName() : theme);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.put("admin", !(authentication instanceof AnonymousAuthenticationToken));
         return new ModelAndView("main", model);
+    }
+
+    @PostMapping("/setCurrentDate")
+    public ModelAndView setCurrentDate(HttpServletRequest request) {
+        String day = request.getParameter("calendar");
+        if (day.equals("")) {
+            return main(null, request);
+        }
+        int dayNumber = Integer.parseInt(day.split("-")[2]);
+        int monthNumber = Integer.parseInt(day.split("-")[1]);
+        LocalDate date = LocalDate.of(2020, monthNumber, dayNumber);
+        return main(date, request);
     }
 
     @RequestMapping("/nextDay")
@@ -211,7 +228,7 @@ public class MainController {
         String encodedWithISO88591 = statsForDownload;
         statsForDownload = new String(encodedWithISO88591.getBytes("ISO-8859-1"), "UTF-8");
         String csvFileName = "results.csv";
-        response.setContentType("text/csv;charset=UTF-8");
+        response.setContentType("text/csv;charset=Windows-1251");
         String headerKey = "Content-Disposition";
         String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
         response.setHeader(headerKey, headerValue);

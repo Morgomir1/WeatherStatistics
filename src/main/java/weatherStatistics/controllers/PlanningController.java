@@ -1,9 +1,10 @@
 package weatherStatistics.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import weatherStatistics.entity.WeatherStat;
@@ -119,6 +120,8 @@ public class PlanningController {
         String display = request.getParameter("display");
         model.put("display", display);
         model.put("theme", theme == null ? ThemeTypes.BLUE.getThemeName() : theme);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.put("admin", !(authentication instanceof AnonymousAuthenticationToken));
         return new ModelAndView("planning", model);
     }
 
@@ -160,8 +163,9 @@ public class PlanningController {
                                            @RequestParam(name = "calendar") String calendar,
                                            @RequestParam(name = "plans") String plans) throws UnsupportedEncodingException {
         HashMap<String, ArrayList<Plan>> newPlans = parsePlansFromStr(plans);
-        System.out.println(plans);
-        if (!calendar.equals("")) {
+        //System.out.println(plans);
+
+        if (!calendar.equals("") && newPlans.size() < 10) {
             newPlans.put(calendar, new ArrayList<>());
         }
         return planning(request, newPlans, null, true);
@@ -184,7 +188,7 @@ public class PlanningController {
                                 @RequestParam(name = "plan", required = false) String plan,
                                 @RequestParam(name = "plans") String plans) throws UnsupportedEncodingException {
         HashMap<String, ArrayList<Plan>> newPlans = parsePlansFromStr(plans);
-        System.out.println(plans);
+        //System.out.println(plans);
         if (plan != null) {
             String encodedWithISO88591 = plan;
             plan = new String(encodedWithISO88591.getBytes("ISO-8859-1"), "UTF-8");
@@ -197,17 +201,19 @@ public class PlanningController {
                 || timeEnd < timeStart) {
             return planning(request, newPlans, null, true);
         }
-        if (newPlans.get(key) != null) {
-            ArrayList<Plan> plansForThisDay = newPlans.get(key);
-            if (!this.alreadyHasPlan(plansForThisDay, plan, timeStart, timeEnd)) {
-                plansForThisDay.add(new Plan(timeStart, timeEnd, plan));
-                newPlans.put(key, plansForThisDay);
-            }
-        } else {
-            ArrayList<Plan> plansForThisDay = new ArrayList<>();
-            if (!this.alreadyHasPlan(plansForThisDay, plan, timeStart, timeEnd)) {
-                plansForThisDay.add(new Plan(timeStart, timeEnd, plan));
-                newPlans.put(key, plansForThisDay);
+        if (newPlans.size() < 10) {
+            if (newPlans.get(key) != null) {
+                ArrayList<Plan> plansForThisDay = newPlans.get(key);
+                if (!this.alreadyHasPlan(plansForThisDay, plan, timeStart, timeEnd)) {
+                    plansForThisDay.add(new Plan(timeStart, timeEnd, plan));
+                    newPlans.put(key, plansForThisDay);
+                }
+            } else {
+                ArrayList<Plan> plansForThisDay = new ArrayList<>();
+                if (!this.alreadyHasPlan(plansForThisDay, plan, timeStart, timeEnd)) {
+                    plansForThisDay.add(new Plan(timeStart, timeEnd, plan));
+                    newPlans.put(key, plansForThisDay);
+                }
             }
         }
         return planning(request, newPlans, null, true);

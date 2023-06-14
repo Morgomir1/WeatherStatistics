@@ -113,33 +113,33 @@ public class WeatherStat {
       } else {
         this.P = 0;
       }
-      if (params.length > 9) {
-        this.U = Integer.parseInt(params[9]);
+      if (params.length > 8) {
+        this.U = Integer.parseInt(params[8]);
       } else {
         this.U = 0;
       }
-      if (params.length > 10) {
-        this.DD = params[10];
+      if (params.length > 9) {
+        this.DD = params[9];
       } else {
         this.DD = " ";
       }
-      if (params.length > 11) {
-        this.WW = params[11];
+      if (params.length > 10) {
+        this.WW = params[10];
       } else {
         this.WW = " ";
       }
-      if (params.length > 12) {
-        this.W1 = params[12];
+      if (params.length > 11) {
+        this.W1 = params[11];
       } else {
         this.W1 = " ";
       }
-      if (params.length > 13) {
-        this.W2 = params[13];
+      if (params.length > 12) {
+        this.W2 = params[12];
       } else {
         this.W2 = " ";
       }
-      if (params.length > 14) {
-        String weatherTypes = params[14];
+      if (params.length > 13) {
+        String weatherTypes = params[13];
         for (String weatherType : weatherTypes.split(", ")) {
           String[] split = weatherType.split("=");
           this.weatherTypes.put(WeatherTypes.getForDisplayName(split[0]), Double.valueOf(split[1].replaceAll("\\}", "")));
