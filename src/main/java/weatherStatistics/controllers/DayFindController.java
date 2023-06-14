@@ -49,8 +49,10 @@ public class DayFindController {
         if (model.get("foundedDays") != null) {
             foundedDays = new ArrayList<WeatherStat>((Collection<? extends WeatherStat>) model.get("foundedDays"));
             ArrayList<WeatherStat> finalStats = new ArrayList<>();
-            for (int i = startFindId; i < endFindID; i++) {
-                finalStats.add(foundedDays.get(i));
+            if (foundedDays.size() > 3) {
+                for (int i = startFindId; i < endFindID; i++) {
+                    finalStats.add(foundedDays.get(i));
+                }
             }
             model.put("results", finalStats);
         }
@@ -100,10 +102,14 @@ public class DayFindController {
             endFindID++;
         }
         HashMap<String, Object> model = new HashMap<>();
-        model.put("foundedDays", stats);
-
+        if (stats.size() != 0) {
+            model.put("foundedDays", stats);
+        } else {
+            model = null;
+        }
         Integer timeStart = Integer.valueOf(request.getParameter("timeStart"));
         Integer timeEnd = Integer.valueOf(request.getParameter("timeEnd"));
+
         return dayFind(request, startFindId, endFindID, timeStart, timeEnd, model);
     }
 
@@ -117,7 +123,11 @@ public class DayFindController {
             startFindId--;
         }
         HashMap<String, Object> model = new HashMap<>();
-        model.put("foundedDays", stats);
+        if (stats.size() != 0) {
+            model.put("foundedDays", stats);
+        } else {
+            model = null;
+        }
         Integer timeStart = Integer.valueOf(request.getParameter("timeStart"));
         Integer timeEnd = Integer.valueOf(request.getParameter("timeEnd"));
         return dayFind(request, startFindId, endFindID, timeStart, timeEnd, model);
