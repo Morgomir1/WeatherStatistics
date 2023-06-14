@@ -12,7 +12,7 @@ import java.time.format.TextStyle;
 import java.util.*;
 
 @Entity
-@Table(name = "statsnew")
+@Table(name = "stats")
 public class WeatherStat {
 
   @Id
