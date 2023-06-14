@@ -12,7 +12,8 @@ export PATH=$PATH:$JAVA_HOME/bin
 #Теперь необходимо добавить к переменной PATH путь к папке bin распакованного архива Maven.
 export PATH=$PATH:/opt/apache-maven-3.9.2/bin:
 #Скачиваем исходный код с гитхаба проекта
-wget https://github.com/Morgomir1/Weatherstatistics/archive/release/v1.0.0.tar.gz
+#P.s в видео с развертыванием мы скачивали ветку release/v1.0.0, но с ней возникают проблемы при установке, поэтому лучше скачивать develop.
+wget https://github.com/Morgomir1/Weatherstatistics/archive/develop.tar.gz
 #Распаковываем в архив, и переходим в полученную папку. Выполняем команду:
 mvn install
 #Если все сделано правильно - в папке target появится jar-файл проекта
