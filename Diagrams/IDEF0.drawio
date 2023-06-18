@@ -1,0 +1,184 @@
+<mxfile host="app.diagrams.net" modified="2023-06-18T12:41:18.805Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="balHMH-m33AzrfdUO7z1" version="21.3.7" type="device">
+  <diagram name="Страница 1" id="W4wu9IdWYWKfuvak4qdR">
+    <mxGraphModel dx="1434" dy="830" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFF4C3" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-5" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="417" y="321" width="335" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-6" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="rnoFFCQ1fwiPKzGrQRdq-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="414" as="sourcePoint" />
+            <mxPoint x="248" y="389" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-7" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.272;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="rnoFFCQ1fwiPKzGrQRdq-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="508" y="138" as="sourcePoint" />
+            <mxPoint x="727" y="187" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="rnoFFCQ1fwiPKzGrQRdq-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="748" y="414" as="sourcePoint" />
+            <mxPoint x="1030" y="414" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-14" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endFill=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="490" y="506" as="sourcePoint" />
+            <mxPoint x="492" y="692" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-15" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=0;startArrow=classic;startFill=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="506" as="sourcePoint" />
+            <mxPoint x="682" y="692" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-18" value="Удовлетворенный пользователь" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="880" y="384" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-19" value="&lt;br&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;WeatherStatistics&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="555" y="384" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-20" value="А0" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="692" y="476" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-21" value="Сайт" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="670" y="580" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-22" value="Администратор" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="508" y="580" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-23" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="1" target="rnoFFCQ1fwiPKzGrQRdq-27" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint y="760" as="sourcePoint" />
+            <mxPoint x="1165" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-25" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry y="760" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-26" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="220" y="760" width="780" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-27" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="760" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-30" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-31" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="160" width="440" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-32" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="630" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-33" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="600" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-34" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="600" y="30" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-35" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="600" y="60" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-36" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="600" y="90" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-37" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="630" y="30" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-38" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="840" y="30" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-39" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="840" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-40" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="630" y="60" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-41" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="630" y="90" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-42" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="840" y="60" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-43" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="840" y="90" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-44" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" parent="1" vertex="1">
+          <mxGeometry x="1050" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-45" value="Основы метеорологии" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="508" y="206" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-46" value="ИСПОЛЬЗУЕТСЯ В:" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="2" width="119" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-47" value="АВТОР: Долгих Семен, Тимошинов Егор, Самсонова Анастасия" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="160" width="441" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-48" value="ПРОЕКТ: WeatherStatistics&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;ДАТА: 19.03.2023" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="159" y="26" width="441" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-49" value="ЗАМЕЧАНИЯ: 1 2 3 4 5 6 7 8 9 10" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="159" y="97" width="441" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-50" value="РЕКОМЕНДОВАНО" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="630" y="60" width="171" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-51" value="ЧЕРНОВИК" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="630" y="30" width="171" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-52" value="РАЗРАБАТЫВАЕТСЯ" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="630" width="167" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-53" value="ПУБЛИКАЦИЯ" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="630" y="90" width="171" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-54" value="ЧИТАТЕЛЬ&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; ДАТА" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="840" width="209" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-55" value="КОНТЕКСТ:" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="1027" width="119" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-56" value="Ветка: А-0" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry y="760" width="119" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-57" value="Название:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="220" y="760" width="119" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-58" value="WeatherStatistics" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="525" y="775" width="119" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rnoFFCQ1fwiPKzGrQRdq-59" value="Номер: 1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="760" width="119" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="NmbTLLtivtEYBok6L0Ok-1" value="Данные о погоде за прошлые года&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="213" y="384" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FYH4ocL8sALxSMZAJZ0s-1" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endFill=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="583" y="506" as="sourcePoint" />
+            <mxPoint x="585" y="692" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FYH4ocL8sALxSMZAJZ0s-2" value="Группа разработчиков Команды 2-2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="601" y="580" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FYH4ocL8sALxSMZAJZ0s-5" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.272;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="672" y="138" as="sourcePoint" />
+            <mxPoint x="672" y="321" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FYH4ocL8sALxSMZAJZ0s-6" value="Техническое задание" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="672" y="206" width="105" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
