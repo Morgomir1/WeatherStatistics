@@ -23,63 +23,59 @@
     <!-- /Yandex.Metrika counter -->
 
 </head>
-<body class="root">
+<body class="root col-xl">
 <div>
     <div class="buttonsBox col-xl">
         <div class="row">
-            <div class="siteIconContainer">
-                <img class="siteIconStyle" src="/images/rain.png">
-            </div>
-            <form class="col-md" action="/mainRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
+            <form class="col-1" action="/mainRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="logoButton"><img class="siteIconStyle" src="/images/rain.png"></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
             <form class="col-md" action="/informationRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
+                <button name="theme" value="{{theme}}" class="butt">Информация</button>
                 <input name="display" value="{{display}}" hidden>
             </form>
             <form class="col-md" action="/dayFindRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Поиск дня</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
             <form class="col-md" action="/planningRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Планирование дня</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
             <form class="col-md" action="/settingsRedirect" method="get" >
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Настройки</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
             {{#admin}}
                 <form class="col-md" action="/adminRedirect" method="get">
-                    <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+                    <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Админ</h2></button>
                     <input name="display" value="{{display}}" hidden>
                 </form>
                 <form class="col-md" action="/logOut" method="post">
-                    <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
+                    <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Выйти</h2></button>
                     <input name="display" value="{{display}}" hidden>
                 </form>
             {{/admin}}
             </div>
         </div>
-    </div>
     <div>
         <div class="row">
-            <div class="box2 col-md-2">
+            <div class=" col-md-2 weatherBox">
                 <h2 class="buttonTitle" >{{dateDisplay}}
                     <form method="post" action="/setCurrentDate">
                         <input name="display" value="{{display}}" hidden>
                         <input name="theme" value="{{theme}}" hidden>
                         <p><input type="date" name="calendar"></p>
-                        <button type="submit">Выбрать день</button>
+                        <button class="butt" type="submit">Выбрать день</button>
                     </form>
                 </h2>
             </div>
             <div class="col-xl"></div>
             {{^admin}}
-                <div class="buttonDaySwitchBox col-xl">
+                <div class=" col-xl">
                     <form class="col-md" action="/adminRedirect" method="get">
-                        <button name="theme" value="{{theme}}" class="buttonDaySwitchBox2" ><h2 class="buttonTitle">Войти в аккаунт</h2></button>
+                        <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Войти в аккаунт</h2></button>
                         <input name="display" value="{{display}}" hidden>
                     </form>
                 </div>
@@ -186,27 +182,27 @@
             {{/isWeek}}
         </div>
         <div class="row">
-            <div class="buttonDaySwitchBox col-xl">
+            <div class=" col">
                 <form method="post" action="/prevDay">
-                    <button type="submit" name="day" value="{{day}} {{monthNumber}}" class="buttonDaySwitchBox2">
+                    <button type="submit" name="day" value="{{day}} {{monthNumber}}" class="butt">
                         <input name="theme" value="{{theme}}" hidden>
                         <input name="display" value="{{display}}" hidden>
                         <h2 class="buttonTitle">Предыдущ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>
                     </button>
                 </form>
             </div>
-            <div class="col-xl-1"></div>
-            <div class="col-md">
+            <div class="col"></div>
+            <div class=" col">
                 <form method="post" action="/downloadTable">
-                    <button class="buttonDaySwitchBox2" name="statsForDownload" value="{{statsForDownload}}" type="submit">
+                    <button class="butt" name="statsForDownload" value="{{statsForDownload}}" type="submit">
                         <h2 class="buttonTitle">Скачать таблицу</h2>
                     </button>
                 </form>
             </div>
-            <div class="col-xl-1"></div>
-            <div class="buttonDaySwitchBox col-xl">
+            <div class="col"></div>
+            <div class="col">
                 <form method="post" action="/nextDay">
-                    <button type="submit" name="day"  value="{{day}} {{monthNumber}}" class="buttonDaySwitchBox2">
+                    <button type="submit" name="day"  value="{{day}} {{monthNumber}}" class="butt">
                         <input name="theme" value="{{theme}}" hidden>
                         <input name="display" value="{{display}}" hidden>
                         <h2 class="buttonTitle">Следующ{{^isWeek}}ий{{/isWeek}}{{#isWeek}}ая{{/isWeek}} {{#isDay}}день{{/isDay}}{{#isWeek}}неделя{{/isWeek}}{{#isMonth}}месяц{{/isMonth}}</h2>

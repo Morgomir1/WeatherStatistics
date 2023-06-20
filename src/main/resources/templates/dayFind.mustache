@@ -21,45 +21,42 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/93829072" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 </head>
-<body class="root">
-<div class="buttonsBox col-xl">
-    <div class="row">
-        <div class="siteIconContainer">
-            <img class="siteIconStyle" src="/images/rain.png">
-        </div>
-        <form class="col-md" action="/mainRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/informationRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/dayFindRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/planningRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/settingsRedirect" method="get" >
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        {{#admin}}
-            <form class="col-md" action="/adminRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-            <form class="col-md" action="/logOut" method="post">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-        {{/admin}}
-    </div>
-</div>
+<body class="root col-xl">
 <div>
+    <div class="buttonsBox col-xl">
+        <div class="row">
+            <form class="col-1" action="/mainRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="logoButton"><img class="siteIconStyle" src="/images/rain.png"></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/informationRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt">Информация</button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/dayFindRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Поиск дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/planningRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Планирование дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/settingsRedirect" method="get" >
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Настройки</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            {{#admin}}
+                <form class="col-md" action="/adminRedirect" method="get">
+                    <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Админ</h2></button>
+                    <input name="display" value="{{display}}" hidden>
+                </form>
+                <form class="col-md" action="/logOut" method="post">
+                    <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Выйти</h2></button>
+                    <input name="display" value="{{display}}" hidden>
+                </form>
+            {{/admin}}
+        </div>
+    </div>
     <div class="row">
         <div class="findOptionsContainer col-3">
             <div class="findOptionsContainer2 col">
@@ -77,17 +74,14 @@
                     </select>
                     <input type="number" placeholder="Начало" name="timeStart">
                     <input type="number" placeholder="Конец" name="timeEnd">
-                    <!--select name="timeInterval">
-                        {{#timeIntervals}}
-                            <option value={{time}}>{{time}}:00 - {{next}}:00</option>
-                        {{/timeIntervals}}
-                    </select-->
                     <br>
                     <input class="input-temp" type="number" name="temperature" placeholder="Температура">
                     <br>
                     <input name="display" value="{{display}}" hidden>
                     <input name="theme" value="{{theme}}" hidden>
-                    <button type="submit" class="buttonDayFind">Поиск</button>
+                    <div class="row">
+                        <button type="submit" class="butt">Поиск</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -98,25 +92,25 @@
 
             <div class="daysBox row">
                 {{#results}}
-                <div class="col">
-                    <div class="day">
-                        {{day}} {{monthStr}}<br>
-                        {{timeStart}}:00 - {{timeEnd}}:00<br/>
-                        Средняя температура в течении дня: <br>
-                        {{#positive}}
-                            +{{T}}<br/>
-                        {{/positive}}
-                        {{^positive}}
-                            {{T}}<br/>
-                        {{/positive}}
-                        Вероятность осадков:<br>
-                        {{#weatherTypes}}
-                            {{#entrySet}}
-                                {{key}} - {{value}}%<br>
-                            {{/entrySet}}
-                        {{/weatherTypes}}
+                    <div class="col">
+                        <div class="day">
+                            {{day}} {{monthStr}}<br>
+                            {{timeStart}}:00 - {{timeEnd}}:00<br/>
+                            Средняя температура в течении дня: <br>
+                            {{#positive}}
+                                +{{T}}<br/>
+                            {{/positive}}
+                            {{^positive}}
+                                {{T}}<br/>
+                            {{/positive}}
+                            Вероятность осадков:<br>
+                            {{#weatherTypes}}
+                                {{#entrySet}}
+                                    {{key}} - {{value}}%<br>
+                                {{/entrySet}}
+                            {{/weatherTypes}}
+                        </div>
                     </div>
-                </div>
                 {{/results}}
             </div>
             <div class="row">
@@ -127,7 +121,7 @@
                     <input name="theme" value="{{theme}}" hidden>
                     <input name="timeStart" value="{{timeStart}}" hidden>
                     <input name="timeEnd" value="{{timeEnd}}" hidden>
-                    <button value="{{allResults}}" name="allResultsPrev" class="buttonDaySwitchBox2"><h2 class="buttonTitle">Назад</h2></button>
+                    <button value="{{allResults}}" name="allResultsPrev" class="butt"><h2 class="buttonTitle">Назад</h2></button>
                 </form>
                 <div class="col-md"></div>
                 <form method="post" action="/nextFindDays" class="col-sm">
@@ -137,7 +131,7 @@
                     <input name="theme" value="{{theme}}" hidden>
                     <input name="timeStart" value="{{timeStart}}" hidden>
                     <input name="timeEnd" value="{{timeEnd}}" hidden>
-                    <button value="{{allResults}}" name="allResultsNext" class="buttonDaySwitchBox2"><h2 class="buttonTitle">Вперед</h2></button>
+                    <button value="{{allResults}}" name="allResultsNext" class="butt"><h2 class="buttonTitle">Вперед</h2></button>
                 </form>
             </div>
         </div>

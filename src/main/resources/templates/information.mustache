@@ -22,77 +22,63 @@
     <!-- /Yandex.Metrika counter -->
 
 </head>
-<body class="root">
-<div class="buttonsBox col-xl">
-    <div class="row">
-        <div class="siteIconContainer">
-            <img class="siteIconStyle" src="/images/rain.png">
-        </div>
-        <form class="col-md" action="/mainRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/informationRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/dayFindRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/planningRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/settingsRedirect" method="get" >
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        {{#admin}}
-            <form class="col-md" action="/adminRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-            <form class="col-md" action="/logOut" method="post">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-        {{/admin}}
-    </div>
-</div>
+<body class="root col-xl">
 <div>
-    <div class="row flex-wrapper-two">
-        <div class="info-frame2">
-            <div class="text-frame">
-                <p class="info-title">Информация о сайте</p>
-                <p class="info-text">
-                    На нашем сайте вы можете:<br>
-                    <br>
-                    - Посмотреть статистику погодных наблюдений в Воронежской области за последние годы<br>
-                    <br>
-                    - Воспользоваться функцией поиска ближайшего дня с интересующей вас погодой.<br>
-                    <br>
-                    - Составить список дел на неделю, и узнать какие погодные условия наиболее вероятны в указанные вами промежутки времени.<br>
-                    <br>
-                    - Возможность скачать таблицы погоды<br>
-                    <br>
-                    Создатели сайта:<br>
-                    - Тимошинов Е.Б. <br>
-                    - Долгих С.В.<br>
-                    - Самсонова А.Г.
-                </p>
-            </div>
+    <div class="buttonsBox col-xl">
+        <div class="row">
+            <form class="col-1" action="/mainRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="logoButton"><img class="siteIconStyle" src="/images/rain.png"></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/informationRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt">Информация</button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/dayFindRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Поиск дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/planningRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Планирование дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/settingsRedirect" method="get" >
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Настройки</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            {{#admin}}
+                <form class="col-md" action="/adminRedirect" method="get">
+                    <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Админ</h2></button>
+                    <input name="display" value="{{display}}" hidden>
+                </form>
+                <form class="col-md" action="/logOut" method="post">
+                    <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Выйти</h2></button>
+                    <input name="display" value="{{display}}" hidden>
+                </form>
+            {{/admin}}
         </div>
-        <div class="image-frame">
-            <!--img
-                    alt=""
-                    class="image-2"
-                    src="https://static.overlay-tech.com/assets/0e85eb02-c6c9-4213-bd93-fc08e9926eb3.png"
-            /-->
-            <img alt="" class="image-2" src="/images/info.png">
+    </div>
+    <div>
+        <div class="col-xl text-frame">
+            <p class="info-title">Информация о сайте</p>
+            <p class="info-text">
+                На нашем сайте вы можете:<br>
+                <br>
+                - Посмотреть статистику погодных наблюдений в Воронежской области за последние годы<br>
+                <br>
+                - Воспользоваться функцией поиска ближайшего дня с интересующей вас погодой.<br>
+                <br>
+                - Составить список дел на неделю, и узнать какие погодные условия наиболее вероятны в указанные вами промежутки времени.<br>
+                <br>
+                - Скачать таблицы погоды с главной страницы<br>
+                <br>
+                Создатели сайта:<br>
+                - Тимошинов Е.Б. <br>
+                - Долгих С.В.<br>
+                - Самсонова А.Г.
+            </p>
         </div>
     </div>
 </div>
-
 </body>
 </html>

@@ -22,64 +22,67 @@
     <!-- /Yandex.Metrika counter -->
     
 </head>
-<body class="root">
-<div class="buttonsBox col-xl">
+<body class="root col-xl">
+    <div class="buttonsBox col-xl">
     <div class="row">
-        <div class="siteIconContainer">
-            <img class="siteIconStyle" src="/images/rain.png">
-        </div>
-        <form class="col-md" action="/mainRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
+        <form class="col-1" action="/mainRedirect" method="get">
+            <button name="theme" value="{{theme}}" class="logoButton"><img class="siteIconStyle" src="/images/rain.png"></button>
             <input name="display" value="{{display}}" hidden>
         </form>
         <form class="col-md" action="/informationRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
+            <button name="theme" value="{{theme}}" class="butt">Информация</button>
             <input name="display" value="{{display}}" hidden>
         </form>
         <form class="col-md" action="/dayFindRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
+            <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Поиск дня</h2></button>
             <input name="display" value="{{display}}" hidden>
         </form>
         <form class="col-md" action="/planningRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
+            <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Планирование дня</h2></button>
             <input name="display" value="{{display}}" hidden>
         </form>
         <form class="col-md" action="/settingsRedirect" method="get" >
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
+            <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Настройки</h2></button>
             <input name="display" value="{{display}}" hidden>
         </form>
         {{#admin}}
             <form class="col-md" action="/adminRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Админ</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
             <form class="col-md" action="/logOut" method="post">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Выйти</h2></button>
                 <input name="display" value="{{display}}" hidden>
             </form>
         {{/admin}}
     </div>
 </div>
-<div>
-    <form action="/setupSettings" method="post">
-        <div class="row">
-            <div class="col-md text-frame2">
-                <div class="settingsTitle">Вид отображения главной страницы</div>
-                {{#displayTypes}}
-                    <p><input class="input-settings" name="displayType" type="radio" value={{.}}>{{name}}</p>
-                {{/displayTypes}}
+    <div>
+        <form action="/setupSettings" method="post">
+            <div class="row">
+                <div class="col-md text-frame2">
+                    <div class="settingsTitle">Вид отображения главной страницы</div>
+                    {{#displayTypes}}
+                        <p><input class="input-settings" name="displayType" type="radio" value={{.}}>{{name}}</p>
+                    {{/displayTypes}}
+                </div>
+                <div class="col-md text-frame2">
+                    <div class="settingsTitle">Оформление сайта</div>
+                    {{#themeTypes}}
+                        <p><input class="input-settings" name="themeType" type="radio" value={{.}}>{{displayName}}</p>
+                    {{/themeTypes}}
+                </div>
             </div>
-            <div class="col-md text-frame2">
-                <div class="settingsTitle">Оформление сайта</div>
-                {{#themeTypes}}
-                    <p><input class="input-settings" name="themeType" type="radio" value={{.}}>{{displayName}}</p>
-                {{/themeTypes}}
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col">
+                    <button class="butt" type="submit">Применить изменения</button>
+                </div>
+                <div class="col">
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <button class="buttonSettings" type="submit">Применить изменения</button>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </body>
 </html>

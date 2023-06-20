@@ -22,145 +22,139 @@
     <!-- /Yandex.Metrika counter -->
 
 </head>
-<body class="root">
-<div class="buttonsBox col-xl">
-    <div class="row">
-        <div class="siteIconContainer">
-            <img class="siteIconStyle" src="/images/rain.png">
+<body class="root col-xl">
+    <div class="buttonsBox col-xl">
+        <div class="row">
+            <form class="col-1" action="/mainRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="logoButton"><img class="siteIconStyle" src="/images/rain.png"></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/informationRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt">Информация</button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/dayFindRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Поиск дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/planningRedirect" method="get">
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Планирование дня</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            <form class="col-md" action="/settingsRedirect" method="get" >
+                <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Настройки</h2></button>
+                <input name="display" value="{{display}}" hidden>
+            </form>
+            {{#admin}}
+                <form class="col-md" action="/adminRedirect" method="get">
+                    <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Админ</h2></button>
+                    <input name="display" value="{{display}}" hidden>
+                </form>
+                <form class="col-md" action="/logOut" method="post">
+                    <button name="theme" value="{{theme}}" class="butt" ><h2 class="buttonTitle">Выйти</h2></button>
+                    <input name="display" value="{{display}}" hidden>
+                </form>
+            {{/admin}}
         </div>
-        <form class="col-md" action="/mainRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Главная</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/informationRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Информация</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/dayFindRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Поиск дня</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/planningRedirect" method="get">
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Планирование дня</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        <form class="col-md" action="/settingsRedirect" method="get" >
-            <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Настройки</h2></button>
-            <input name="display" value="{{display}}" hidden>
-        </form>
-        {{#admin}}
-            <form class="col-md" action="/adminRedirect" method="get">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Админ</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-            <form class="col-md" action="/logOut" method="post">
-                <button name="theme" value="{{theme}}" class="buttonBox" ><h2 class="buttonTitle">Выйти</h2></button>
-                <input name="display" value="{{display}}" hidden>
-            </form>
-        {{/admin}}
     </div>
-</div>
-<div class="component">
-    <div class="info-frame2 row">
-        {{#creatingPlans}}
-            {{#plans}}
-                {{#entrySet}}
-                    <div class="day-frame col">
-                        <form action="/removePlansForDay" method="post">
-                            <input name="theme" value="{{theme}}" hidden>
-                            <input name="display" value="{{display}}" hidden>
-                            <input name="plans" value="{{plans}}" hidden>
-                            <button type="submit" value="{{key}}" name="key" class="buttonDeleteDayPlans">x</button>
-                        </form>
-                        <p class="day-title row">{{key}}</p>
-                        {{#value}}
-                            <form action="/removePlan" method="post">
+    <div class="component">
+        <div class="info-frame2 row">
+            {{#creatingPlans}}
+                {{#plans}}
+                    {{#entrySet}}
+                        <div class="day-frame col">
+                            <form action="/removePlansForDay" method="post">
                                 <input name="theme" value="{{theme}}" hidden>
                                 <input name="display" value="{{display}}" hidden>
                                 <input name="plans" value="{{plans}}" hidden>
-                                <input name="plan" value="{{plan}}" hidden>
-                                <p>{{plan}}</p>
-                                <p>{{startTime}}:00-{{endTime}}:00</p>
-                                <button class="buttonDeleteDayPlans" value="{{key}}" name="key" type="submit">x</button>
+                                <button type="submit" value="{{key}}" name="key" class="buttonDeleteDayPlans">x</button>
                             </form>
-                        {{/value}}
-                        <form action="/addPlan" method="post">
+                            <p class="day-title row">{{key}}</p>
+                            {{#value}}
+                                <form action="/removePlan" method="post">
+                                    <input name="theme" value="{{theme}}" hidden>
+                                    <input name="display" value="{{display}}" hidden>
+                                    <input name="plans" value="{{plans}}" hidden>
+                                    <input name="plan" value="{{plan}}" hidden>
+                                    <p>{{plan}}</p>
+                                    <p>{{startTime}}:00-{{endTime}}:00</p>
+                                    <button class="buttonDeleteDayPlans" value="{{key}}" name="key" type="submit">x</button>
+                                </form>
+                            {{/value}}
+                            <form action="/addPlan" method="post">
+                                <input name="theme" value="{{theme}}" hidden>
+                                <input name="display" value="{{display}}" hidden>
+                                <input name="plans" value="{{plans}}" hidden>
+                                <p><b>План:</b><br>
+                                    <input name="plan" type="text" size="auto">
+                                </p>
+                                <p><b>Время:</b><br>
+                                    <input type="number" placeholder="Начало" name="timeStart">
+                                    <input type="number" placeholder="Конец" name="timeEnd">
+                                    <!--select name="time" size="3" multiple>
+                                        {{#timeIntervals}}
+                                            <option value={{time}}>{{time}}:00-{{next}}:00</option>
+                                        {{/timeIntervals}}
+                                    </select-->
+                                </p>
+                                <button class="button" value="{{key}}" name="key" type="submit">+</button>
+                            </form>
+                        </div>
+                    {{/entrySet}}
+
+                    <div class="day-frame col">
+                        <form action="/addPlansForNextDay" method="post">
+                            <br>
                             <input name="theme" value="{{theme}}" hidden>
                             <input name="display" value="{{display}}" hidden>
                             <input name="plans" value="{{plans}}" hidden>
-                            <p><b>План:</b><br>
-                                <input name="plan" type="text" size="auto">
-                            </p>
-                            <p><b>Время:</b><br>
-                                <input type="number" placeholder="Начало" name="timeStart">
-                                <input type="number" placeholder="Конец" name="timeEnd">
-                                <!--select name="time" size="3" multiple>
-                                    {{#timeIntervals}}
-                                        <option value={{time}}>{{time}}:00-{{next}}:00</option>
-                                    {{/timeIntervals}}
-                                </select-->
-                            </p>
-                            <button class="button" value="{{key}}" name="key" type="submit">+</button>
+                            <p>Выберите дату: <input type="date" name="calendar"></p>
+                            <button class="button">+</button>
                         </form>
                     </div>
-                {{/entrySet}}
-
-                <div class="day-frame col">
-                    <form action="/addPlansForNextDay" method="post">
-                        <br>
-                        <input name="theme" value="{{theme}}" hidden>
-                        <input name="display" value="{{display}}" hidden>
-                        <input name="plans" value="{{plans}}" hidden>
-                        <p>Выберите дату: <input type="date" name="calendar"></p>
-                        <button class="button">+</button>
-                    </form>
-                </div>
-            {{/plans}}
-        {{/creatingPlans}}
-        {{^creatingPlans}}
-            {{#plansResults}}
-                {{#entrySet}}
-                    <div class="day-frame col">
-                        <p class="day-title row">{{key}}</p>
-                        {{#value}}
-                            {{#entrySet}}
-                                {{#key}}
-                                    <p><input value="{{plan}}" name="plan" readonly></p>
-                                    <h2>{{startTime}}:00-{{endTime}}:00</h2><br/>
-                                {{/key}}
-                                {{#value}}
-                                    Средняя температура:<br>
-                                    {{#positive}}
-                                        +{{T}}<br/>
-                                    {{/positive}}
-                                    {{^positive}}
-                                        {{T}}<br/>
-                                    {{/positive}}
-                                    Вероятность осадков:<br>
-                                    {{#weatherTypes}}
-                                        {{#entrySet}}
-                                            {{key}} - {{value}}%<br>
-                                        {{/entrySet}}
-                                    {{/weatherTypes}}
-                                {{/value}}
-                            {{/entrySet}}
-                        {{/value}}
-                    </div>
-                {{/entrySet}}
-            {{/plansResults}}
-        {{/creatingPlans}}
+                {{/plans}}
+            {{/creatingPlans}}
+            {{^creatingPlans}}
+                {{#plansResults}}
+                    {{#entrySet}}
+                        <div class="day-frame col">
+                            <p class="day-title row">{{key}}</p>
+                            {{#value}}
+                                {{#entrySet}}
+                                    {{#key}}
+                                        <p><input value="{{plan}}" name="plan" readonly></p>
+                                        <h2>{{startTime}}:00-{{endTime}}:00</h2><br/>
+                                    {{/key}}
+                                    {{#value}}
+                                        Средняя температура:<br>
+                                        {{#positive}}
+                                            +{{T}}<br/>
+                                        {{/positive}}
+                                        {{^positive}}
+                                            {{T}}<br/>
+                                        {{/positive}}
+                                        Вероятность осадков:<br>
+                                        {{#weatherTypes}}
+                                            {{#entrySet}}
+                                                {{key}} - {{value}}%<br>
+                                            {{/entrySet}}
+                                        {{/weatherTypes}}
+                                    {{/value}}
+                                {{/entrySet}}
+                            {{/value}}
+                        </div>
+                    {{/entrySet}}
+                {{/plansResults}}
+            {{/creatingPlans}}
+        </div>
+        <div class="main-button-four row">
+            <form action="/showResults" method="post">
+                <input name="theme" value="{{theme}}" hidden>
+                <input name="display" value="{{display}}" hidden>
+                <input name="plans" value="{{plans}}" hidden>
+                <button name="creatingPlans" value="{{creatingPlans}}" type="submit" class="butt">{{#creatingPlans}}Показать результаты{{/creatingPlans}}{{^creatingPlans}}Вернуться{{/creatingPlans}}</button>
+            </form>
+        </div>
     </div>
-
-    <div class="main-button-four row">
-        <form action="/showResults" method="post">
-            <input name="theme" value="{{theme}}" hidden>
-            <input name="display" value="{{display}}" hidden>
-            <input name="plans" value="{{plans}}" hidden>
-            <button name="creatingPlans" value="{{creatingPlans}}" type="submit" class="main-button-four glavnaja">{{#creatingPlans}}Показать результаты{{/creatingPlans}}{{^creatingPlans}}Вернуться{{/creatingPlans}}</button>
-        </form>
-    </div>
-
-
-</div>
 </body>
 </html>
